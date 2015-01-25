@@ -5020,19 +5020,35 @@ class Intro
 	randomSeed=14094245;
 	class Intel
 	{
+<<<<<<< Temporary merge branch 1
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+=======
 		timeOfChanges=3e+038;
 		startWeather=0;
 		startWind=0;
 		forecastWeather=0;
 		forecastWind=0;
 		forecastWaves=0;
+>>>>>>> Temporary merge branch 2
 		year=2035;
 		month=6;
 		day=24;
 		hour=12;
 		minute=0;
+<<<<<<< Temporary merge branch 1
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+=======
 		startFogDecay=0.001;
 		forecastFogDecay=0.001;
+>>>>>>> Temporary merge branch 2
 	};
 };
 class OutroWin
@@ -5048,19 +5064,35 @@ class OutroWin
 	randomSeed=14521529;
 	class Intel
 	{
+<<<<<<< Temporary merge branch 1
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+=======
 		timeOfChanges=3e+038;
 		startWeather=0;
 		startWind=0;
 		forecastWeather=0;
 		forecastWind=0;
 		forecastWaves=0;
+>>>>>>> Temporary merge branch 2
 		year=2035;
 		month=6;
 		day=24;
 		hour=12;
 		minute=0;
+<<<<<<< Temporary merge branch 1
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+=======
 		startFogDecay=0.001;
 		forecastFogDecay=0.001;
+>>>>>>> Temporary merge branch 2
 	};
 };
 class OutroLoose
@@ -5076,18 +5108,34 @@ class OutroLoose
 	randomSeed=14971574;
 	class Intel
 	{
+<<<<<<< Temporary merge branch 1
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+=======
 		timeOfChanges=3e+038;
 		startWeather=0;
 		startWind=0;
 		forecastWeather=0;
 		forecastWind=0;
 		forecastWaves=0;
+>>>>>>> Temporary merge branch 2
 		year=2035;
 		month=6;
 		day=24;
 		hour=12;
 		minute=0;
+<<<<<<< Temporary merge branch 1
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+=======
 		startFogDecay=0.001;
 		forecastFogDecay=0.001;
+>>>>>>> Temporary merge branch 2
 	};
 };

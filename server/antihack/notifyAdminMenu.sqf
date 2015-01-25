@@ -21,7 +21,7 @@ switch (toLower _action) do
 	{
 		if (_value > 0) then
 		{
-			_message = format ["[NOTICE] %1 used the admin menu to obtain $%2", name player, _value];
+			//_message = format ["[NOTICE] %1 used the admin menu to obtain $%2", name player, _value];
 		};
 	};
 	case "teleport":

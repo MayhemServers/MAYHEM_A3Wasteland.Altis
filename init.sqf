@@ -76,4 +76,5 @@ if (isServer) then
 [] execVM "addons\JumpMF\init.sqf";
 [] execVM "addons\EtV\init.sqf";
 [] execVM "addons\outlw_magRepack\MagRepack_init_sv.sqf";
+[] execVM "addons\laptop\init.sqf";
 
