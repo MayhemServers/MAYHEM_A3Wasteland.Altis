@@ -638,6 +638,7 @@ if (isServer) then {
 
     0 setRain _rain;
 	0 setFog [fog max (_rain / 4), 0.001, 1000];
+<<<<<<< HEAD
     sleep 0.1;
 
     while {true} do {
@@ -657,6 +658,35 @@ if (isServer) then {
 
         3 setRain _rain;
 		3 setFog [fog max (_rain / 4), 0.001, 1000];
+=======
+	sleep 0.1;
+
+	while {true} do {
+		if (_rainIntervalRainProbability > 0) then {
+			if (_rain < drn_var_DynamicWeather_Rain) then {
+				_rain = _rain + _rainPerSecond;
+				if (_rain > 1) then { _rain = 1; };
+			};
+			if (_rain > drn_var_DynamicWeather_Rain) then {
+				_rain = _rain - _rainPerSecond;
+				if (_rain < 0) then { _rain = 0; };
+			};
+		}
+		else {
+			_rain = 0;
+		};
+
+		if (rain != _rain) then
+		{
+			3 setRain _rain;
+		};
+
+		_tempFog = fog max (_rain / 4);
+		if (_tempFog > fog + 0.001 || _tempFog < fog - 0.001) then
+		{
+			3 setFog [_tempFog, 0.001, 1000];
+		};
+>>>>>>> 299433ae00f583f5497407664481672d7908f13e
 
         sleep 10;
     };
