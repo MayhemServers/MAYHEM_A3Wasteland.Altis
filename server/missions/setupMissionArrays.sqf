@@ -39,13 +39,29 @@ MoneyMissions =
 	["mission_SunkenTreasure", 1]
 ];
 
+ExtraMissions =
+[
+	["mission_Sniper", 1],
+	["mission_Smugglers", 1],
+	["mission_HostileJet", 0.5],
+	["mission_HackLaptop", 1]
+];
+
+PatrolMissions =
+[
+	["mission_militaryPatrol", 1]
+];
+
 MainMissions = [MainMissions, [["A3W_heliPatrolMissions", ["mission_Coastal_Convoy", "mission_HostileHeliFormation"]], ["A3W_underWaterMissions", ["mission_ArmedDiversquad"]]]] call removeDisabledMissions;
 SideMissions = [SideMissions, [["A3W_heliPatrolMissions", ["mission_HostileHelicopter"]], ["A3W_underWaterMissions", ["mission_SunkenSupplies"]]]] call removeDisabledMissions;
 MoneyMissions = [MoneyMissions, [["A3W_underWaterMissions", ["mission_SunkenTreasure"]]]] call removeDisabledMissions;
+ExtraMissions = [ExtraMissions, [["A3W_heliPatrolMissions", ["mission_HostileJet"]]]] call removeDisabledMissions;
 
 { _x set [2, false] } forEach MainMissions;
 { _x set [2, false] } forEach SideMissions;
 { _x set [2, false] } forEach MoneyMissions;
+{ _x set [2, false] } forEach ExtraMissions;
+{ _x set [2, false] } forEach PatrolMissions;
 
 MissionSpawnMarkers = [];
 SunkenMissionMarkers = [];
@@ -72,3 +88,8 @@ CoastalConvoyPaths = [];
 {
 	CoastalConvoyPaths pushBack [_x, false];
 } forEach (call compile preprocessFileLineNumbers "mapConfig\convoys\coastalConvoysList.sqf");
+
+PatrolConvoyPaths = [];
+{
+	PatrolConvoyPaths pushBack [_x, false];
+} forEach (call compile preprocessFileLineNumbers "mapConfig\convoys\patrolConvoysList.sqf");
