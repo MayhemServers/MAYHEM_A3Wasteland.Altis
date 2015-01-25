@@ -372,13 +372,13 @@ player createDiaryRecord ["infos",
 [
 "Hints and Tips",
 "
-<br/><font size='18'>TOP Wasteland</font>
+<br/><font size='18'>A3Wasteland</font>
 <br/>
 <br/>
 <br/>* Loot spawns in vehicles or purchased from the Gun Store.
 <br/>* Base items can be purchased from General Store, no base loot will be spawned in server. 
 <br/>* Use ATM to save your money, in the event that you are killed, it will be safe.
-<br/>* Planes are spawned, not able for purchase. Planes cannot be saved.
+<br/>* Planes cannot be saved.
 <br/>* Vehicles can be saved, use action item to Save Vehicle before log off or after moving it. 
 <br/>* Base items need to be locked for save. Spawn beacon save automatically on restart.
 <br/>* Conquest territories, $15,000 pay out. 

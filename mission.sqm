@@ -97,8 +97,8 @@ class Mission
 	randomSeed=14957468;
 	class Intel
 	{
-		briefingName="TOP A3Wasteland Altis v1.1 extDB";
-		overviewText="TOP Wasteland Conquest Altis by TOPARMA.com. Core developed by A3Wasteland.com";
+		briefingName="A3Wasteland Altis v1.1";
+		overviewText="MAYHEM (Auzgaming.Enjin.com) Wasteland Conquest, Core developed by A3Wasteland.com, TOParma.com";
 		resistanceWest=0;
 		startWeather=0.10000001;
 		startWind=0.30000001;

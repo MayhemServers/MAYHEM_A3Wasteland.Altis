@@ -22,11 +22,11 @@ class Header
 	maxPlayers=145; // 144 players, 1 headless client
 };
 
-author="TOPARMA.COM - Core by A3Wasteland.com";
-onLoadName = "TOP A3Wasteland Altis"; // it would be great if you could keep "A3" in the name, like "ABC A3Wasteland" instead of "ABC Wasteland" :)
-onLoadMission = "Website: toparma.com Teamspeak: ts.toparma.com CORE MISSION: a3wasteland.com";
-overviewText = "Website: toparma.com Teamspeak: ts.toparma.com";
-overviewTextLocked = "Website: toparma.com Teamspeak: ts.toparma.com";
+author="MAYHEM(Auzgaming.Enjin.com), TOPARMA, Core by A3Wasteland.com";
+onLoadName = "A3Wasteland Altis"; // it would be great if you could keep "A3" in the name, like "ABC A3Wasteland" instead of "ABC Wasteland" :)
+onLoadMission = "Website: auzgaming.enjin.com Teamspeak: mayhem.tserverhq.com CORE MISSION: a3wasteland.com";
+overviewText = "Website: auzgaming.enjin.com Teamspeak: mayhem.tserverhq.com";
+overviewTextLocked = "Website: auzgaming.enjin.com Teamspeak: mayhem.tserverhq.com";
 overviewPicture = "mapConfig\Loading.jpg";
 loadScreen = "mapConfig\Loading.jpg";
 
