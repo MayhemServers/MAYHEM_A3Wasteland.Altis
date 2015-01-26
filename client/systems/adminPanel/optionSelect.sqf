@@ -100,12 +100,12 @@ if (_uid call isAdmin) then
 				case 2: //Access ATM Interface
 				{
 					closeDialog 0;
-					[] call loadVehicleStore;
+					call mf_items_atm_access;
 				};
 				case 3: //Access ATM Dialog
 				{
 					closeDialog 0;
-					call mf_items_atm_access;
+					[] call loadVehicleStore;
 				};
 				case 4: //Access Respawn Dialog
 				{
