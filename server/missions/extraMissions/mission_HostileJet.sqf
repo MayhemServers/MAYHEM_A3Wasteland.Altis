@@ -104,12 +104,12 @@ _successExec =
 	// Mission completed
 
 	//Money
-	for "_i" from 1 to 5 do
+	for "_i" from 1 to 10 do
 	{
 		_cash = createVehicle ["Land_Money_F", _lastPos, [], 5, "None"];
 		_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
 		_cash setDir random 360;
-		_cash setVariable ["cmoney", 5000, true];
+		_cash setVariable ["cmoney", 10000, true];
 		_cash setVariable ["owner", "world", true];
 	};
 
@@ -127,7 +127,7 @@ _successExec =
 	
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
 
-	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates and some money have fallen near the pilot.";
+	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates and LOTS of money have fallen near the pilot.";
 };
 
 _this call extraMissionProcessor;
