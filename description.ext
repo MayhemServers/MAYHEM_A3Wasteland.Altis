@@ -59,6 +59,7 @@ loadScreen = "mapConfig\Loading.jpg";
 
 #include "addons\outlw_magRepack\MagRepack_config.hpp"
 #include "addons\beacondetector\sound\cfgsounds.hpp"
+#include "client\systems\hud\dialog\downloadData.hpp"
 
 
 class RscTitles
