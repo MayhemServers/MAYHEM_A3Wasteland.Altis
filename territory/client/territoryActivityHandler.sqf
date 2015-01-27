@@ -28,7 +28,7 @@ if (typeName _this == "ARRAY" && {count _this >= 1}) then {
 			//markername starts with Flag_ but not with current random territory grp
 			if ([_flagGroup, _marker] call fn_startsWith) then
 			{
-				if ((player distance (getmarkerpos _x))< 2000) then
+				if ((player distance (getmarkerpos _x))< 20000) then
 				{
 				_inrange_payout = true;
 				};			
