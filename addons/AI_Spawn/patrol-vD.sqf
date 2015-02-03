@@ -1,15 +1,15 @@
 ///////Simple Patrol script vD 1.9 - SPUn / LostVar
 //
 //*infantry units patrols independently around starting position in defined radius and also checks randomly buildings
-//*Syntax: nul = [this] execVM "LV\patrol-vD.sqf";
-//     or: nul = [this,center position,radius,handle doors] execVM "LV\patrol-vD.sqf";
+//*Syntax: nul = [this] execVM "addons\AI_Spawn\patrol-vD.sqf";
+//     or: nul = [this,center position,radius,handle doors] execVM "addons\AI_Spawn\patrol-vD.sqf";
 //*center position: [position array] (center point of patrol, f.ex. (getMarkerPos "marker1")) DEFAULT: (getPos _unit) = unit's starting position
 //*radius: number (how far from center position will the patrol reach) DEFAULT: 150
 //*handle doors: true = units will close doors behind them
 
 private ["_buildings","_wp1","_unit","_startingPos","_pDir","_pRange","_newPos","_buildingVisits","_justDidBuilding","_i","_i2","_bPoss","_chooseBuildingOrNot","_building","_center","_radius","_buildingVisitMax","_buildingDistanceLimit"];
-if(isNil("LV_CloseDoors"))then{LV_CloseDoors = compile preprocessFile "LV\LV_functions\LV_fnc_closeDoors.sqf";};
-if(isNil("LV_nearestBuilding"))then{LV_nearestBuilding = compile preprocessFile "LV\LV_functions\LV_fnc_nearestBuilding.sqf";};
+if(isNil("LV_CloseDoors"))then{LV_CloseDoors = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_closeDoors.sqf";};
+if(isNil("LV_nearestBuilding"))then{LV_nearestBuilding = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_nearestBuilding.sqf";};
 _unit = _this select 0;
 _cPos = _this select 1;
 _radius = _this select 2;

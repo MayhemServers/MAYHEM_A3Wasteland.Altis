@@ -4,7 +4,7 @@ private ["_sUnit","_nearestUnit","_nsUnit","_wGroup","_leader","_uns","_i","_max
 _sUnit = _this select 0;
 _maxDis = _this select 1;
 _mp = _this select 2;
-if(_mp)then{if(isNil("LV_GetPlayers"))then{LV_GetPlayers = compile preprocessFile "LV\LV_functions\LV_fnc_getPlayers.sqf";};};
+if(_mp)then{if(isNil("LV_GetPlayers"))then{LV_GetPlayers = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_getPlayers.sqf";};};
 
 while{true}do{
 	_i = 0;

@@ -4,8 +4,8 @@ _sUnit = _this select 0;
 _maxRange = _this select 1;
 _pType = _this select 2;
 _mp = _this select 3;
-if(_mp)then{if(isNil("LV_GetPlayers"))then{LV_GetPlayers = compile preprocessFile "LV\LV_functions\LV_fnc_getPlayers.sqf";};};
-if(isNil("LV_IsInMarker"))then{LV_IsInMarker = compile preprocessFile "LV\LV_functions\LV_fnc_isInMarker.sqf";};
+if(_mp)then{if(isNil("LV_GetPlayers"))then{LV_GetPlayers = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_getPlayers.sqf";};};
+if(isNil("LV_IsInMarker"))then{LV_IsInMarker = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_isInMarker.sqf";};
 /*
 fn_drawLine = compile preprocessFileLineNumbers "fn_drawLine.sqf";
 fn_r2Dis = compile preprocessFileLineNumbers "fn_R2Dis.sqf";

@@ -1,6 +1,6 @@
 //ARMA3Alpha function LV_fnc_follow v1.2 - by SPUn / lostvar
 //Makes unit follow its target(s), which is set elsewhere (unit setVariable ["target0", target, false];) 
-//Syntax: nul = [this,cycle] execVM "LV\LV_functions\LV_fnc_follow.sqf"; (on units init)
+//Syntax: nul = [this,cycle] execVM "addons\AI_Spawn\LV_functions\LV_fnc_follow.sqf"; (on units init)
 //*cycle = true or false (IF target0 is array of markers then true will make unit cycle those markers) DEFAULT: false
 private ["_cycle","_unit","_target","_i2","_targetM","_dir","_nearTarget","_maxDistance","_g0","_tTarget","_groupArr","_ttE"];
 _unit = _this select 0;

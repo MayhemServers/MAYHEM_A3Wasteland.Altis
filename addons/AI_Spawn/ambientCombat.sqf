@@ -5,9 +5,9 @@
 			
 		Calling the script:
 		
-				default: 	nul = [] execVM "LV\ambientCombat.sqf";
+				default: 	nul = [] execVM "addons\AI_Spawn\ambientCombat.sqf";
 				custom: 	nul = [min range, max range, min delay, max delay, groups, side ratios, center unit, AI skills, 
-								communication, dissapear distance, custom init, patrol type, MP] execVM "LV\ambientCombat.sqf";
+								communication, dissapear distance, custom init, patrol type, MP] execVM "addons\AI_Spawn\ambientCombat.sqf";
 								
 	Parameters:
 		
@@ -38,7 +38,7 @@
 								
 		Fully customized example:
 				nul = [150,600,10,30,8,[0,1,1],player,[0.2,0.3,0.1,0.55,0.25,1,1,0.25,1,1],1,800,"hint format['spawning unit: %1',this];",
-					["AWARE","SAD"],false] execVM "LV\ambientCombat.sqf";
+					["AWARE","SAD"],false] execVM "addons\AI_Spawn\ambientCombat.sqf";
 					
 */
 if (!isServer)exitWith{};
@@ -58,20 +58,20 @@ _customInit = if(count _this > 10)then{_this select 10;} else {nil};
 _patrolType = if(count _this > 11)then{_this select 11;} else {1};	
 _mp = if(count _this > 12)then{_this select 12;} else {false};
 
-if(isNil("LV_fullLandVehicle"))then{LV_fullLandVehicle = compile preprocessFile "LV\LV_functions\LV_fnc_fullLandVehicle.sqf";};
-if(isNil("LV_fullAirVehicle"))then{LV_fullAirVehicle = compile preprocessFile "LV\LV_functions\LV_fnc_fullAirVehicle.sqf";};
-if(isNil("LV_fullWaterVehicle"))then{LV_fullWaterVehicle = compile preprocessFile "LV\LV_functions\LV_fnc_fullWaterVehicle.sqf";};
-if(isNil("LV_menGroup"))then{LV_menGroup = compile preprocessFile "LV\LV_functions\LV_fnc_menGroup.sqf";};
-if(isNil("LV_diveGroup"))then{LV_diveGroup = compile preprocessFile "LV\LV_functions\LV_fnc_diveGroup.sqf";};
-if(isNil("LV_ACpatrol"))then{LV_ACpatrol = compile preprocessFile "LV\LV_functions\LV_fnc_ACpatrol.sqf";};
-if(isNil("LV_ACcleanUp"))then{LV_ACcleanUp = compile preprocessFile "LV\LV_functions\LV_fnc_ACcleanUp.sqf";};
-if(isNil("LV_ACskills"))then{LV_ACskills = compile preprocessFile "LV\LV_functions\LV_fnc_ACskills.sqf";};
-if(_communication == 1)then{if(isNil("LV_AIcommunication"))then{LV_AIcommunication = compile preprocessFile "LV\LV_functions\LV_fnc_AIcommunication.sqf";};};
-if(isNil("LV_vehicleInit"))then{LV_vehicleInit = compile preprocessFile "LV\LV_functions\LV_fnc_vehicleInit.sqf";};
-if(isNil("LV_RandomSpot"))then{LV_RandomSpot = compile preprocessFile "LV\LV_functions\LV_fnc_randomSpot.sqf";};
-if(_mp)then{if(isNil("LV_GetPlayers"))then{LV_GetPlayers = compile preprocessFile "LV\LV_functions\LV_fnc_getPlayers.sqf";};};
-if(isNil("LV_FindLandPosition"))then{LV_FindLandPosition = compile preprocessFile "LV\LV_functions\LV_fnc_findLandPosition.sqf";};
-if(isNil("LV_IsInMarker"))then{LV_IsInMarker = compile preprocessFile "LV\LV_functions\LV_fnc_isInMarker.sqf";};
+if(isNil("LV_fullLandVehicle"))then{LV_fullLandVehicle = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_fullLandVehicle.sqf";};
+if(isNil("LV_fullAirVehicle"))then{LV_fullAirVehicle = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_fullAirVehicle.sqf";};
+if(isNil("LV_fullWaterVehicle"))then{LV_fullWaterVehicle = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_fullWaterVehicle.sqf";};
+if(isNil("LV_menGroup"))then{LV_menGroup = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_menGroup.sqf";};
+if(isNil("LV_diveGroup"))then{LV_diveGroup = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_diveGroup.sqf";};
+if(isNil("LV_ACpatrol"))then{LV_ACpatrol = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_ACpatrol.sqf";};
+if(isNil("LV_ACcleanUp"))then{LV_ACcleanUp = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_ACcleanUp.sqf";};
+if(isNil("LV_ACskills"))then{LV_ACskills = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_ACskills.sqf";};
+if(_communication == 1)then{if(isNil("LV_AIcommunication"))then{LV_AIcommunication = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_AIcommunication.sqf";};};
+if(isNil("LV_vehicleInit"))then{LV_vehicleInit = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_vehicleInit.sqf";};
+if(isNil("LV_RandomSpot"))then{LV_RandomSpot = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_randomSpot.sqf";};
+if(_mp)then{if(isNil("LV_GetPlayers"))then{LV_GetPlayers = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_getPlayers.sqf";};};
+if(isNil("LV_FindLandPosition"))then{LV_FindLandPosition = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_findLandPosition.sqf";};
+if(isNil("LV_IsInMarker"))then{LV_IsInMarker = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_isInMarker.sqf";};
 
 if(isNil("LV_ACS_activeGroups"))then{LV_ACS_activeGroups = [];}; 
 if(isNil("LV_AI_westGroups"))then{LV_AI_westGroups = [];}; 

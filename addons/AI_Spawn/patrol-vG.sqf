@@ -1,11 +1,11 @@
 ///////Simple House Patrol script vG 1.3 - SPUn / LostVar
 //
 //*infantry units patrols inside nearest building and outside of it
-//*Syntax: nul = [this] execVM "LV\patrol-vG.sqf";
+//*Syntax: nul = [this] execVM "addons\AI_Spawn\patrol-vG.sqf";
 
 private ["_unit","_newPos","_i","_i2","_bPoss","_building","_dir","_range","_curPos","_outOrNot"];
 
-if(isNil("LV_nearestBuilding"))then{LV_nearestBuilding = compile preprocessFile "LV\LV_functions\LV_fnc_nearestBuilding.sqf";};
+if(isNil("LV_nearestBuilding"))then{LV_nearestBuilding = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_nearestBuilding.sqf";};
 
 _unit = _this select 0;
 _buildings = ["nearest one",_unit] call LV_nearestBuilding;

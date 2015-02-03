@@ -5,10 +5,10 @@
 						
 			Calling the script:
 			
-					default: nul = [this] execVM "LV\fillHouse.sqf";
+					default: nul = [this] execVM "addons\AI_Spawn\fillHouse.sqf";
 					
 					custom:  nul = [target, side, patrol, patrol type, spawn rate, radius, skills, group, 
-									custom init, ID] execVM "LV\fillHouse.sqf";
+									custom init, ID] execVM "addons\AI_Spawn\fillHouse.sqf";
 
 		Parameters:
 		
@@ -32,7 +32,7 @@
 				EXAMPLE: "hint 'this is hint';"
 	ID 			= 	number (if you want to delete units this script creates, you'll need ID number for them)DEFAULT: nil
 
-EXAMPLE: 	nul = [this, 2, true, 2, 50, 1, 0.75, nil, nil, 9] execVM "LV\fillHouse.sqf";
+EXAMPLE: 	nul = [this, 2, true, 2, 50, 1, 0.75, nil, nil, 9] execVM "addons\AI_Spawn\fillHouse.sqf";
 			spawns in nearest building east soldiers in 50% of possible building positions with skill 0.75,
 			and makes them patrol in & outside of that building
 */
@@ -50,9 +50,9 @@ _milGroup = if (count _this > 7) then { _this select 7;} else {nil}; if(!isNil("
 _customInit = if (count _this > 8) then { _this select 8;} else {nil}; if(!isNil("_customInit"))then{if(_customInit == "nil0")then{_customInit = nil;};};
 _grpId = if (count _this > 9) then { _this select 9;} else {nil};	 
 
-if(isNil("LV_ACskills"))then{LV_ACskills = compile preprocessFile "LV\LV_functions\LV_fnc_ACskills.sqf";};
-if(isNil("LV_vehicleInit"))then{LV_vehicleInit = compile preprocessFile "LV\LV_functions\LV_fnc_vehicleInit.sqf";};
-if(isNil("LV_nearestBuilding"))then{LV_nearestBuilding = compile preprocessFile "LV\LV_functions\LV_fnc_nearestBuilding.sqf";};
+if(isNil("LV_ACskills"))then{LV_ACskills = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_ACskills.sqf";};
+if(isNil("LV_vehicleInit"))then{LV_vehicleInit = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_vehicleInit.sqf";};
+if(isNil("LV_nearestBuilding"))then{LV_nearestBuilding = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_nearestBuilding.sqf";};
 
 _blueMenArray = ["B_Soldier_A_F","B_soldier_AR_F","B_medic_F","B_engineer_F","B_soldier_exp_F","B_Soldier_GL_F","B_soldier_M_F","B_soldier_AA_F","B_soldier_AT_F","B_officer_F","B_soldier_repair_F","B_Soldier_F","B_soldier_LAT_F","B_Soldier_lite_F","B_Soldier_SL_F","B_Soldier_TL_F","B_soldier_AAR_F","B_soldier_AAA_F","B_soldier_AAT_F"];
 _blueMenArray2 = ["B_recon_exp_F","B_recon_JTAC_F","B_recon_M_F","B_recon_medic_F","B_recon_F","B_recon_LAT_F","B_recon_TL_F","B_soldier_AAR_F","B_soldier_AAA_F","B_soldier_AAT_F"];
@@ -132,10 +132,10 @@ while{_i2 < _rat}do{
 	if(_patrol)then{
         	switch (_pType) do {
             		case 1: {
-                		_pFile = "LV\patrol-vF.sqf";
+                		_pFile = "addons\AI_Spawn\patrol-vF.sqf";
             		};
             		case 2: {
-                		_pFile = "LV\patrol-vG.sqf";
+                		_pFile = "addons\AI_Spawn\patrol-vG.sqf";
             		};
         	};
 			nul = [_unit] execVM format["%1",_pFile]; 

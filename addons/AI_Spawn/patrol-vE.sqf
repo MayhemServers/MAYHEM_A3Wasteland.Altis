@@ -1,8 +1,8 @@
 ///////Simple Patrol script vE 1.8 - SPUn / LostVar
 //
 //*simple vehicle patrol around center position
-//*Syntax: nul = [this] execVM "LV\patrol-vE.sqf";
-//     or: nul = [this,center,(optional: radius)] execVM "LV\patrol-vE.sqf";
+//*Syntax: nul = [this] execVM "addons\AI_Spawn\patrol-vE.sqf";
+//     or: nul = [this,center,(optional: radius)] execVM "addons\AI_Spawn\patrol-vE.sqf";
 //*center : [position array] (center point of patrol, f.ex. (getMarkerPos "marker1")) DEFAULT: (getPos _unit) = unit's starting position
 //		  or "marker"
 //		  or unit/object

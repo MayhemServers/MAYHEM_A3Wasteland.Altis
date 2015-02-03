@@ -1,6 +1,6 @@
 //ARMA3Alpha function LV_fnc_removeGroup v0.2 - by SPUn / lostvar, REMAKE by kemor
 //removes fillHouse or militarize units 
-//Syntax: nul = [LVgroup*] execVM "LV\LV_functions\LV_fnc_removeGroupV2.sqf";
+//Syntax: nul = [LVgroup*] execVM "addons\AI_Spawn\LV_functions\LV_fnc_removeGroupV2.sqf";
 // * = id number (which is defined in fillHouse or militarize, so if ID is 10 = LVgroup10)
 private["_grp"];
 

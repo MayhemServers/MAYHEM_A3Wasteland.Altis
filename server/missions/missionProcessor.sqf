@@ -9,10 +9,10 @@ if (!isServer) exitwith {};
 #define MISSION_LOCATION_COOLDOWN (10*60)
 #define MISSION_TIMER_EXTENSION (15*60)
 
-private ["_controllerSuffix", "_missionTimeout", "_availableLocations", "_missionLocation", "_leader", "_marker", "_failed", "_complete", "_startTime", "_oldAiCount", "_leaderTemp", "_newAiCount", "_adjustTime", "_lastPos", "_floorHeight"];
+private ["_controllerSuffix", "_missionTimeout", "_availableLocations", "_missionLocation", "_leader", "_marker", "_failed", "_complete", "_startTime", "_oldAiCount", "_leaderTemp", "_newAiCount", "_adjustTime", "_lastPos", "_floorHeight", "_startAiCount", "_reinforcementsCalled", "_reinforceChanceRoll"];
 
 // Variables that can be defined in the mission script :
-private ["_missionType", "_locationsArray", "_aiGroup", "_missionPos", "_missionPicture", "_missionHintText", "_successHintMessage", "_failedHintMessage"];
+private ["_missionType", "_locationsArray", "_aiGroup", "_missionPos", "_missionPicture", "_missionHintText", "_successHintMessage", "_failedHintMessage", "_reinforceChance", "_minReinforceGroups","_maxReinforceGroups"];
 
 _controllerSuffix = [_this, 0, "", [""]] call BIS_fnc_param;
 _aiGroup = grpNull;
@@ -62,6 +62,12 @@ _complete = false;
 _startTime = diag_tickTime;
 _oldAiCount = 0;
 
+//Logic and Variables for AI Reinforcements
+_reinforcementsCalled = false;
+_startAiCount = 0;
+_startAiCount = count units _aiGroup;
+_reinforceChanceRoll = floor (random 99);
+
 if (isNil "_ignoreAiDeaths") then { _ignoreAiDeaths = false };
 
 waitUntil
@@ -92,7 +98,22 @@ waitUntil
 	};
 
 	_oldAiCount = _newAiCount;
-
+	if (isNil "_reinforceChance") then { _reinforceChance = 0};
+	if (isNil "_minReinforceGroups") then { _minReinforceGroups = 1};
+	if (isNil "_maxReinforceGroups") then { _maxReinforceGroups = 1};
+	
+	if ((_newAiCount < _startAiCount/2) && (!_reinforcementsCalled)) then
+	{
+		if (_reinforceChance > _reinforceChanceRoll) then 
+		{
+			for "_i" from _minReinforceGroups to _maxReinforceGroups step 1 do{
+				nul = [_marker,4,true,false,1500,"random",true,200,150,8,0.5,50,true,false,false,true,_marker,false,"default",nil,nil,1,false] execVM "addons\AI_Spawn\heliParadrop.sqf";
+				diag_log format ["WASTELAND SERVER - %1 Mission%2 Reinforcements Called: %3.  %5 of %4 AI remaining", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType, _startAiCount, _newAiCount];
+				_reinforcementsCalled = True;
+				sleep 5;
+			};
+		};
+	};
 	if (!isNull _leaderTemp) then { _leader = _leaderTemp }; // Update current leader
 
 	if (!isNil "_waitUntilMarkerPos") then { _marker setMarkerPos (call _waitUntilMarkerPos) };

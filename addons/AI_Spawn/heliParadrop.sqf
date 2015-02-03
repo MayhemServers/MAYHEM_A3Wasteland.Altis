@@ -5,11 +5,11 @@
 				
 		Calling the script:
 		
-			default: 		nul = [this] execVM "LV\heliParadrop.sqf";
+			default: 		nul = [this] execVM "addons\AI_Spawn\heliParadrop.sqf";
 			
 			custom: 		nul = [spot, side, allowDamage, captive, distance, direction, flyby, fly height, jump distance,
 								group size, jump delay, open height, smokes, flares, chems, patrol, target, cycle, skills,
-								group, custom init, ID, MP] execVM "LV\heliParadrop.sqf";
+								group, custom init, ID, MP] execVM "addons\AI_Spawn\heliParadrop.sqf";
 								
 	Parameters:
 	
@@ -49,7 +49,7 @@ custom init = 	"init commands" (if you want something in init field of units, pu
 ID 			= 	number (if you want to delete units this script creates, you'll need ID number for them)						DEFAULT: nil
 MP			= 	true/false	true = 'drop spot' will automatically be one of alive non-captive players							DEFAULT: false
 						 
-EXAMPLE: 	nul = [player, 2, false, true, 1000, "random", true, 500, 200, 6, 1, 50, true, false, true, true, player, false, 0.75, nil, nil, 1,false] execVM "LV\heliParadrop.sqf";
+EXAMPLE: 	nul = [player, 2, false, true, 1000, "random", true, 500, 200, 6, 1, 50, true, false, true, true, player, false, 0.75, nil, nil, 1,false] execVM "addons\AI_Spawn\heliParadrop.sqf";
 */
 if (!isServer)exitWith{};
 private ["_mp","_grp","_heliType","_men","_grp2","_center","_man1","_man2","_landingSpot","_side","_flyHeight","_openHeight","_jumpDelay","_jumperAmount","_heliDistance","_heliDirection","_flyBy","_allowDamage","_BLUmen","_OPFmen","_INDmen","_BLUchopper","_OPFchopper","_INDchopper","_landingSpotPos","_spos","_heli","_crew","_dir","_flySpot","_jumpDistanceFromTarget","_captive","_smokes","_flares","_chems","_skls","_cPosition","_cRadius","_patrol","_target","_cycle","_skills","_customInit","_grpId","_wp0","_wp1","_doorHandling"];
@@ -83,9 +83,9 @@ _grpId = if (count _this > 21) then { _this select 21;} else {nil};
 _mp = if (count _this > 22) then { _this select 22;} else {false};
 
 //Prepare functions:
-if(isNil("LV_ACskills"))then{LV_ACskills = compile preprocessFile "LV\LV_functions\LV_fnc_ACskills.sqf";};
-if(isNil("LV_vehicleInit"))then{LV_vehicleInit = compile preprocessFile "LV\LV_functions\LV_fnc_vehicleInit.sqf";};
-if(_mp)then{if(isNil("LV_GetPlayers"))then{LV_GetPlayers = compile preprocessFile "LV\LV_functions\LV_fnc_getPlayers.sqf";};};
+if(isNil("LV_ACskills"))then{LV_ACskills = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_ACskills.sqf";};
+if(isNil("LV_vehicleInit"))then{LV_vehicleInit = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_vehicleInit.sqf";};
+if(_mp)then{if(isNil("LV_GetPlayers"))then{LV_GetPlayers = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_getPlayers.sqf";};};
 
 //Classnames:
 _BLUmen = ["B_Soldier_A_F","B_soldier_AR_F","B_medic_F","B_engineer_F","B_soldier_exp_F","B_Soldier_GL_F","B_soldier_M_F","B_soldier_AA_F","B_soldier_AT_F","B_officer_F","B_soldier_repair_F","B_Soldier_F","B_soldier_LAT_F","B_Soldier_lite_F","B_Soldier_SL_F","B_Soldier_TL_F","B_recon_exp_F","B_recon_JTAC_F","B_recon_M_F","B_recon_medic_F","B_recon_F","B_recon_LAT_F","B_recon_TL_F","B_soldier_AAR_F","B_soldier_AAA_F","B_soldier_AAT_F"];
@@ -118,6 +118,13 @@ switch(_side)do{
 		_men = _INDmen;
 		_heliType = _INDchopper;
 	};
+	case 4:{
+		_center = createCenter civilian;
+		_grp = createGroup civilian;
+		if(isNil("_grp2"))then{_grp2 = createGroup civilian;}else{_grp2 = _grp2;};
+		_men = _INDmen;
+		_heliType = _INDchopper;
+	};	
 };
 
 if(_mp)then{
@@ -133,6 +140,7 @@ if(_mp)then{
 			_landingSpotPos = _landingSpot;
 		}else{
 			_landingSpotPos = getPos _landingSpot;
+			_landingSpotPos = [(_landingSpotPos select 0)+ floor(random 250), (_landingSpotPos select 1)+ floor(random 250), 0]; //Randomization of drop point
 		};
 	};
 };
@@ -249,7 +257,7 @@ if(_patrol)then{
 					{
 						_cPosition = _target select 1;
 						_cRadius = _target select 2;
-						nul = [_x,_cPosition,_cRadius,_doorHandling] execVM "LV\patrol-vD.sqf";
+						nul = [_x,_cPosition,_cRadius,_doorHandling] execVM "addons\AI_Spawn\patrol-vD.sqf";
 					}forEach units _grp2;
 				};
 			};
@@ -258,9 +266,9 @@ if(_patrol)then{
 				_x setVariable ["target0",_target,false];
 				_x setVariable ["mDis0", 1000, false];
 				if(_cycle)then{
-					nul = [_x,true] execVM "LV\LV_functions\LV_fnc_follow.sqf";
+					nul = [_x,true] execVM "addons\AI_Spawn\LV_functions\LV_fnc_follow.sqf";
 				}else{
-					nul = [_x,false] execVM "LV\LV_functions\LV_fnc_follow.sqf";
+					nul = [_x,false] execVM "addons\AI_Spawn\LV_functions\LV_fnc_follow.sqf";
 				};
 				sleep 2;
 			}forEach units _grp2;
@@ -272,7 +280,7 @@ if(_patrol)then{
 				{ ////TARGET is single Unit/Object
 					_x setVariable ["target0",_target,false];
 					_x setVariable ["mDis0", 1000, false];
-					nul = [_x] execVM "LV\LV_functions\LV_fnc_follow.sqf";
+					nul = [_x] execVM "addons\AI_Spawn\LV_functions\LV_fnc_follow.sqf";
 				}forEach units _grp2;
 		};
 	};
