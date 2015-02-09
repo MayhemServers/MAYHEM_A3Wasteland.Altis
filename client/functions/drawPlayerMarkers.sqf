@@ -91,7 +91,7 @@ A3W_mapDraw_thread = [] spawn
 				_uav = _x;
 				_uavOwner = (uavControl _uav) select 0;
 
-				if (IS_FRIENDLY_PLAYER(_uavOwner) || (isNull _uavOwner && side _uav == playerSide)) then
+				if (IS_FRIENDLY_PLAYER(_uavOwner) || (((isNull _uavOwner && side _uav == playerSide)) && !_isIndie)) then
 				{
 					_icon = getText (configFile >> "CfgVehicles" >> typeOf _uav >> "icon");
 					if (_icon == "") then { _icon = "iconMan" };
