@@ -52,7 +52,7 @@ MP			= 	true/false	true = 'drop spot' will automatically be one of alive non-cap
 EXAMPLE: 	nul = [player, 2, false, true, 1000, "random", true, 500, 200, 6, 1, 50, true, false, true, true, player, false, 0.75, nil, nil, 1,false] execVM "addons\AI_Spawn\heliParadrop.sqf";
 */
 if (!isServer)exitWith{};
-private ["_mp","_grp","_heliType","_men","_grp2","_center","_man1","_man2","_landingSpot","_side","_flyHeight","_openHeight","_jumpDelay","_jumperAmount","_heliDistance","_heliDirection","_flyBy","_allowDamage","_BLUmen","_OPFmen","_INDmen","_BLUchopper","_OPFchopper","_INDchopper","_landingSpotPos","_spos","_heli","_crew","_dir","_flySpot","_jumpDistanceFromTarget","_captive","_smokes","_flares","_chems","_skls","_cPosition","_cRadius","_patrol","_target","_cycle","_skills","_customInit","_grpId","_wp0","_wp1","_doorHandling"];
+private ["_mp","_grp","_heliType","_men","_grp2","_center","_man1","_man2","_landingSpot","_side","_flyHeight","_openHeight","_jumpDelay","_jumperAmount","_heliDistance","_heliDirection","_flyBy","_allowDamage","_BLUmen","_OPFmen","_INDmen","_BLUchopper","_OPFchopper","_INDchopper","_landingSpotPos","_spos","_heli","_crew","_dir","_flySpot","_jumpDistanceFromTarget","_captive","_smokes","_flares","_chems","_skls","_cPosition","_cRadius","_patrol","_target","_cycle","_skills","_customInit","_grpId","_wp0","_wp1","_doorHandling","_jumpPOS"];
 
 //Extra settings:
 _doorHandling = true;
@@ -201,12 +201,10 @@ waitUntil{([_heli, _landingSpotPos] call BIS_fnc_distance2D)<_jumpDistanceFromTa
 //Create para group
 for "_i" from 1 to _jumperAmount step 1 do{
 	_man1 = _men select (floor(random(count _men)));
-	_man2 = _grp2 createUnit [_man1, [(getPos _heli) select 0,(getPos _heli) select 1, ((getPos _heli) select 2) - 3], [], 0, "NONE"];
+	_jumpPOS = [(getPos _heli) select 0,(getPos _heli) select 1, ((getPos _heli) select 2) - 3];
+	_man2 = [_grp2, _jumpPOS] call createRandomSoldier;
 	_man2 setPos [(getPos _heli) select 0,(getPos _heli) select 1, ((getPos _heli) select 2) - 3];
-	if(typeName _skills != "STRING")then{_skls = [_man2,_skills] call LV_ACskills;};
-	if(!isNil("_customInit"))then{ 
-		[_man2,_customInit] spawn LV_vehicleInit;
-	};
+
 	[_man2,_heli,_openHeight,_smokes,_flares,_chems] spawn{
 		private ["_man2","_heli","_openHeight","_para","_smokes","_flares","_chems","_smoke","_flare","_chem"];
 		_man2 = _this select 0;

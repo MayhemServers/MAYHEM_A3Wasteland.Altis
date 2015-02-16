@@ -62,7 +62,7 @@ _complete = false;
 _startTime = diag_tickTime;
 _oldAiCount = 0;
 
-//Logic and Variables for AI Reinforcements
+//Logic and Variables for AI Reinforcements///////////////////////////////////////////////
 _reinforcementsCalled = false;
 _startAiCount = 0;
 _startAiCount = count units _aiGroup;
@@ -74,6 +74,8 @@ if (_minReinforceGroups > _maxReinforceGroups) then {_maxReinforceGroups = _minR
 _reinforcementsToCall = 0; //initialize variable
 _reinforcementsToCall = ceil (random _maxReinforceGroups); //Find random number of reinforcements to be sent, up to max
 if (_minReinforceGroups > _reinforcementsToCall) then {_reinforcementsToCall = _minReinforceGroups}; //Make sure we call for at least the minimum number of groups
+//End of reinforcement Block///////////////////////////////////////////////////////////////
+
 
 if (isNil "_ignoreAiDeaths") then { _ignoreAiDeaths = false };
 
@@ -111,13 +113,14 @@ waitUntil
 		if (_reinforceChance > _reinforceChanceRoll) then 
 		{
 			for "_i" from 1 to _reinforcementsToCall step 1 do{
-				nul = [_marker,4,true,false,1500,"random",true,200,150,8,0.5,50,true,false,false,true,_marker,false,"default",nil,nil,1,false] execVM "addons\AI_Spawn\heliParadrop.sqf";
+				nul = [_marker,4,true,false,1500,"random",true,200,150,8,0.5,50,true,false,false,true,_marker,false,"default",nil,"addRating 1e11",1,false] execVM "addons\AI_Spawn\heliParadrop.sqf";
 				diag_log format ["WASTELAND SERVER - %1 Mission%2 Reinforcements Called: %3.  %5 of %4 AI remaining", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType, _startAiCount, _newAiCount];
 				_reinforcementsCalled = True;
-				sleep 60;
+				sleep 30;
 			};
 		};
 	};
+	
 	if (!isNull _leaderTemp) then { _leader = _leaderTemp }; // Update current leader
 
 	if (!isNil "_waitUntilMarkerPos") then { _marker setMarkerPos (call _waitUntilMarkerPos) };
