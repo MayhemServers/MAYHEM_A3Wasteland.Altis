@@ -154,6 +154,13 @@ switch(_side)do{
 		_men = _INDmen;
 		_chopperTypes = _INDchoppers;
 	};
+	case 4:{
+		_center = createCenter civilian;
+		_grp = createGroup civilian;
+		if(isNil("_grp2"))then{_grp2 = createGroup civilian;}else{_grp2 = _grp2;};
+		_men = _INDmen;
+		_heliType = _INDchopper;
+	};		
 
 };
 
@@ -161,14 +168,14 @@ switch(_side)do{
 if(!_exactPos)then{
 	if(isNil("REKA60padArray"))then{REKA60padArray = [];};
 	_finding = 1;
-	_ra = 1;
+	_ra = 20;
 	while{_finding > 0}do{
 		
 		_tPos = [];
 		while{count _tPos < 1}do{
 			_spot = [_targetPos, _ra] call LV_RandomSpot;
-			_tPos = _spot isflatempty [5,0,0.3,4,0,false,objnull];
-			_ra = _ra + 50; //try and get them to land further out sooner
+			_tPos = _spot isflatempty [12,0,0.3,4,0,false,objnull];
+			_ra = _ra + 10; //try and get them to land further out sooner
 		};
 		
 		sleep 0.001;
@@ -199,7 +206,8 @@ if(_grpSize > (getNumber (configFile >> "CfgVehicles" >> _heliT >> "transportSol
 };
 
 _man1 = _men select (floor(random(count _men)));
-_man = _grp1 createUnit [_man1, _pos, [], 0, "NONE"];
+//_man = _grp1 createUnit [_man1, _pos, [], 0, "NONE"];
+_man = [_grp1, _pos] call createRandomSoldier;
 _man moveInDriver _heli;
 _man setUnitRank "SERGEANT";
 if(_precise)then{_man setBehaviour "CARELESS";};
@@ -226,21 +234,12 @@ if(_precise)then{_man setBehaviour "CARELESS";};
 _i = 1; 
 for "_i" from 1 to _vehSpots do {
 	_man1 = _men select (floor(random(count _men)));
-	_man2 = _grp2 createUnit [_man1, _pos, [], 0, "NONE"];
-	if(typeName _skills != "STRING")then{_skls = [_man2,_skills] call LV_ACskills;};
-	_man2 moveInCargo _heli;
-	if(!isNil("_customInit"))then{ 
-		[_man2,_customInit] spawn LV_vehicleInit;
-	};
+	_man2 = [_grp2, _pos] call createRandomSoldier;
 };
 if((_vehSpots == 0)&&(_grpSize > 0))then{
 	_man1 = _men select (floor(random(count _men)));
-	_man2 = _grp2 createUnit [_man1, _pos, [], 0, "NONE"];
-	if(typeName _skills != "STRING")then{_skls = [_man2,_skills] call LV_ACskills;};
+	_man2 = [_grp2, _pos] call createRandomSoldier;
 	_man2 moveInTurret [_heli, [0]];
-	if(!isNil("_customInit"))then{ 
-		[_man2,_customInit] spawn LV_vehicleInit;
-	}; 
 };
 
 if(!isNil("_grpId"))then{
@@ -256,7 +255,7 @@ if(_captive)then{
 _heli doMove _targetPos;
 while { _heli distance _targetPos > 260 } do { sleep 4; };
 doStop _heli;
-_heli land "GET OUT"; //you can also try "GET OUT" (then it wont land, only hovers)
+_heli land "LAND"; //you can also try "GET OUT" (then it wont land, only hovers)
 while { (getPos _heli) select 2 > 3 } do { sleep 2; };
 
 if((_smoke select 1))then{//Cover smoke
@@ -363,5 +362,7 @@ if((!_exactPos)&&((_heli distance _targetPos) > 50))then{REKA60padArray = REKA60
 if((_heli distance _pos < 200))exitWith{
 	deleteVehicle _man;
 	deleteVehicle _heli;
+	waituntil {sleep 1;(count units _grp1)==0};
+    	deletegroup _grp1; 
 };
 
