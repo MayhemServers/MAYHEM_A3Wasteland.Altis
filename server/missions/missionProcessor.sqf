@@ -113,7 +113,7 @@ waitUntil
 		if (_reinforceChance > _reinforceChanceRoll) then 
 		{
 			for "_i" from 1 to _reinforcementsToCall step 1 do{
-				nul = [_marker,4,true,false,1500,"random",true,200,150,8,0.5,50,true,false,false,true,_marker,false,"default",nil,"addRating 1e11",1,false] execVM "addons\AI_Spawn\heliParadrop.sqf";
+				nul = [_marker,4,true,false,1500,"random",true,200,150,8,0.5,50,true,false,false,true,_marker,false,"default",_aigroup,nil,1,false] execVM "addons\AI_Spawn\heliParadrop.sqf";
 				diag_log format ["WASTELAND SERVER - %1 Mission%2 Reinforcements Called: %3.  %5 of %4 AI remaining", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType, _startAiCount, _newAiCount];
 				_reinforcementsCalled = True;
 				sleep 30;
