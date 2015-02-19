@@ -11,39 +11,39 @@
 								
 	Parameters:
 	
-	spot 	= 	landing spot 	(name of marker or object or unit, or position array) 									DEFAULT: this
-	exact 	= 	true or false 	(true = tries landing exactly on *spot, false = finds place where it fits) 				DEFAULT: true
-	side 	= 	1 or 2 or 3		(1 = west, 2 = east, 3 = independent)													DEFAULT: 2
-	type 	= 	number 			(Depends on side)																		DEFAULT: 1
+	0)spot 	= 	landing spot 	(name of marker or object or unit, or position array) 									DEFAULT: this
+	1)exact 	= 	true or false 	(true = tries landing exactly on *spot, false = finds place where it fits) 				DEFAULT: true
+	2)side 	= 	1 or 2 or 3		(1 = west, 2 = east, 3 = independent)													DEFAULT: 2
+	3)type 	= 	number 			(Depends on side)																		DEFAULT: 1
 				WEST: 1 = B_Heli_Light_01_armed_F, 2 = B_Heli_Light_01_F, 3 = B_Heli_Transport_01_F
 				EAST: 1 = O_Heli_Attack_02_F, 2 = O_Heli_Attack_02_black_F, 3 = O_Heli_Light_02_F, 4 = O_Heli_Light_02_unarmed_F
 				INDEPENDENT: 1 = I_Heli_Transport_02_F
-	captive = 	true/false 		(if true, enemies wont notice them before chopper has landed) 							DEFAULT: false
-	patrol 	= 	true/false 		(if false, units wont patrol in any way <- handy if you set (group player) as *group) 	DEFAULT: true
-	target 	= 	patrol target 	(patrolling target for infantry group, options:											DEFAULT: player
+	4)captive = 	true/false 		(if true, enemies wont notice them before chopper has landed) 							DEFAULT: false
+	5)patrol 	= 	true/false 		(if false, units wont patrol in any way <- handy if you set (group player) as *group) 	DEFAULT: true
+	6)target 	= 	patrol target 	(patrolling target for infantry group, options:											DEFAULT: player
 								unit 	= 	units name, ex: enemyunit1
 								marker 	= 	markers' name, ex: "marker01" (remember quotes with markers!)
 								marker array = array of markers in desired order, ex: ["marker01","marker02","marker03"]
 								group	= 	groups name, ex: (group enemy1)	OR BlueGroup17
 								group array, ex: [(group player), (group blue2)]
 								["PATROL",center position,radius] = uses patrol-vD.sqf, ex: ["PATROL",(getPos player),150]
-	direction 	= 	"random" or 0-360 (direction where chopper comes from, use quotes with random!) 									DEFAULT: "random"
-	distance 	= 	number (from how far KA60 comes from) 																				DEFAULT: 1500
-	precise 	= 	true or false (true = heli will land even in middle of war, false = heli might have air fights etc before landing) 	DEFAULT: true
-	cycle 		= 	true or false (if true and target is array of markers, unit will cycle these markers) 								DEFAULT: false
-	groupSize 	= 	1-8 (infantry groups' size) 																						DEFAULT: 8
-	skills 		= 	"default" 	(default AI skills) 																					DEFAULT: "default"
+	7)direction 	= 	"random" or 0-360 (direction where chopper comes from, use quotes with random!) 									DEFAULT: "random"
+	8)distance 	= 	number (from how far KA60 comes from) 																				DEFAULT: 1500
+	9)precise 	= 	true or false (true = heli will land even in middle of war, false = heli might have air fights etc before landing) 	DEFAULT: true
+	10)cycle 		= 	true or false (if true and target is array of markers, unit will cycle these markers) 								DEFAULT: false
+	11)groupSize 	= 	1-8 (infantry groups' size) 																						DEFAULT: 8
+	12)skills 		= 	"default" 	(default AI skills) 																					DEFAULT: "default"
 				or	number	=	0-1.0 = this value will be set to all AI skills, ex: 0.8
 				or	array	=	all AI skills invidiually in array, values 0-1.0, order:
 						[aimingAccuracy, aimingShake, aimingSpeed, spotDistance, spotTime, courage, commanding, general, endurance, reloadSpeed] 
 						ex: 	[0.75,0.5,0.6,0.85,0.9,1,1,0.75,1,1] 					
-	smoke		=	[LZ smoke, cover smokes, flare, chemlights] (if chopper uses these on landing spot)									DEFAULT: [false,false,false,false]
-	group 		= 	group name OR nil (if you want units in existing group, set it here. if this is left empty, new group is made) 		DEFAULT: nil
-	custom init = 	"init commands" (if you want something in init field of units, put it here) 										DEFAULT: nil
+	13)smoke		=	[LZ smoke, cover smokes, flare, chemlights] (if chopper uses these on landing spot)									DEFAULT: [false,false,false,false]
+	14)group 		= 	group name OR nil (if you want units in existing group, set it here. if this is left empty, new group is made) 		DEFAULT: nil
+	15)custom init = 	"init commands" (if you want something in init field of units, put it here) 										DEFAULT: nil
 					NOTE: Keep it inside quotes, and if you need quotes in init commands, you MUST use ' or "" instead of ",
 						 ex: "hint 'this is hint';"
-	ID 			= 	number (if you want to delete units this script creates, you'll need ID number for them)							DEFAULT: nil
-	MP			= 	true/false	true = 'landing spot' will automatically be one of alive non-captive players								DEFAULT: false
+	16)ID 			= 	number (if you want to delete units this script creates, you'll need ID number for them)							DEFAULT: nil
+	17)MP			= 	true/false	true = 'landing spot' will automatically be one of alive non-captive players								DEFAULT: false
 	
 	EXAMPLE: 	nul = [player,false,2,3,false,true,player,"random",1000,true,false,8,0.75,[false,true,false,true],nil,nil,33,false] execVM "addons\AI_Spawn\reinforcementChopper.sqf";
 */
@@ -189,6 +189,22 @@ if(!_exactPos)then{
 		};
 	};
 	REKA60padArray set [(count REKA60padArray), _targetPos];
+	
+	//LZ smoke --DEBUG Testing of Heli Code
+		if((_smoke select 0))then{
+			[_targetPos,_distance] spawn {
+				private["_targetPos","_a","_timesLimit","_distance"];
+				_targetPos = _this select 0;
+				_distance = _this select 1;
+				_a = 0;
+				_timesLimit = ceil(_distance / 1000);
+				while{_a < _timesLimit}do{
+					_smoke1 = "SmokeShellRed" createVehicle _targetPos;
+					sleep 50;
+					_a = _a + 1;
+				};
+			};
+		};
 };
 
 _heliT = _chopperTypes select (_chopperType - 1);
