@@ -7,9 +7,9 @@
 if (!isServer) exitwith {};
 //#include "sideMissionDefines.sqf"
 
-private ["_vehicleClass", "_vehicle", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2", "_callLocation"];
+private ["_vehicleClass", "_vehicle", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2", "_callLocation", "_callLocationPos"];
 
-_callLocation _this select 0;  //parameter passed from the missionProcessor which called for help, set as ai location when reinforcement was called
+_callLocation = _this select 0;  //parameter passed from the missionProcessor which called for help, set as ai location when reinforcement was called
 
 _missionPos = markerPos (((call cityList) call BIS_fnc_selectRandom) select 0);  //we'll use this to have random start locations for the reinforcement helos
 
@@ -81,14 +81,14 @@ _aiGroup2 setCombatMode "WHITE"; // Defensive behaviour
 _aiGroup2 setBehaviour "AWARE";
 _aiGroup2 setFormation "STAG COLUMN";
 
-_speedMode = if (missionDifficultyHard) then { "FULL" } else { "NORMAL" }; //speed them up to get there 
+_speedMode = "FULL"; //speed them up to get there 
 
 _aiGroup2 setSpeedMode _speedMode;
 
 // behaviour on waypoints
-
+_callLocationPos = getMarkerPos _callLocation;
 //Waypoint 1 - Get to Trouble Location
-	_waypoint = _aiGroup2 addWaypoint _callLocation;
+	_waypoint = _aiGroup2 addWaypoint [_callLocationPos];
 	_waypoint setWaypointType "MOVE";
 	_waypoint setWaypointCompletionRadius 50;
 	_waypoint setWaypointCombatMode "GREEN";
@@ -97,7 +97,7 @@ _aiGroup2 setSpeedMode _speedMode;
 	_waypoint setWaypointSpeed _speedMode;
 	
 //Waypoint 2 - Take Care of Business
-	_waypoint2 = _aiGroup2 addWaypoint _callLocation;
+	_waypoint2 = _aiGroup2 addWaypoint [_callLocationPos];
 	_waypoint2 setWaypointType "Loiter";
 	_waypoint2 setWaypointLoiterRadius 500;
 	_waypoint2 setWaypointCombatMode "RED";

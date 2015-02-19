@@ -110,11 +110,11 @@ waitUntil
 	
 	if ((_newAiCount < _startAiCount/2) && (!_reinforcementsCalled)) then
 	{
-		if (_reinforceChance > _reinforceChanceRoll) then 
+		if (_reinforceChance > 0) then 
 		{
 			for "_i" from 1 to _reinforcementsToCall step 1 do{
 				nul = [_marker,4,true,false,1500,"random",true,200,150,8,0.5,50,true,false,false,true,_marker,false,"default",_aigroup,nil,1,false] execVM "addons\AI_Spawn\heliParadrop.sqf";
-				if ((floor random(100))>50) then 
+				if ((floor random(100))>0) then 
 				{
 					nul = [_marker] execVM "server\missions\factoryMethods\createReinforceAttackHelicopter.sqf";
 				};
