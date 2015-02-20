@@ -58,29 +58,29 @@ private ["_mp","_grp","_heliType","_men","_grp2","_center","_man1","_man2","_lan
 _doorHandling = true;
 //
 
-_landingSpot = if (count _this > 0) then {_this select 0};
-_side = if (count _this > 1) then {_this select 1}else{2};
-_allowDamage = if (count _this > 2) then {_this select 2}else{true};
-_captive = if (count _this > 3) then {_this select 3}else{false};
-_heliDistance = if (count _this > 4) then {_this select 4}else{1500};
-_heliDirection = if (count _this > 5) then {_this select 5}else{"random"};
-_flyBy = if (count _this > 6) then {_this select 6}else{true};
-_flyHeight = if (count _this > 7) then {_this select 7}else{200};
+_landingSpot = 		if (count _this > 0) then {_this select 0};
+_side = 			if (count _this > 1) then {_this select 1}else{2};
+_allowDamage = 		if (count _this > 2) then {_this select 2}else{true};
+_captive = 			if (count _this > 3) then {_this select 3}else{false};
+_heliDistance = 	if (count _this > 4) then {_this select 4}else{1500};
+_heliDirection = 	if (count _this > 5) then {_this select 5}else{"random"};
+_flyBy = 			if (count _this > 6) then {_this select 6}else{true};
+_flyHeight = 		if (count _this > 7) then {_this select 7}else{200};
 _jumpDistanceFromTarget = if (count _this > 8) then {_this select 8}else{150};
-_jumperAmount = if (count _this > 9) then {_this select 9}else{8};
-_jumpDelay = if (count _this > 10) then {_this select 10}else{0.5};
-_openHeight = if (count _this > 11) then {_this select 11}else{50};
-_smokes = if (count _this > 12) then {_this select 12}else{false};
-_flares = if (count _this > 13) then {_this select 13}else{false};
-_chems = if (count _this > 14) then {_this select 14}else{false};
-_patrol = if (count _this > 15) then {_this select 15; }else{true;};
-_target = if (count _this > 16) then {_this select 16; }else{player;};
-_cycle = if (count _this > 17) then {_this select 17; }else{false;};
-_skills = if (count _this > 18) then {_this select 18; }else{"default";};
-_grp2 = if (count _this > 19) then {_this select 19; }else{nil;};
-_customInit = if (count _this > 20) then {_this select 20; }else{nil;};
-_grpId = if (count _this > 21) then { _this select 21;} else {nil};
-_mp = if (count _this > 22) then { _this select 22;} else {false};
+_jumperAmount = 	if (count _this > 9) then {_this select 9}else{8};
+_jumpDelay =		if (count _this > 10) then {_this select 10}else{0.5};
+_openHeight = 		if (count _this > 11) then {_this select 11}else{50};
+_smokes = 			if (count _this > 12) then {_this select 12}else{false};
+_flares = 			if (count _this > 13) then {_this select 13}else{false};
+_chems = 			if (count _this > 14) then {_this select 14}else{false};
+_patrol = 			if (count _this > 15) then {_this select 15; }else{true;};
+_target = 			if (count _this > 16) then {_this select 16; }else{player;};
+_cycle = 			if (count _this > 17) then {_this select 17; }else{false;};
+_skills = 			if (count _this > 18) then {_this select 18; }else{"default";};
+_grp2 = 			if (count _this > 19) then {_this select 19; }else{nil;};
+_customInit = 		if (count _this > 20) then {_this select 20; }else{nil;};
+_grpId = 			if (count _this > 21) then { _this select 21;} else {nil};
+_mp = 				if (count _this > 22) then { _this select 22;} else {false};
 
 //Prepare functions:
 if(isNil("LV_ACskills"))then{LV_ACskills = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_ACskills.sqf";};
@@ -150,7 +150,13 @@ if(typeName _heliDirection == "STRING")then{_heliDirection = random 360;};
 _spos = [(_landingSpotPos select 0) + (sin _heliDirection) * _heliDistance, (_landingSpotPos select 1) + (cos _heliDirection) * _heliDistance, _flyHeight];
 _heli = createVehicle [_heliType, _spos, [], 0, "FLY"];
 _heli allowDamage _allowDamage;
-_crew = [_heli,_grp] call bis_fnc_spawncrew;
+_heli setVariable ["R3F_LOG_disabled", true, true];
+[_heli] call vehicleSetup;
+
+_crew = [_grp, _spos] call createRandomSoldierC;
+_crew moveInDriver _heli;
+
+
 if(_captive)then{
 	_heli setCaptive true;
 	{ _x setCaptive true; } forEach units _grp;

@@ -156,10 +156,10 @@ switch(_side)do{
 	};
 	case 4:{
 		_center = createCenter civilian;
-		_grp = createGroup civilian;
+		_grp1 = createGroup civilian;
 		if(isNil("_grp2"))then{_grp2 = createGroup civilian;}else{_grp2 = _grp2;};
 		_men = _INDmen;
-		_heliType = _INDchopper;
+		_chopperTypes = _INDchoppers;
 	};		
 
 };
@@ -191,7 +191,7 @@ if(!_exactPos)then{
 	REKA60padArray set [(count REKA60padArray), _targetPos];
 	
 	//LZ smoke --DEBUG Testing of Heli Code
-		if((_smoke select 0))then{
+		
 			[_targetPos,_distance] spawn {
 				private["_targetPos","_a","_timesLimit","_distance"];
 				_targetPos = _this select 0;
@@ -199,12 +199,12 @@ if(!_exactPos)then{
 				_a = 0;
 				_timesLimit = ceil(_distance / 1000);
 				while{_a < _timesLimit}do{
-					_smoke1 = "SmokeShellRed" createVehicle _targetPos;
+					_smoke1 = "SmokeShellGreen" createVehicle _targetPos;
 					sleep 50;
 					_a = _a + 1;
 				};
 			};
-		};
+		
 };
 
 _heliT = _chopperTypes select (_chopperType - 1);
@@ -251,6 +251,7 @@ _i = 1;
 for "_i" from 1 to _vehSpots do {
 	_man1 = _men select (floor(random(count _men)));
 	_man2 = [_grp2, _pos] call createRandomSoldier;
+	_man2 moveInCargo _heli;
 };
 if((_vehSpots == 0)&&(_grpSize > 0))then{
 	_man1 = _men select (floor(random(count _men)));
@@ -267,12 +268,26 @@ if(_captive)then{
 	{ _x setCaptive true; }forEach units _grp1;
 	{ _x setCaptive true; }forEach units _grp2;
 };
-
+/*
 _heli doMove _targetPos;
 while { _heli distance _targetPos > 260 } do { sleep 4; };
 doStop _heli;
 _heli land "LAND"; //you can also try "GET OUT" (then it wont land, only hovers)
 while { (getPos _heli) select 2 > 3 } do { sleep 2; };
+*/
+//Trying to get helo to land
+	_waypoint = _grp1 addWaypoint [_targetPos,0,1];
+	_waypoint setWaypointType "MOVE";
+	_waypoint setWaypointCompletionRadius 50;
+	_waypoint setWaypointCombatMode "WHITE";
+	_waypoint setWaypointBehaviour "AWARE";
+	_waypoint setWaypointFormation "STAG COLUMN";
+	
+	_waypoint = _grp1 addWaypoint [_targetPos,0,2];
+	_waypoint = setWaypointType "TR UNLOAD";
+	
+	
+	
 
 if((_smoke select 1))then{//Cover smoke
 	[_targetPos,_heli] spawn {

@@ -9,13 +9,14 @@ if (!isServer) exitwith {};
 #define MISSION_LOCATION_COOLDOWN (10*60)
 #define MISSION_TIMER_EXTENSION (15*60)
 
-private ["_controllerSuffix", "_missionTimeout", "_availableLocations", "_missionLocation", "_leader", "_marker", "_failed", "_complete", "_startTime", "_oldAiCount", "_leaderTemp", "_newAiCount", "_adjustTime", "_lastPos", "_floorHeight", "_startAiCount", "_reinforcementsCalled", "_reinforceChanceRoll", "_reinforcementsToCall"];
+private ["_controllerSuffix", "_missionTimeout", "_availableLocations", "_missionLocation", "_leader", "_marker", "_failed", "_complete", "_startTime", "_oldAiCount", "_leaderTemp", "_newAiCount", "_adjustTime", "_lastPos", "_floorHeight", "_startAiCount", "_reinforcementsCalled", "_reinforceChanceRoll", "_reinforcementsToCall", "_aiGroup2"];
 
 // Variables that can be defined in the mission script :
 private ["_missionType", "_locationsArray", "_aiGroup", "_missionPos", "_missionPicture", "_missionHintText", "_successHintMessage", "_failedHintMessage", "_reinforceChance", "_minReinforceGroups","_maxReinforceGroups"];
 
 _controllerSuffix = [_this, 0, "", [""]] call BIS_fnc_param;
 _aiGroup = grpNull;
+_aiGroup2 = grpNull;
 
 if (!isNil "_setupVars") then { call _setupVars };
 
@@ -114,13 +115,15 @@ waitUntil
 		{
 			for "_i" from 1 to _reinforcementsToCall step 1 do{
 				nul = [_marker,4,true,false,1500,"random",true,200,150,8,0.5,50,true,false,false,true,_marker,false,"default",_aigroup,nil,1,false] execVM "addons\AI_Spawn\heliParadrop.sqf";
-				if ((floor random(100))>0) then 
-				{
-					nul = [_marker] execVM "server\missions\factoryMethods\createReinforceAttackHelicopter.sqf";
-				};
+				//nul = [_marker,false,4,1,false,true,_marker,"random",1000,false,false,8,0.75,[false,true,false,true],_aiGroup,nil,33,false] execVM "addons\AI_Spawn\reinforcementChopper.sqf";
 				diag_log format ["WASTELAND SERVER - %1 Mission%2 Reinforcements Called: %3.  %5 of %4 AI remaining", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType, _startAiCount, _newAiCount];
 				_reinforcementsCalled = True;
 				sleep 30;
+			};
+			if ((floor random(100))>85) then 
+			{
+				_aiGroup2 = [_marker] execVM "server\missions\factoryMethods\createReinforceAttackHelicopter.sqf";
+				diag_log format ["WASTELAND SERVER - %1 Mission%2 Attack Helo Called: %3.  %5 of %4 AI remaining", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType, _startAiCount, _newAiCount];
 			};
 		};
 	};
@@ -146,7 +149,12 @@ if (_failed) then
 	// Mission failed
 
 	{ moveOut _x; deleteVehicle _x } forEach units _aiGroup;
-
+	
+	if (count units _aiGroup2 > 0) then
+	{
+		{ moveOut _x; deleteVehicle _x } forEach units _aiGroup2; //This group only exists if attack heli reinforcement is called upon
+	};
+	
 	if (!isNil "_failedExec") then { call _failedExec };
 
 	if (!isNil "_vehicle" && {typeName _vehicle == "OBJECT"}) then

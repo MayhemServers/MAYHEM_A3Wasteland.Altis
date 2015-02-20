@@ -7,11 +7,16 @@
 if (!isServer) exitwith {};
 //#include "sideMissionDefines.sqf"
 
-private ["_vehicleClass", "_vehicle", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2", "_callLocation", "_callLocationPos"];
+private ["_vehicleClass", "_vehicle", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2", "_callLocation", "_callLocationPos","_heliDirection","_heliDistance", "_flyHeight"];
 
 _callLocation = _this select 0;  //parameter passed from the missionProcessor which called for help, set as ai location when reinforcement was called
+_callLocationPos = getMarkerPos _callLocation;
 
-_missionPos = markerPos (((call cityList) call BIS_fnc_selectRandom) select 0);  //we'll use this to have random start locations for the reinforcement helos
+_heliDirection = random 360;
+_heliDistance = 1000 + (random 2000);
+_flyHeight = 100 + (random 300);
+
+_startPos = [(_callLocationPos select 0) + (sin _heliDirection) * _heliDistance, (_callLocationPos select 1) + (cos _heliDirection) * _heliDistance, _flyHeight];
 
 _vehicleClass = ["B_Heli_Attack_01_F", "O_Heli_Attack_02_black_F","B_Heli_Light_01_armed_F", "O_Heli_Light_02_F", "I_Heli_light_03_F"] call BIS_fnc_selectRandom;
 
@@ -72,7 +77,7 @@ _createVehicle =
 
 _aiGroup2 = createGroup CIVILIAN;
 
-_vehicle = [_vehicleClass, _missionPos, 0] call _createVehicle;
+_vehicle = [_vehicleClass, _startPos, 0] call _createVehicle;
 
 _leader = effectiveCommander _vehicle;
 _aiGroup2 selectLeader _leader;
@@ -86,56 +91,26 @@ _speedMode = "FULL"; //speed them up to get there
 _aiGroup2 setSpeedMode _speedMode;
 
 // behaviour on waypoints
-_callLocationPos = getMarkerPos _callLocation;
+
 //Waypoint 1 - Get to Trouble Location
-	_waypoint = _aiGroup2 addWaypoint [_callLocationPos];
+	_waypoint = _aiGroup2 addWaypoint [_callLocationPos,0,1];
 	_waypoint setWaypointType "MOVE";
 	_waypoint setWaypointCompletionRadius 50;
-	_waypoint setWaypointCombatMode "GREEN";
-	_waypoint setWaypointBehaviour "AWARE";
+	_waypoint setWaypointCombatMode "RED";
+	_waypoint setWaypointBehaviour "COMBAT";
 	_waypoint setWaypointFormation "STAG COLUMN";
 	_waypoint setWaypointSpeed _speedMode;
 	
 //Waypoint 2 - Take Care of Business
-	_waypoint2 = _aiGroup2 addWaypoint [_callLocationPos];
-	_waypoint2 setWaypointType "Loiter";
-	_waypoint2 setWaypointLoiterRadius 500;
+	_waypoint2 = _aiGroup2 addWaypoint [_callLocationPos,0,2];
+	_waypoint2 setWaypointType "SAD";
 	_waypoint2 setWaypointCombatMode "RED";
 	_waypoint2 setWaypointBehaviour "COMBAT";
+	
+[_callLocationPos] spawn {
+	private["_targetPos"];
+	_targetPos = _this select 0;
+	_smoke1 = "SmokeShellRed" createVehicle _targetPos;
+};	
 
-/*
-_missionPos = getPosATL leader _aiGroup2;
-
-_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
-_vehicleName = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "displayName");
-
-_missionHintText = format ["An armed <t color='%2'>%1</t> is patrolling the island. Intercept it and recover its cargo!", _vehicleName, sideMissionColor];
-
-_numWaypoints = count waypoints _aiGroup2;
-
-
-_waitUntilMarkerPos = {getPosATL _leader};
-_waitUntilExec = nil;
-_waitUntilCondition = {currentWaypoint _aiGroup2 >= _numWaypoints};
-
-_failedExec = nil;
-
-// _vehicle is automatically deleted or unlocked in missionProcessor depending on the outcome
-
-_successExec =
-{
-	// Mission completed
-
-	_box1 = createVehicle ["Box_NATO_Wps_F", _lastPos, [], 5, "None"];
-	_box1 setDir random 360;
-	[_box1, "mission_USSpecial"] call fn_refillbox;
-
-	_box2 = createVehicle ["Box_East_Wps_F", _lastPos, [], 5, "None"];
-	_box2 setDir random 360;
-	[_box2, "mission_USLaunchers"] call fn_refillbox;
-
-	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates have fallen near the wreck.";
-};
-
-_this call sideMissionProcessor;
-*/
+_aiGroup2 //Returns the group to the calling processor to allow for it to be deleted
