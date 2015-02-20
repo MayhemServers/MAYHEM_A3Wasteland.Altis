@@ -7,18 +7,28 @@
 if (!isServer) exitwith {};
 //#include "sideMissionDefines.sqf"
 
-private ["_vehicleClass", "_vehicle", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2", "_callLocation", "_callLocationPos","_heliDirection","_heliDistance", "_flyHeight"];
-
-_callLocation = _this select 0;  //parameter passed from the missionProcessor which called for help, set as ai location when reinforcement was called
-_callLocationPos = getMarkerPos _callLocation;
+private ["_vehicleClass", "_vehicle", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2", "_callLocation", "_callLocationPos","_heliDirection","_heliDistance", "_flyHeight","_heliTypes"];
 
 _heliDirection = random 360;
 _heliDistance = 1000 + (random 2000);
 _flyHeight = 100 + (random 300);
 
+_callLocation = _this select 0;  //parameter passed from the missionProcessor which called for help, set as ai location when reinforcement was called
+_callLocationPos = getMarkerPos _callLocation;
+_callLocationPos = [(_callLocationPos select 0), (_callLocationPos select 1), _flyHeight]; //Change position of call to have proper heli height, goes into waypoints
+
 _startPos = [(_callLocationPos select 0) + (sin _heliDirection) * _heliDistance, (_callLocationPos select 1) + (cos _heliDirection) * _heliDistance, _flyHeight];
 
-_vehicleClass = ["B_Heli_Attack_01_F", "O_Heli_Attack_02_black_F","B_Heli_Light_01_armed_F", "O_Heli_Light_02_F", "I_Heli_light_03_F"] call BIS_fnc_selectRandom;
+//Use Random Weighting for Attack Heli type to reduce the likelihood of a Blackfoot or Kaj tearing up players
+_heliTypes =[
+	["B_Heli_Attack_01_F", .25],
+	["O_Heli_Attack_02_black_F", .25],
+	["B_Heli_Light_01_armed_F", 1],
+	["O_Heli_Light_02_F", 1],
+	["I_Heli_light_03_F", 1]
+];
+
+_vehicleClass =  _heliTypes call fn_selectRandomWeighted;
 
 _createVehicle =
 {
