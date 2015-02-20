@@ -114,7 +114,7 @@ waitUntil
 		if (_reinforceChance > 0) then 
 		{
 			for "_i" from 1 to _reinforcementsToCall step 1 do{
-				nul = [_marker,4,true,false,1500,"random",true,200,150,8,0.5,50,true,false,false,true,_marker,false,"default",_aigroup,nil,1,false] execVM "addons\AI_Spawn\heliParadrop.sqf";
+				nul = [_marker,4,true,false,1500,"random",true,200,150,8,0.5,50,true,false,false,true,_marker,false,"default",_aigroup,nil,1,false,100] execVM "addons\AI_Spawn\heliParadrop.sqf";
 				//nul = [_marker,false,4,1,false,true,_marker,"random",1000,false,false,8,0.75,[false,true,false,true],_aiGroup,nil,33,false] execVM "addons\AI_Spawn\reinforcementChopper.sqf";
 				diag_log format ["WASTELAND SERVER - %1 Mission%2 Reinforcements Called: %3.  %5 of %4 AI remaining", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType, _startAiCount, _newAiCount];
 				_reinforcementsCalled = True;
@@ -237,9 +237,16 @@ else
 	call missionHint;
 
 	diag_log format ["WASTELAND SERVER - %1 Mission%2 complete: %3", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType];
+	
+	if (count units _aiGroup2 > 0) then
+	{
+		sleep 60; //delay to give heli a chance to track down the victors
+		{ moveOut _x; deleteVehicle _x } forEach units _aiGroup2; //This group only exists if attack heli reinforcement is called upon
+	};
 };
 
 deleteGroup _aiGroup;
+deleteGroup _aiGroup2;
 deleteMarker _marker;
 
 if (!isNil "_locationsArray") then
