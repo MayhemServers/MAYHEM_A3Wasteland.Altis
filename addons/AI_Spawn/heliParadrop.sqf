@@ -48,11 +48,12 @@ custom init = 	"init commands" (if you want something in init field of units, pu
 					ex: "hint 'this is hint';"
 ID 			= 	number (if you want to delete units this script creates, you'll need ID number for them)						DEFAULT: nil
 MP			= 	true/false	true = 'drop spot' will automatically be one of alive non-captive players							DEFAULT: false
+Precision	=	Range from landing spot that heli will target for drop.  Use to have troops come from further away to patrol	DEFAULT: 100
 						 
-EXAMPLE: 	nul = [player, 2, false, true, 1000, "random", true, 500, 200, 6, 1, 50, true, false, true, true, player, false, 0.75, nil, nil, 1,false] execVM "addons\AI_Spawn\heliParadrop.sqf";
+EXAMPLE: 	nul = [player, 2, false, true, 1000, "random", true, 500, 200, 6, 1, 50, true, false, true, true, player, false, 0.75, nil, nil, 1,false,100] execVM "addons\AI_Spawn\heliParadrop.sqf";
 */
 if (!isServer)exitWith{};
-private ["_mp","_grp","_heliType","_men","_grp2","_center","_man1","_man2","_landingSpot","_side","_flyHeight","_openHeight","_jumpDelay","_jumperAmount","_heliDistance","_heliDirection","_flyBy","_allowDamage","_BLUmen","_OPFmen","_INDmen","_BLUchopper","_OPFchopper","_INDchopper","_landingSpotPos","_spos","_heli","_crew","_dir","_flySpot","_jumpDistanceFromTarget","_captive","_smokes","_flares","_chems","_skls","_cPosition","_cRadius","_patrol","_target","_cycle","_skills","_customInit","_grpId","_wp0","_wp1","_doorHandling","_jumpPOS"];
+private ["_mp","_grp","_heliType","_men","_grp2","_center","_man1","_man2","_landingSpot","_side","_flyHeight","_openHeight","_jumpDelay","_jumperAmount","_heliDistance","_heliDirection","_flyBy","_allowDamage","_BLUmen","_OPFmen","_INDmen","_BLUchopper","_OPFchopper","_INDchopper","_landingSpotPos","_spos","_heli","_crew","_dir","_flySpot","_jumpDistanceFromTarget","_captive","_smokes","_flares","_chems","_skls","_cPosition","_cRadius","_patrol","_target","_cycle","_skills","_customInit","_grpId","_wp0","_wp1","_doorHandling","_jumpPOS","_precision"];
 
 //Extra settings:
 _doorHandling = true;
@@ -81,6 +82,7 @@ _grp2 = 			if (count _this > 19) then {_this select 19; }else{nil;};
 _customInit = 		if (count _this > 20) then {_this select 20; }else{nil;};
 _grpId = 			if (count _this > 21) then { _this select 21;} else {nil};
 _mp = 				if (count _this > 22) then { _this select 22;} else {false};
+_precision =		if (count _this > 23) then { _this select 23;} else {100};
 
 //Prepare functions:
 if(isNil("LV_ACskills"))then{LV_ACskills = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_ACskills.sqf";};
@@ -135,6 +137,7 @@ if(_mp)then{
 	//Check if target is marker/object/position
 	if(_landingSpot in allMapMarkers)then{
 		_landingSpotPos = getMarkerPos _landingSpot;
+		_landingSpotPos = [(_landingSpotPos select 0) + (sin _heliDirection) * _precision, (_landingSpotPos select 1) + (cos _heliDirection) * _precision, 0];  //Drops troops preset radius from marker
 	}else{
 		if (typeName _landingSpot == "ARRAY") then{
 			_landingSpotPos = _landingSpot;
@@ -206,7 +209,7 @@ waitUntil{([_heli, _landingSpotPos] call BIS_fnc_distance2D)<_jumpDistanceFromTa
 
 //Create para group
 for "_i" from 1 to _jumperAmount step 1 do{
-	_man1 = _men select (floor(random(count _men)));
+	
 	_jumpPOS = [(getPos _heli) select 0,(getPos _heli) select 1, ((getPos _heli) select 2) - 3];
 	_man2 = [_grp2, _jumpPOS] call createRandomSoldier;
 	_man2 setPos [(getPos _heli) select 0,(getPos _heli) select 1, ((getPos _heli) select 2) - 3];
@@ -279,7 +282,10 @@ if(_patrol)then{
 		};
 	}else{
 		if(_target in allMapMarkers)then{ /////TARGET is single Marker
-			{ _x doMove getMarkerPos _target; } forEach units _grp2;
+			//{ _x doMove getMarkerPos _target; } forEach units _grp2;
+			_cPosition = getMarkerPos _target;
+			_cRadius = 50;
+			nul = [_x,_cPosition,_cRadius,_doorHandling] execVM "addons\AI_Spawn\patrol-vD";
 		}else{
 				{ ////TARGET is single Unit/Object
 					_x setVariable ["target0",_target,false];
