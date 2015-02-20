@@ -88,6 +88,7 @@ _precision =		if (count _this > 23) then { _this select 23;} else {100};
 if(isNil("LV_ACskills"))then{LV_ACskills = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_ACskills.sqf";};
 if(isNil("LV_vehicleInit"))then{LV_vehicleInit = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_vehicleInit.sqf";};
 if(_mp)then{if(isNil("LV_GetPlayers"))then{LV_GetPlayers = compile preprocessFile "addons\AI_Spawn\LV_functions\LV_fnc_getPlayers.sqf";};};
+if(isNil("createParatrooper"))then{createParatrooper = compile preprocessFile "addons\AI_Spawn\LV_functions\createParatrooper.sqf";};
 
 //Classnames:
 _BLUmen = ["B_Soldier_A_F","B_soldier_AR_F","B_medic_F","B_engineer_F","B_soldier_exp_F","B_Soldier_GL_F","B_soldier_M_F","B_soldier_AA_F","B_soldier_AT_F","B_officer_F","B_soldier_repair_F","B_Soldier_F","B_soldier_LAT_F","B_Soldier_lite_F","B_Soldier_SL_F","B_Soldier_TL_F","B_recon_exp_F","B_recon_JTAC_F","B_recon_M_F","B_recon_medic_F","B_recon_F","B_recon_LAT_F","B_recon_TL_F","B_soldier_AAR_F","B_soldier_AAA_F","B_soldier_AAT_F"];
@@ -211,7 +212,7 @@ waitUntil{([_heli, _landingSpotPos] call BIS_fnc_distance2D)<_jumpDistanceFromTa
 for "_i" from 1 to _jumperAmount step 1 do{
 	
 	_jumpPOS = [(getPos _heli) select 0,(getPos _heli) select 1, ((getPos _heli) select 2) - 3];
-	_man2 = [_grp2, _jumpPOS] call createRandomSoldier;
+	_man2 = [_i,_grp2, _jumpPOS] call createParatrooper;
 	_man2 setPos [(getPos _heli) select 0,(getPos _heli) select 1, ((getPos _heli) select 2) - 3];
 
 	[_man2,_heli,_openHeight,_smokes,_flares,_chems] spawn{
