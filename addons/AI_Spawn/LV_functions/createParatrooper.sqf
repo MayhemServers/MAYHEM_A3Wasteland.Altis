@@ -46,12 +46,14 @@ _soldier addVest (_vestTypes call BIS_fnc_selectRandom);
 switch (true) do
 {
 	//Random Trooper
-	case (_index = 1 || _index = 2 || _index = 3 || _index > 8):
+	
+	case ((_index == 1) || (_index == 2) || (_index == 3) || (_index > 8)):
 	{
 		[_soldier, _weaponTypes call BIS_fnc_selectRandom, 3] call BIS_fnc_addWeapon;
 	};
+	
 	//Grenadier
-	case (_index = 4 || _index =5):
+	case ((_index == 4) || (_index == 5)):
 	{
 		_soldier addMagazine	"1Rnd_HE_Grenade_shell";
 		_soldier addWeapon "arifle_TRG21_GL_F";
@@ -59,7 +61,7 @@ switch (true) do
 		_soldier addMagazine "1Rnd_HE_Grenade_shell";
 	};
 	//AT Unit
-	case (_index = 6):
+	case (_index == 6):
 	{
 		_soldier addBackpack "B_Kitbag_mcamo";
 		_soldier addWeapon "arifle_TRG20_F";
@@ -69,7 +71,7 @@ switch (true) do
 		_soldier addMagazine "Titan_AT";
 	};
 	//AA Unit
-	case (_index = 7):
+	case (_index == 7):
 	{
 		_soldier addBackpack "B_Kitbag_mcamo";
 		_soldier addWeapon "arifle_TRG20_F";
@@ -79,7 +81,7 @@ switch (true) do
 		_soldier addMagazine "Titan_AA";
 	};
 	//Designated Marksman
-	case (_index = 8):
+	case (_index == 8):
 	{
 		_soldier addWeapon "srifle_LRR_SOS_F";
 	};

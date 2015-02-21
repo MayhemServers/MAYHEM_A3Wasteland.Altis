@@ -129,6 +129,7 @@ switch(_side)do{
 		_heliType = _INDchopper;
 	};	
 };
+if(typeName _heliDirection == "STRING")then{_heliDirection = random 360;};
 
 if(_mp)then{
 	_landingSpot = call LV_GetPlayers;
@@ -150,7 +151,7 @@ if(_mp)then{
 };
 
 //Spawn chopper
-if(typeName _heliDirection == "STRING")then{_heliDirection = random 360;};
+
 _spos = [(_landingSpotPos select 0) + (sin _heliDirection) * _heliDistance, (_landingSpotPos select 1) + (cos _heliDirection) * _heliDistance, _flyHeight];
 _heli = createVehicle [_heliType, _spos, [], 0, "FLY"];
 _heli allowDamage _allowDamage;
@@ -286,7 +287,9 @@ if(_patrol)then{
 			//{ _x doMove getMarkerPos _target; } forEach units _grp2;
 			_cPosition = getMarkerPos _target;
 			_cRadius = 50;
-			nul = [_x,_cPosition,_cRadius,_doorHandling] execVM "addons\AI_Spawn\patrol-vD";
+			{
+			nul = [_x,_cPosition,_cRadius,_doorHandling] execVM "addons\AI_Spawn\patrol-vD.sqf";
+			}forEach units _grp2;
 		}else{
 				{ ////TARGET is single Unit/Object
 					_x setVariable ["target0",_target,false];
