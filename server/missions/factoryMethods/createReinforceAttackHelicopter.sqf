@@ -28,7 +28,7 @@ _heliTypes =[
 	["I_Heli_light_03_F", 1]
 ];
 
-_vehicleClass =  _heliTypes call BIS_fnc_selectRandom;
+_vehicleClass =  (_heliTypes call generateMissionWeights) call fn_selectRandomWeighted;
 
 _createVehicle =
 {
