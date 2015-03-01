@@ -40,8 +40,9 @@ R3F_LOG_CFG_objets_heliportables =
 [
 	"Car_F",
 	"Ship_F",
-	"Tank_F",
+	"Tank_F"/*,
 	"Land_Pier_F"
+	*/
 ];
 
 
