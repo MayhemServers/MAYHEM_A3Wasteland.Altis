@@ -27,7 +27,7 @@ if (_vehicle == _unit) exitWith {};
 
 //set up prices
 _vehClass = typeOf _vehicle;
-_price = 1000; // price = 1000 for vehicles not found in vehicle store. (e.g. Static Weapons)
+_price = 50000; // price = 1000 for vehicles not found in vehicle store. (e.g. Static Weapons)
 
 {
 	if (_vehClass == _x select 1) exitWith
