@@ -129,9 +129,9 @@ throwputArray = compileFinal str
 [
 	["Mini Grenade", "MiniGrenade", 50],
 	["Frag Grenade", "HandGrenade", 100],
-	["APERS Tripwire Mine", "APERSTripMine_Wire_Mag", 200],
+	["APERS Tripwire Mine (Tripflare)", "APERSTripMine_Wire_Mag", 200], //New explosives systems uses this as a tripflare
 	["APERS Bounding Mine", "APERSBoundingMine_Range_Mag", 250],
-	["APERS Mine", "APERSMine_Range_Mag", 300],
+	["APERS Mine (Motion Detector)", "APERSMine_Range_Mag", 300],		//New explosives system uses this as a motion detector
 	["Claymore Charge", "ClaymoreDirectionalMine_Remote_Mag", 350],
 	["M6 SLAM Mine", "SLAMDirectionalMine_Wire_Mag", 350],
 	["AT Mine", "ATMine_Range_Mag", 400],

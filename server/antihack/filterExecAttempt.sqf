@@ -50,7 +50,8 @@ if (_packetName == "BIS_fnc_MP_packet") then
 		[
 			"BIS_fnc_effectKilledAirDestruction",
 			"BIS_fnc_effectKilledAirDestructionStage2",
-			"BIS_fnc_effectKilledSecondaries"/*,
+			"BIS_fnc_effectKilledSecondaries",
+			"vip_sms_fnc_"/*,
 			"JTS_FNC_SENT"*/ // PM Compact by JTS
 		];
 
@@ -65,7 +66,8 @@ if (_packetName == "BIS_fnc_MP_packet") then
 			forEach
 			[
 				"A3W_fnc_",
-				"mf_remote_"
+				"mf_remote_",
+				"vip_sms_fnc_"
 			];
 		};
 	};

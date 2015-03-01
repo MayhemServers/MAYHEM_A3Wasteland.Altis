@@ -72,13 +72,24 @@ class RscTitles
 
 class CfgFunctions
 {
+	#include "addons\vip_sms_v1.0\vip_cmn\fn\vip_cmn_fnc.hpp" //Simple Mine System Addon
+	#include "addons\vip_sms_v1.0\vip_sms\fn\vip_sms_fnc.hpp" //Simple Mine System Addon
 	class A3W
 	{
 		#include "server\CfgFunctions.hpp"
 	};
 };
 
+class CfgRemoteExecCommands 
+{
+	#include "addons\vip_sms_v1.0\vip_cmn\fn\vip_cmn_fnc_remoteExec.hpp" //Simple Mine System Addon
+	#include "addons\vip_sms_v1.0\vip_sms\fn\vip_sms_fnc_remoteExec.hpp" //Simple Mine System Addon
+};	
+
 class CfgNotifications
 {
 	#include "client\CfgNotifications.hpp"
 };
+
+#include "addons\vip_sms_v1.0\vip_cmn\resource\vip_dlg_defaults.hpp" //Simple Mine System Addon
+#include "addons\vip_sms_v1.0\vip_sms\resource\vip_sms_dlg.hpp" //Simple Mine System Addon
