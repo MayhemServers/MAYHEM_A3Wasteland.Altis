@@ -139,7 +139,8 @@ R3F_LOG_CFG_objets_transportables =
 	["Land_BarrelWater_F", 2],
 	["Land_Pier_F", 150],  
 	["Land_FuelStation_Feed_F", 75],
-	["Land_Pod_Heli_Transport_04_ammo_F", 150]
+	["Land_Pod_Heli_Transport_04_ammo_F", 150],
+	["Land_Laptop_unfolded_F", 5]
 	
 ];
 
@@ -200,5 +201,6 @@ R3F_LOG_CFG_objets_deplacables =
 	"Land_BarrelWater_F",
 	"Land_Pier_F",  
 	"Land_FuelStation_Feed_F",
-	"Land_Pod_Heli_Transport_04_ammo_F"
+	"Land_Pod_Heli_Transport_04_ammo_F",
+	"Land_Laptop_unfolded_F"
 ];

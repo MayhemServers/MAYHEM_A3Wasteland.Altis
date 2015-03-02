@@ -567,7 +567,8 @@ genObjectsArray = compileFinal str
 	["Land Pier (TOParma.com)", "Land_Pier_F", 250000, "object"],
 	["Fuel Station (TOParma.com)", "Land_FuelStation_Feed_F", 10000, "object"],
 	["Food sacks", "Land_Sacks_goods_F", 5000, "object"], // Added on player request
-	["Water Barrel", "Land_BarrelWater_F", 5000, "object"] // Added on player request
+	["Water Barrel", "Land_BarrelWater_F", 5000, "object"], // Added on player request
+	["Laptop (Property Manager)", "Land_Laptop_unfolded_F", 250000, "object"]
 ];
 
 allGenStoreVanillaItems = compileFinal str (call genItemArray + call genObjectsArray + call allStoreGear);
