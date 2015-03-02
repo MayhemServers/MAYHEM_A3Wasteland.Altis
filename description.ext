@@ -58,7 +58,7 @@ loadScreen = "mapConfig\Loading.jpg";
 #include "addons\proving_ground\PG_config.hpp"
 
 #include "addons\outlw_magRepack\MagRepack_config.hpp"
-#include "addons\beacondetector\sound\cfgsounds.hpp"
+#include "addons\cfgsounds.hpp"	//Collapsed all sounds to one .hpp due to array of class names at beginning of cfg
 #include "client\systems\hud\dialog\downloadData.hpp"
 
 
