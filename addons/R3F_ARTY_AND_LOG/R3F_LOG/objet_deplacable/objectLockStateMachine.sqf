@@ -106,7 +106,8 @@ switch (_lockState) do
 	case 1: // UNLOCK
 	{
 		R3F_LOG_mutex_local_verrou = true;
-		_totalDuration = if (_object getVariable ["ownerUID", ""] == getPlayerUID player) then { 10 } else { 45 }; // Allow owner to unlock quickly
+		_totalDuration = if (_object getVariable ["ownerUID", ""] == getPlayerUID player) then 
+		{ 10 } else {if ('Land_Laptop_unfolded_F' == typeof _object) then {600} else {45} }; // Allow owner to unlock quickly, have very slow unlock of laptop
 		//_unlockDuration = _totalDuration;
 		//_iteration = 0;
 
