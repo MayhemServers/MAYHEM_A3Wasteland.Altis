@@ -93,3 +93,16 @@ class CfgNotifications
 
 #include "addons\vip_sms_v1.0\vip_cmn\resource\vip_dlg_defaults.hpp" //Simple Mine System Addon
 #include "addons\vip_sms_v1.0\vip_sms\resource\vip_sms_dlg.hpp" //Simple Mine System Addon
+
+class params
+{
+	class marker3D
+	{
+		title = "3D markers";
+		values[] = {0,1};
+		texts[] = {$STR_DISABLED,$STR_ENABLED};
+		default = 1;
+		isGlobal = 1;		
+		file = "addons\3D_Markers\3Dmarkers.sqf";
+	};
+};
