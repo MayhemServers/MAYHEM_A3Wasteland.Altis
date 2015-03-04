@@ -11,7 +11,7 @@ PM_Lock = {
 		};
 		sleep .1;
 	} forEach (position _player nearObjects 50);
-	diag_log "PM_Lock function called";
+	//diag_log "PM_Lock function called";
 	hint "Nearby objects locked";
 };
 
@@ -30,6 +30,32 @@ PM_Unlock = {
 		};
 		sleep .1;
 	} forEach (position _player nearobjects 50);
-	diag_log "PM_Unlock function called";
+	//diag_log "PM_Unlock function called";
 	hint "Nearby objects unlocked";
+};
+
+PM_InventoryLock = {
+	private["_player"];
+	_player = _this select 0;
+	{if (((typeof _x) in ["Box_NATO_Ammo_F"])&&(_x getVariable ["ownerUID",""]==(getPlayerUID _player))&&(_x getVariable ["objectLocked",true])) then
+		{
+			_x setVariable ["A3W_inventoryLockR3F", true, true]; //Lock access to crate
+		};
+		sleep .1;
+	} forEach (position _player nearObjects 50);
+	//diag_log "PM_InventoryLock function called";
+	hint "Nearby crates padlocked";	
+};
+
+PM_InventoryUnlock = {
+	private["_player"];
+	_player = _this select 0;
+	{if (((typeof _x) in ["Box_NATO_Ammo_F"])&&(_x getVariable ["ownerUID",""]==(getPlayerUID _player))&&(_x getVariable ["objectLocked",true])&&(_x getVariable ["A3W_inventoryLockR3F",true])) then
+		{
+			_x setVariable ["A3W_inventoryLockR3F", false, true]; //Unlock access to crate
+		};
+		sleep .1;
+	} forEach (position _player nearObjects 50);
+	//diag_log "PM_InventoryLock function called";
+	hint "Padlocks removed from nearby crates";	
 };
