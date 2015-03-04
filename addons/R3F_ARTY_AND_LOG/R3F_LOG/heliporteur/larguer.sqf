@@ -1,5 +1,5 @@
 /**
- * Larguer un objet en train d'être héliporté
+ * Larguer un objet en train d'être héliporté //Dropping an object being heli
  *
  * @param 0 l'héliporteur
  *
@@ -24,9 +24,9 @@ else
 	_objet = _heliporteur getVariable "R3F_LOG_heliporte";
 	_parachute = [_this, 3, false, [false]] call BIS_fnc_param;
 
-	// On mémorise sur le réseau que le véhicule n'héliporte plus rien
+	// On mémorise sur le réseau que le véhicule n'héliporte plus rien // Is stored on the network that the vehicle is nothing more heli
 	_heliporteur setVariable ["R3F_LOG_heliporte", objNull, true];
-	// On mémorise aussi sur le réseau que l'objet n'est plus attaché
+	// On mémorise aussi sur le réseau que l'objet n'est plus attaché// It also stores on the network that the subject is no longer attached
 	_objet setVariable ["R3F_LOG_est_transporte_par", objNull, true];
 
 	if (_parachute) then

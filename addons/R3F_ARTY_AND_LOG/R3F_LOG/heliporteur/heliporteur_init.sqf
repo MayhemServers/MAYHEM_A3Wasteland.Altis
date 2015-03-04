@@ -14,7 +14,7 @@ if (isNil "_est_desactive") then
 	_heliporteur setVariable ["R3F_LOG_disabled", false];
 };
 
-// Définition locale de la variable si elle n'est pas définie sur le réseau
+// Définition locale de la variable si elle n'est pas définie sur le réseau //Local definition of the variable if it is not defined in the network
 _heliporte = _heliporteur getVariable "R3F_LOG_heliporte";
 if (isNil "_heliporte") then
 {

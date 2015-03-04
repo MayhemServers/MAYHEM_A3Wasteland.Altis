@@ -1,6 +1,6 @@
 /**
  * Détacher un objet d'un véhicule
- *
+ *Detach an object of a vehicle
  * @param 0 l'objet à détacher
  *
  * Copyright (C) 2010 madbull ~R3F~
@@ -23,7 +23,7 @@ else
 	_objet = _this select 0;
 	_remorqueur = _objet getVariable "R3F_LOG_est_transporte_par";
 
-	// Ne pas permettre de décrocher un objet s'il est porté héliporté
+	// Ne pas permettre de décrocher un objet s'il est porté héliporté// Do not allow to pick up an object if it is carried helicopter
 	if ({_remorqueur isKindOf _x} count R3F_LOG_CFG_remorqueurs > 0) then
 	{
 		player switchMove "AinvPknlMstpSlayWrflDnon_medic";
@@ -58,9 +58,9 @@ else
 
 		sleep 2;
 
-		// On mémorise sur le réseau que le véhicule remorque quelque chose
+		// On mémorise sur le réseau que le véhicule remorque quelque chose// We stored on the network the vehicle tow something
 		_remorqueur setVariable ["R3F_LOG_remorque", objNull, true];
-		// On mémorise aussi sur le réseau que le objet est attaché en remorque
+		// On mémorise aussi sur le réseau que le objet est attaché en remorque// It also stores the network that the object is attached trailer
 		_objet setVariable ["R3F_LOG_est_transporte_par", objNull, true];
 
 		if (local _objet) then
@@ -79,7 +79,7 @@ else
 
 		if ({_objet isKindOf _x} count R3F_LOG_CFG_objets_deplacables > 0) then
 		{
-			// Si personne n'a re-remorquer l'objet pendant le sleep 6
+			// Si personne n'a re-remorquer l'objet pendant le sleep 6// If no re-towed object during sleep 6
 			if (isNull (_remorqueur getVariable "R3F_LOG_remorque") &&
 				(isNull (_objet getVariable "R3F_LOG_est_transporte_par")) &&
 				(isNull (_objet getVariable "R3F_LOG_est_deplace_par"))

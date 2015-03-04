@@ -2,6 +2,9 @@
  * Fait déplacer un objet par le joueur. Il garde l'objet tant qu'il ne le relâche pas ou ne meurt pas.
  * L'objet est relaché quand la variable R3F_LOG_joueur_deplace_objet passe à objNull ce qui terminera le script
  *
+ * Made moving an object by the player. It keeps the object as it does not slip or do not die.
+ * The object is released when the variable goes R3F_LOG_joueur_deplace_objet objNull which end on script
+ 
  * @param 0 l'objet à déplacer
  *
  * Copyright (C) 2010 madbull ~R3F~
@@ -46,7 +49,7 @@ else
 	};
 	_objet setVariable ["R3F_Side", (playerSide), true];
 
-	// Si l'objet est un calculateur d'artillerie, on laisse le script spécialisé gérer
+	// Si l'objet est un calculateur d'artillerie, on laisse le script spécialisé gérer// If the object is an artillery calculator, allowed to manage specialized script
 	_est_calculateur = _objet getVariable "R3F_ARTY_est_calculateur";
 	if !(isNil "_est_calculateur") then
 	{
@@ -59,7 +62,7 @@ else
 
 		R3F_LOG_joueur_deplace_objet = _objet;
 
-		// Sauvegarde et retrait de l'arme primaire
+		// Sauvegarde et retrait de l'arme primaire// Save and removing the primary weapon
 		/*_arme_principale = primaryWeapon player;
 		_arme_principale_accessoires = [];
 		_arme_principale_magasines = [];*/
@@ -71,7 +74,7 @@ else
 
 		sleep 0.5;
 
-		// Si le joueur est mort pendant le sleep, on remet tout comme avant
+		// Si le joueur est mort pendant le sleep, on remet tout comme avant// If the player died during sleep, it puts everything as before
 		if (!alive player) then
 		{
 			R3F_LOG_joueur_deplace_objet = objNull;
@@ -102,7 +105,7 @@ else
 
 			if (count (weapons _objet) > 0) then
 			{
-				// Le canon doit pointer devant nous (sinon on a l'impression de se faire empaler)
+				// Le canon doit pointer devant nous (sinon on a l'impression de se faire empaler)// The barrel should point before us (if we have the impression of being impaled)
 				_azimut_canon = ((_objet weaponDirection (weapons _objet select 0)) select 0) atan2 ((_objet weaponDirection (weapons _objet select 0)) select 1);
 
 				// On est obligé de demander au serveur de tourner le canon pour nous
@@ -126,7 +129,7 @@ else
 			//_action_menu_90 = player addAction [("<img image='client\ui\ui_arrow_combo_ca.paa'/> <t color='#dddd00'>Rotate object 90°</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\rotate.sqf", 90, 5, true, false];
 			//_action_menu_180 = player addAction [("<img image='client\ui\ui_arrow_combo_ca.paa'/> <t color='#dddd00'>Rotate object 180°</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\rotate.sqf", 180, 5, true, false];
 
-			// On limite la vitesse de marche et on interdit de monter dans un véhicule tant que l'objet est porté
+			// On limite la vitesse de marche et on interdit de monter dans un véhicule tant que l'objet est porté// It limits the speed of walking and it is forbidden to ride in a vehicle as the subject is raised
 			while {!isNull R3F_LOG_joueur_deplace_objet && alive player} do
 			{
 				if (vehicle player != player) then
@@ -153,7 +156,7 @@ else
 				sleep 0.25;
 			};
 
-			// L'objet n'est plus porté, on le repose
+			// L'objet n'est plus porté, on le repose// The object is not focused, it is based
 			detach _objet;
 
 			// this addition comes from Sa-Matra (fixes the heigt of some of the objects) - all credits for this fix go to him!
@@ -209,7 +212,7 @@ else
 			player forceWalk false;
 			player selectWeapon _arme_principale;
 
-			// Restauration de l'arme primaire
+			// Restauration de l'arme primaire//Restoration of primary weapon
 			/*if (alive player && _arme_principale != "") then
 			{
 				if(primaryWeapon player != "") then {

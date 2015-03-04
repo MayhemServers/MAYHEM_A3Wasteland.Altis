@@ -22,7 +22,7 @@ else
 
 	_heliporteur = _this select 0;
 	_objet = nearestObjects [_heliporteur, R3F_LOG_CFG_objets_heliportables, 20];
-	// Parce que l'héliporteur peut être un objet héliportable
+	// Parce que l'héliporteur peut être un objet héliportable //Because Helicarrier can be an object heliportable
 	_objet = _objet - [_heliporteur];
 
 	if (count _objet > 0) then
@@ -35,11 +35,11 @@ else
 			{
 				if (count crew _objet == 0) then
 				{
-					// Si l'objet n'est pas en train d'être déplacé par un joueur
+					// Si l'objet n'est pas en train d'être déplacé par un joueur //If the object is not being moved by a player
 					if (isNull (_objet getVariable "R3F_LOG_est_deplace_par") || (!alive (_objet getVariable "R3F_LOG_est_deplace_par"))) then
 					{
 						private ["_ne_remorque_pas", "_remorque"];
-						// Ne pas héliporter quelque chose qui remorque autre chose
+						// Ne pas héliporter quelque chose qui remorque autre chose //Do not héliporter something else trailer
 						_ne_remorque_pas = true;
 						_remorque = _objet getVariable "R3F_LOG_remorque";
 						if !(isNil "_remorque") then
@@ -52,9 +52,9 @@ else
 
 						if (_ne_remorque_pas) then
 						{
-							// On mémorise sur le réseau que l'héliporteur remorque quelque chose
+							// On mémorise sur le réseau que l'héliporteur remorque quelque chose //Is stored on the network as something Helicarrier trailer
 							_heliporteur setVariable ["R3F_LOG_heliporte", _objet, true];
-							// On mémorise aussi sur le réseau que l'objet est attaché à un véhicule
+							// On mémorise aussi sur le réseau que l'objet est attaché à un véhicule //Also is stored on the network that the object is attached to a vehicle
 							_objet setVariable ["R3F_LOG_est_transporte_par", _heliporteur, true];
 
 							_heliBB = _heliporteur call fn_boundingBoxReal;
@@ -73,7 +73,7 @@ else
 
 							_minZ = (_heliMinBB select 2) - (_objectMaxBB select 2) - 0.5;
 
-							// Attacher sous l'héliporteur au ras du sol
+							// Attacher sous l'héliporteur au ras du sol //Attach under the Helicarrier at ground
 							[_objet, true] call fn_enableSimulationGlobal;
 							_objet attachTo [_heliporteur,
 							[
