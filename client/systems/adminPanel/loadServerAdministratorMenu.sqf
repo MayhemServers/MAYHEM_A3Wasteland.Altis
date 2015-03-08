@@ -23,6 +23,8 @@ if ([_uid, 3] call isAdmin) then {
 					"Spectator Cam",
 					"Player Markers",
 					"Teleport",
+					"Teleport player to me",
+					"Teleport me to player",
 	                "Money",
 	                "Debug Menu",
 					"Object Search",

@@ -59,23 +59,33 @@ if (_uid call isAdmin) then
 					}] call BIS_fnc_addStackedEventHandler;
 					hint "Click on map to teleport";
 			    };
-	            case 5: //Money
+				case 5: //Teleport player to me
+				{
+					closeDialog 0;
+					execVM "client\systems\adminPanel\tptome.sqf";
+				};
+				case 6: //Teleport me to player
+				{
+					closeDialog 0;
+					execVM "client\systems\adminPanel\tpmeto.sqf";
+				};
+	            case 7: //Money
 			    {
 					_money = 50000;
 					player setVariable ["cmoney", (player getVariable ["cmoney",0]) + _money, true];
 					if (!isNil "notifyAdminMenu") then { ["money", _money] call notifyAdminMenu };
 			    };
-	            case 6: //Debug Menu
+	            case 8: //Debug Menu
 			    {
 	            	closeDialog 0;
 	                execVM "client\systems\adminPanel\loadDebugMenu.sqf";
 			    };
-				case 7: //Object search menu
+				case 9: //Object search menu
 			    {
 	            	closeDialog 0;
 	                execVM "client\systems\adminPanel\loadObjectSearch.sqf";
 			    };
-			    case 8: // toggle God mode
+			    case 10: // toggle God mode
 			    {
 			    	execVM "client\systems\adminPanel\toggleGodMode.sqf";
 			    };
