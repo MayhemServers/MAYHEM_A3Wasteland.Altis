@@ -109,7 +109,7 @@ waitUntil
 
 	_oldAiCount = _newAiCount;
 	
-	if ((_newAiCount < _startAiCount/2) && (!_reinforcementsCalled)) then
+	if (((_newAiCount < _startAiCount/2) && (!_reinforcementsCalled)) && !(MISSION_PROC_TYPE_NAME == "Bounty")) then
 	{
 		if (_reinforceChance > _reinforceChanceRoll) then 
 		{

@@ -4,14 +4,23 @@
 //	@file Name: FAR_lastResort.sqf
 //	@file Author: AgentRev
 
-private ["_hasCharge", "_hasSatchel", "_mineType", "_pos", "_mine"];
+private ["_hasCharge", "_hasSatchel", "_mineType", "_pos", "_mine", "_IsBountyTarget"];
 
 _hasCharge = "DemoCharge_Remote_Mag" in magazines player;
 _hasSatchel = "SatchelCharge_Remote_Mag" in magazines player;
+_IsBountyTarget = false;
+
+{
+	if(getPlayerUID player == _x) then
+		{
+			_IsBountyTarget = true;
+		};
+}foreach pvar_BountySystemActiveTargets;
+
 
 if !(player getVariable ["performingDuty", false]) then
 {
-	if (_hasCharge || _hasSatchel) then
+	if ((_hasCharge || _hasSatchel) && !(_IsBountyTarget)) then
 	{
 		if (["Perform your duty?", "", "Yes", "No"] call BIS_fnc_guiMessage) then
 		{
@@ -42,6 +51,12 @@ if !(player getVariable ["performingDuty", false]) then
 	}
 	else
 	{
+		If (_IsBountyTarget) Then
+		{
+		titleText ["You cannot take the easy route as the bounty target.", "PLAIN", 0.5];
+		} Else 
+		{
 		titleText ["Get an explosive charge next time, my child.", "PLAIN", 0.5];
+		};
 	};
 };
