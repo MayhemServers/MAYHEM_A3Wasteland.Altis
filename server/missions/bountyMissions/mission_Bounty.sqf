@@ -99,6 +99,7 @@ _missionPos = position _foundPlayer;
 
 //add the MP died event
 _foundPlayer addMPEventHandler ["mpkilled", {[_this] call server_BountyDied;}];
+_foundPlayer setVariable ["isBountyTarget", true, true]; //Sets variable on player object and broadcasts it so client scripts can pick that up //Apoc
 
 //get the variables so that if _foundPlayer instance changes we aren't fucked
 _playerName = name _foundPlayer;

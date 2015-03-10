@@ -10,12 +10,11 @@ _hasCharge = "DemoCharge_Remote_Mag" in magazines player;
 _hasSatchel = "SatchelCharge_Remote_Mag" in magazines player;
 _IsBountyTarget = false;
 
+If (player getVariable ["isBountyTarget",false]) then
 {
-	if(getPlayerUID player == _x) then
-		{
-			_IsBountyTarget = true;
-		};
-}foreach pvar_BountySystemActiveTargets;
+	_IsBountyTarget = true;
+};
+
 
 
 if !(player getVariable ["performingDuty", false]) then

@@ -8,14 +8,14 @@ private ["_IsBountyTarget"];
 _IsBountyTarget = false;
 if (!alive player) exitWith {};
 
+If (player getVariable ["isBountyTarget",false]) then
+{
+	_IsBountyTarget = true;
+};
+
+
 if (["Are you sure you want to suicide?", "Confirm", "Yes", true] call BIS_fnc_guiMessage) then
-	{
-		if(getPlayerUID player == _x) then
-			{
-			_IsBountyTarget = true;
-			};
-	}foreach pvar_BountySystemActiveTargets;
-	
+{	
 	if !(_IsBountyTarget) then
 	{
 		player allowDamage true;
