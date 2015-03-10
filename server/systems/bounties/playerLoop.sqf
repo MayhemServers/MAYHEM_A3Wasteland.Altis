@@ -33,6 +33,7 @@ _BountyType = _this select 1;
 _mission_state = BOUNTY_MISSION_ACTIVE;
 
 pvar_BountySystemActiveTargets = pvar_BountySystemActiveTargets + [_targetUID];
+publicVariable "pvar_BountySystemActiveTargets"; //Rebroadcast the Variable to clients so they know if they're the Target to block suicide options //Apoc
 
 {
 		if(_targetUID == getPlayerUID _x) then
@@ -121,138 +122,129 @@ private ["_bountyDeath"];
 
 while {true} do
 {
-sleep 10;
-_currTime = (floor time);
+	sleep 10;
+	_currTime = (floor time);
 
 
 
 
-if (_currTime - _startTime >= bountyMissionTimeout) then 
-{ 
-		_mission_state = BOUNTY_MISSION_END_SURVIVED; 
-};
-
-//Update Marker
-_targetMarker setMarkerPos (position _targetPlayer);
-
-if(!isnil "_targetGroup") then
-{
-	{
-		private ["_friendlyFound","_friendlyName"];
-		_friendlyFound = false;
-		_friendlyName = name _x;
-		{
-			if(_friendlyName == _x) then
-			{
-				_friendlyFound = true;
-			};
-		}foreach _targetFriendlies;
-		
-		if(!_friendlyFound) then
-		{
-			_targetFriendlies = _targetFriendlies + [_friendlyName];
-		};
-	}foreach units _targetGroup;
-};
-
-
-{
-
-	
-
-
-	private ["_player"];
-	_player = _x select 0;
-	
-
-	if(name _player == _targetName) then
-	{
-		_bountyDeath = _x;
-		_killer = _x select 1;
-		_killerName = name _killer;
-		_killerSide = side _killer;
-		_killerUID = getPlayerUID _killer;
-		
-		_killerSideName = 
-		switch (_killerSide) do 
-		{
-			case west: {"Blufor"}; 
-			case east: {"Opfor"};
-			case civilian: {"A.I."};
-			case independent: {"Rebels"};
-			default {"Unknown"};
-		};
-		
+	if (_currTime - _startTime >= bountyMissionTimeout) then 
+	{ 
+			_mission_state = BOUNTY_MISSION_END_SURVIVED; 
 	};
-	
-	
-		
-}foreach pvar_BountySystemTargetDeaths;
 
-if(!isNil "_killer") then
-{ 
-		_mission_state = BOUNTY_MISSION_END_KILLED;
-		if(_killerName == _targetName) then 
-		{ 
-			_mission_state = BOUNTY_MISSION_END_SUICIDE;
-		}
-		else 
+	//Update Marker
+	_targetMarker setMarkerPos (position _targetPlayer);
+
+	if(!isnil "_targetGroup") then
+	{
 		{
-			if(_killerSide == _targetSide) then 
-			{ 
-				if(_killerSide == independent) then 
+			private ["_friendlyFound","_friendlyName"];
+			_friendlyFound = false;
+			_friendlyName = name _x;
+			{
+				if(_friendlyName == _x) then
 				{
-					
-					_killerIsFriendly = 0;
-					diag_log format ["Is Killer Friendly: %1", _killerIsFriendly];
-					diag_log format ["_killerName: %1", _killerName];
-					diag_log format ["_targetFriendlies: %1", _targetFriendlies];
+					_friendlyFound = true;
+				};
+			}foreach _targetFriendlies;
+			
+			if(!_friendlyFound) then
+			{
+				_targetFriendlies = _targetFriendlies + [_friendlyName];
+			};
+		}foreach units _targetGroup;
+	};
+
+
+	{
+		private ["_player"];
+		_player = _x select 0;
+
+		if(name _player == _targetName) then
+		{
+			_bountyDeath = _x;
+			_killer = _x select 1;
+			_killerName = name _killer;
+			_killerSide = side _killer;
+			_killerUID = getPlayerUID _killer;
+			
+			_killerSideName = 
+			switch (_killerSide) do 
+			{
+				case west: {"Blufor"}; 
+				case east: {"Opfor"};
+				case civilian: {"A.I."};
+				case independent: {"Rebels"};
+				default {"Unknown"};
+			};
+		};
+	}foreach pvar_BountySystemTargetDeaths;
+
+	if(!isNil "_killer") then
+	{ 
+			_mission_state = BOUNTY_MISSION_END_KILLED;
+			if(_killerName == _targetName) then 
+			{ 
+				_mission_state = BOUNTY_MISSION_END_SUICIDE;
+			}
+			else 
+			{
+				if(_killerSide == _targetSide) then 
+				{ 
+					if(_killerSide == independent) then 
 					{
-						if(_killerName == _x) then
+						
+						_killerIsFriendly = 0;
+						diag_log format ["Is Killer Friendly: %1", _killerIsFriendly];
+						diag_log format ["_killerName: %1", _killerName];
+						diag_log format ["_targetFriendlies: %1", _targetFriendlies];
 						{
-							_killerIsFriendly = 1;
+							if(_killerName == _x) then
+							{
+								_killerIsFriendly = 1;
+							};
+						}foreach _targetFriendlies;
+						
+						if(_killerIsFriendly == 1) then
+						{
+							_mission_state = BOUNTY_MISSION_END_TEAMKILLED;
+						}
+						else
+						{
+							_mission_state = BOUNTY_MISSION_END_KILLED;
 						};
-					}foreach _targetFriendlies;
-					
-					if(_killerIsFriendly == 1) then
+					} 
+					else 
 					{
 						_mission_state = BOUNTY_MISSION_END_TEAMKILLED;
-					}
-					else
-					{
-						_mission_state = BOUNTY_MISSION_END_KILLED;
 					};
-				} 
-				else 
-				{
-					_mission_state = BOUNTY_MISSION_END_TEAMKILLED;
 				};
 			};
-		};
-};
-
-if(!(_mission_state == BOUNTY_MISSION_END_SUICIDE || _mission_state == BOUNTY_MISSION_END_TEAMKILLED || _mission_state == BOUNTY_MISSION_END_KILLED)) then
-{
-	_isPlayerOnServer = 0;
-	_players = playableUnits;
-	{
-			if(name _x == _targetName) then
-			{
-				_isPlayerOnServer = 1;
-			};
-	}foreach _players;
-		
-		
-	if(_isPlayerOnServer == 0) then
-	{
-			 diag_log format ["Player Not On Server: %1 PlayerName: %2", _targetUID, _targetName];
-			_mission_state = BOUNTY_MISSION_END_DISCONNECT;
 	};
-};
 
-diag_log format ["Custom Bounty in Progress: %1", _targetUID];
+	if(!(_mission_state == BOUNTY_MISSION_END_SUICIDE || _mission_state == BOUNTY_MISSION_END_TEAMKILLED || _mission_state == BOUNTY_MISSION_END_KILLED)) then
+	{
+		_isPlayerOnServer = 0;
+		_players = playableUnits;
+		{
+				if(name _x == _targetName) then
+				{
+					_isPlayerOnServer = 1;
+				};
+		}foreach _players;
+			
+			
+		if(_isPlayerOnServer == 0) then
+		{
+				 diag_log format ["Player Not On Server: %1 PlayerName: %2", _targetUID, _targetName];
+				_mission_state = BOUNTY_MISSION_END_DISCONNECT;
+		};
+	};
 
-if (_mission_state != BOUNTY_MISSION_ACTIVE) exitWith {};	
+	diag_log format ["Custom Bounty in Progress: %1", _targetUID];
+
+	if (_mission_state != BOUNTY_MISSION_ACTIVE) exitWith {};	
 
 };
 

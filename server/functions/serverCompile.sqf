@@ -91,12 +91,14 @@ weaponDisassembledServer = [_path, "weaponDisassembledServer.sqf"] call mf_compi
 server_playerDied = [_path, "serverPlayerDied.sqf"] call mf_compile;
 server_BountyDied = [_path, "serverBountyDied.sqf"] call mf_compile;
 
+/*
 //Bounty System
 _path = "server\systems\bounties";
 onBountySystemPlayerDied = [_path, "onBountySystemPlayerDied.sqf"] call mf_compile;
 startPlayerBounty = [_path, "startPlayerBounty.sqf"] call mf_compile;
 startSystemBounty = [_path, "startSystemBounty.sqf"] call mf_compile;
 startSystemBountyByName = [_path, "startSystemBountyByName.sqf"] call mf_compile;
+*/
 
 //Spawning Compiles
 _path = "server\spawning";
