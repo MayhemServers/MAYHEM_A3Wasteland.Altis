@@ -42,7 +42,7 @@ class PM_dialog
 			w = 0.0515625 * safezoneW;
 			h = 0.044 * safezoneH;
 			tooltip = "Unlocks your nearby objects"; //--- ToDo: Localize;
-			action = "closeDialog 0;_nil=[player]Spawn PM_Unlock";
+			action = "closeDialog 0;_nil=[player]Spawn APOC_PM_Unlock";
 		};
 		class PM_Button_Lock: RscButton
 		{
@@ -53,8 +53,31 @@ class PM_dialog
 			w = 0.0515625 * safezoneW;
 			h = 0.044 * safezoneH;
 			tooltip = "Locks nearby objects."; //--- ToDo: Localize;
-			action = "closeDialog 0;_nil=[player]Spawn PM_Lock";
+			action = "closeDialog 0;_nil=[player]Spawn APOC_PM_Lock";
 		};
+		class PM_Button_InventoryUnlock: RscButton
+		{
+			idc = -1;
+			text = "INV UNLOCK"; //--- ToDo: Localize;
+			x = 0.402031 * safezoneW + safezoneX;
+			y = 0.55 * safezoneH + safezoneY;
+			w = 0.0515625 * safezoneW;
+			h = 0.044 * safezoneH;
+			tooltip = "Unlocks your nearby crate inventories."; //--- ToDo: Localize;
+			action = "closeDialog 0;_nil=[player]Spawn APOC_PM_Unlock";
+		};
+		class PM_Button_InventoryLock: RscButton
+		{
+			idc = -1;
+			text = "INV LOCK"; //--- ToDo: Localize;
+			x = 0.546406 * safezoneW + safezoneX;
+			y = 0.55 * safezoneH + safezoneY;
+			w = 0.0515625 * safezoneW;
+			h = 0.044 * safezoneH;
+			tooltip = "Locks nearby crate inventories."; //--- ToDo: Localize;
+			action = "closeDialog 0;_nil=[player]Spawn APOC_PM_InventoryLock";
+		};
+		
 		class PM_Button_Cancel: RscButton
 		{
 			idc = -1;
@@ -66,7 +89,7 @@ class PM_dialog
 			tooltip = "Closes the Property Manager."; //--- ToDo: Localize;
 			action = "closeDialog 0";
 		};
-		class PM_Text_Description: RscText
+		class PM_Text_Description: PM_RscText
 		{
 			idc = -1;
 			text = "Unlocking via property manager will unlock your objects within 50m.  Locking will lock all objects within 50m to your name."; //--- ToDo: Localize;

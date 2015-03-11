@@ -1,4 +1,4 @@
-PM_Lock = {
+APOC_PM_Lock = {
 	private["_player"];
 	_player = _this select 0;
 	{if ((typeof _x) in R3F_LOG_CFG_objets_deplacables) then
@@ -15,7 +15,7 @@ PM_Lock = {
 	hint "Nearby objects locked";
 };
 
-PM_Unlock = {
+APOC_PM_Unlock = {
 	private["_player"];
 	_player = _this select 0;	
 	{if ((typeof _x) in R3F_LOG_CFG_objets_deplacables) then
@@ -34,12 +34,13 @@ PM_Unlock = {
 	hint "Nearby objects unlocked";
 };
 
-PM_InventoryLock = {
+APOC_PM_InventoryLock = {
 	private["_player"];
 	_player = _this select 0;
-	{if (((typeof _x) in ["Box_NATO_Ammo_F"])&&(_x getVariable ["ownerUID",""]==(getPlayerUID _player))&&(_x getVariable ["objectLocked",true])) then
+	{if (({_x isKindOf "ReammoBox_F"})&&(_x getVariable ["ownerUID",""]==(getPlayerUID _player))&&(_x getVariable ["objectLocked",true])) then
 		{
 			_x setVariable ["A3W_inventoryLockR3F", true, true]; //Lock access to crate
+			_x setVariable ["R3F_LOG_disabled", true, true]; //Remove logistics actions from crates/objects (makes them immobile)
 		};
 		sleep .1;
 	} forEach (position _player nearObjects 50);
@@ -47,12 +48,13 @@ PM_InventoryLock = {
 	hint "Nearby crates padlocked";	
 };
 
-PM_InventoryUnlock = {
+APOC_PM_InventoryUnlock = {
 	private["_player"];
 	_player = _this select 0;
-	{if (((typeof _x) in ["Box_NATO_Ammo_F"])&&(_x getVariable ["ownerUID",""]==(getPlayerUID _player))&&(_x getVariable ["objectLocked",true])&&(_x getVariable ["A3W_inventoryLockR3F",true])) then
+	{if (({_x isKindOf "ReammoBox_F"})&&(_x getVariable ["ownerUID",""]==(getPlayerUID _player))&&(_x getVariable ["objectLocked",true])&&(_x getVariable ["A3W_inventoryLockR3F",true])) then
 		{
 			_x setVariable ["A3W_inventoryLockR3F", false, true]; //Unlock access to crate
+			_x setVariable ["R3F_LOG_disabled", false, true]; //Remove logistics actions from crates/objects (makes them immobile)
 		};
 		sleep .1;
 	} forEach (position _player nearObjects 50);
