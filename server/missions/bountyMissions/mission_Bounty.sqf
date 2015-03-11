@@ -8,7 +8,7 @@ if (!isServer) exitwith {};
 #include "bountyMissionDefines.sqf"
 
 private ["_missionMarkerName","_missionType","_hint","_players","_marker","_count", "_foundPlayer", "_mission_state", "_playerName", "_playerSide", "_startTime", "_currTime","_missionEndStateNames","_alivePlayerCount"
-,"_finished","_p", "_destPlayerUID", "_playerSideName", "_iterations", "_timeLeftIterations", "_killerSideName", "_playerMoney", "_randomIndex","_ignoreAiDeaths","_isPlayerOnServer"];
+,"_finished","_p", "_destPlayerUID", "_playerSideName", "_iterations", "_timeLeftIterations", "_killerSideName", "_playerMoney", "_randomIndex","_ignoreAiDeaths","_isPlayerOnServer","_playerGroup"];
 
 
 _setupVars =
@@ -98,12 +98,13 @@ _missionPos = position _foundPlayer;
 //_marker setMarkerText "Bounty Target";
 
 //add the MP died event
-_foundPlayer addMPEventHandler ["mpkilled", {[_this] call server_BountyDied;}];
+//_foundPlayer addMPEventHandler ["mpkilled", {[_this] call server_BountyDied; diag_log "A3Wasteland Server -- Bounty Mission -- mpkilled handler fired";}];
 _foundPlayer setVariable ["isBountyTarget", true, true]; //Sets variable on player object and broadcasts it so client scripts can pick that up //Apoc
 
 //get the variables so that if _foundPlayer instance changes we aren't fucked
 _playerName = name _foundPlayer;
 _destPlayerUID = getPlayerUID _foundPlayer;
+_playerGroup = group _foundPlayer;
 _iterations = 0;
 _timeLeftIterations = 0;
 _mission_state = BOUNTY_MISSION_ACTIVE;
@@ -133,6 +134,16 @@ if (_currTime - _startTime >= bountyMissionTimeout) then { _mission_state = BOUN
 	//check to see if this player has been killed by someone
 	if(!isNil "bKiller") then
 	{ 
+	_killerSideName = 
+		switch (bKillerSide) do 
+		{
+			case west: {"Blufor"}; 
+			case east: {"Opfor"};
+			case civilian: {"A.I."};
+			case independent: {"Rebels"};
+			default {"Unknown"};
+		};
+	
 		_mission_state = BOUNTY_MISSION_END_KILLED;
 		if(bKillerName == _playerName) then 
 		{ 
@@ -142,7 +153,13 @@ if (_currTime - _startTime >= bountyMissionTimeout) then { _mission_state = BOUN
 		{ 
 			if(bkillerSide == independent) then 
 			{
-				_mission_state = BOUNTY_MISSION_END_KILLED;
+				if (bKillerGroup == _playerGroup) then
+				{
+					_mission_state = BOUNTY_MISSION_END_TEAMKILLED;
+				} else
+				{
+					_mission_state = BOUNTY_MISSION_END_KILLED;
+				};
 			} 
 			else 
 			{
@@ -150,10 +167,7 @@ if (_currTime - _startTime >= bountyMissionTimeout) then { _mission_state = BOUN
 			};
 		};
 	};
-	
-	
-	
-		
+
 		_isPlayerOnServer = 0;
 		{
 			if(name _x == _playerName) then
@@ -205,7 +219,7 @@ if(!isNil "bKiller") then
 
 _failedExec =
 {
-	diag_log format["WASTELAND SERVER - Bounty Mission '%1' Failed Started", _missionType];
+	diag_log format["WASTELAND SERVER - Bounty Mission '%1' Failed", _missionType];
 	diag_log format["WASTELAND SERVER - Bounty Mission Player Side '%1'", _playerSide];
 	// Mission failed
 	if (_mission_state == BOUNTY_MISSION_END_SURVIVED) then {
@@ -232,18 +246,32 @@ _failedExec =
 	};
 
 	// Unlucky
-	if (_mission_state == BOUNTY_MISSION_END_TEAMKILLED) then {
-		// Loop over each player on that side and remove their money and guns
+	if (_mission_state == BOUNTY_MISSION_END_TEAMKILLED) then 
+	{
+		if !(_playerSide == independent) then 
 		{
-			if(side _x == bKillerSide)then
+			// Loop over each player on that side and remove their money and guns
 			{
-				_x setVariable["cmoney", 0, true];
-				removeAllWeapons _x;
-				//[format ["updateBounty:%1:%2:%3:%4", _destPlayerUID, '0', getPlayerUID _x, _mission_state]] call extDB_Database_async;
-				//[format ["setPlayerBountyDisabled:%1", _destPlayerUID]] call extDB_Database_async;
-			};
-		}foreach playableUnits;
-
+				if(side _x == bKillerSide)then
+				{
+					_x setVariable["cmoney", 0, true];
+					removeAllWeapons _x;
+					//[format ["updateBounty:%1:%2:%3:%4", _destPlayerUID, '0', getPlayerUID _x, _mission_state]] call extDB_Database_async;
+					//[format ["setPlayerBountyDisabled:%1", _destPlayerUID]] call extDB_Database_async;
+				};
+			}foreach playableUnits;
+		} else
+		{
+			{
+				if(group _x == bKillerGroup)then
+				{
+					_x setVariable["cmoney", 0, true];
+					removeAllWeapons _x;
+					//[format ["updateBounty:%1:%2:%3:%4", _destPlayerUID, '0', getPlayerUID _x, _mission_state]] call extDB_Database_async;
+					//[format ["setPlayerBountyDisabled:%1", _destPlayerUID]] call extDB_Database_async;
+				};
+			}foreach playableUnits;		
+		};
 		_failedHintMessage = format ["<t align='center' color='%2' shadow='2' size='1.75'>Objective Failed</t><br/><t align='center' color='%2'>------------------------------</t><br/><t align='center' color='%3' size='1.25'>%1 was teamkilled!</t><br/><br/><t align='center' color='%3'>Naughty naughty team players. As a penalty %4 has lost all their weapons and money!</t>", _playerName, failMissionColor, subTextColor, _playerSideName];
 	};
 
@@ -301,6 +329,7 @@ _successExec =
 		};
 	}foreach playableUnits;
 
+	_successHintMessage = format ["<br/><t align='center' color='%2'>------------------------------</t><br/><t align='center' color='%6' size='1.25'>%1</t><br/><t align='center'><img size='5' image='%2'/></t><br/><t align='center' color='%3'>%1 has been killed by %4! %5 has earned $5,000 for each member and %4 has earned $50,000!</t>", _playerName, successMissionColor, subTextColor, bKillerName, _killerSideName, failMissionColor];
 	
 	//remove the event
 	_foundPlayer removeAllMPEventHandlers "mpkilled"; 
@@ -310,8 +339,6 @@ _successExec =
 	bKillerName = nil;
 	bKillerSide = nil;
 	
-	_successHintMessage = format ["<br/><t align='center' color='%2'>------------------------------</t><br/><t align='center' color='%6' size='1.25'>%1</t><br/><t align='center'><img size='5' image='%2'/></t><br/><t align='center' color='%3'>%1 has been killed by %4! %5 has earned $5,000 for each member and %4 has earned $50,000!</t>", _playerName, successMissionColor, subTextColor, bKillerName, _killerSideName, failMissionColor];
-
 	diag_log format["WASTELAND SERVER - Bounty Mission '%1' Success End", _missionType];
 };
 

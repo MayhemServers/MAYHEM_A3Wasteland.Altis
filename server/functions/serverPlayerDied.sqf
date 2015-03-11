@@ -24,6 +24,23 @@ _presumedKiller = if (count _this > 2) then { _this select 2 } else { objNull };
 
 if !(_killer isKindOf "Man") then { _killer = effectiveCommander _killer };
 
+//BOUNTY SYSTEM CODE - APOC
+diag_log format ["A3WASTELAND KILL REPORT -- %1 Killed. Name of Killer: %2, Side of Killer: %3",name _unit, name _killer, side _killer];
+
+if (_unit getVariable ["isBountyTarget",false]) then
+{
+	bKiller = _killer;
+	publicVariable "bKiller";
+	bKillerName = name bKiller;
+	publicVariable "bKillerName";
+	bKillerSide = side bKiller;
+	publicVariable "bKillerSide";
+	bKillerGroup = group bKiller;
+	publicVariable "bKillerGroup";
+	diag_log format["A3WASTELAND SERVER - Bounty System bKiller: %1", bKiller];
+	if(isnil "bKiller") then { bKiller = _player;};
+};
+
 // Score handling
 if (isPlayer _killer) then
 {
