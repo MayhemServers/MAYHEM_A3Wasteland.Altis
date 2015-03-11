@@ -8,7 +8,7 @@ private ["_id", "_uid", "_name", "_bountydisconnect","_result"];
 _id = _this select 0;
 _uid = _this select 1;
 _name = _this select 2;
-
+/*
 if(_name != "__SERVER__") then
 {
 	
@@ -21,7 +21,7 @@ if(_name != "__SERVER__") then
 		};
 		
 	}foreach playableUnits;
-	/*
+	
 	_bountydisconnect = 0;
 	if(!isNil "_uid") then
 	{
@@ -36,6 +36,7 @@ if(_name != "__SERVER__") then
 		pvar_BountySystemReconnects = pvar_BountySystemReconnects + [_uid];
 		diag_log format["WASTELAND SERVER - Bounty Reconnected '%1'", _uid];
 	};
-	*/
 };
+
+*/
 diag_log format ["Player connected: %1 (%2)", _name, _uid];
