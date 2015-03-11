@@ -1,4 +1,4 @@
-class Box
+class APOC_PM_Box
 {
     type = CT_STATIC;
     idc = -1;
@@ -11,7 +11,7 @@ class Box
     text = "";
 };
 
-class PM_RscText
+class APOC_PM_RscText
 {
 	access = 0;
 	type = 0;

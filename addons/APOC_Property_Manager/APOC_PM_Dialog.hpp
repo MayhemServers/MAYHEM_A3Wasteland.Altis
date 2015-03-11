@@ -1,11 +1,11 @@
-class PM_dialog
+class APOC_PM_dialog
 {
 	idd=-1;
 	movingenable=true;
 	
 	class controls 
 	{
-		class PM_Box: BOX
+		class APOC_PM_Box: APOC_PM_BOX
 		{
 			idc = -1;
 			text = ""; //--- ToDo: Localize;
@@ -14,7 +14,7 @@ class PM_dialog
 			w = 0.227875 * safezoneW;
 			h = 0.42 * safezoneH;
 		};
-		class PM_Frame: RscFrame
+		class APOC_PM_Frame: RscFrame
 		{
 			idc = -1;
 			text = "Property Manager Frame"; //--- ToDo: Localize;
@@ -23,7 +23,7 @@ class PM_dialog
 			w = 0.226875 * safezoneW;
 			h = 0.418 * safezoneH;
 		};
-		class PM_Title: RscText
+		class APOC_PM_Title: RscText
 		{
 			idc = -1;
 			text = "Property Manager PRO"; //--- ToDo: Localize;
@@ -33,7 +33,7 @@ class PM_dialog
 			h = 0.055 * safezoneH;
 			sizeEx = 2 * GUI_GRID_H;
 		};
-		class PM_Button_Unlock: RscButton
+		class APOC_PM_Button_Unlock: RscButton
 		{
 			idc = -1;
 			text = "UNLOCK"; //--- ToDo: Localize;
@@ -44,7 +44,7 @@ class PM_dialog
 			tooltip = "Unlocks your nearby objects"; //--- ToDo: Localize;
 			action = "closeDialog 0;_nil=[player]Spawn APOC_PM_Unlock";
 		};
-		class PM_Button_Lock: RscButton
+		class APOC_PM_Button_Lock: RscButton
 		{
 			idc = -1;
 			text = "LOCK"; //--- ToDo: Localize;
@@ -55,7 +55,7 @@ class PM_dialog
 			tooltip = "Locks nearby objects."; //--- ToDo: Localize;
 			action = "closeDialog 0;_nil=[player]Spawn APOC_PM_Lock";
 		};
-		class PM_Button_InventoryUnlock: RscButton
+		class APOC_PM_Button_InventoryUnlock: RscButton
 		{
 			idc = -1;
 			text = "INV UNLOCK"; //--- ToDo: Localize;
@@ -66,7 +66,7 @@ class PM_dialog
 			tooltip = "Unlocks your nearby crate inventories."; //--- ToDo: Localize;
 			action = "closeDialog 0;_nil=[player]Spawn APOC_PM_Unlock";
 		};
-		class PM_Button_InventoryLock: RscButton
+		class APOC_PM_Button_InventoryLock: RscButton
 		{
 			idc = -1;
 			text = "INV LOCK"; //--- ToDo: Localize;
@@ -78,7 +78,7 @@ class PM_dialog
 			action = "closeDialog 0;_nil=[player]Spawn APOC_PM_InventoryLock";
 		};
 		
-		class PM_Button_Cancel: RscButton
+		class APOC_PM_Button_Cancel: RscButton
 		{
 			idc = -1;
 			text = "CANCEL"; //--- ToDo: Localize;
@@ -89,7 +89,7 @@ class PM_dialog
 			tooltip = "Closes the Property Manager."; //--- ToDo: Localize;
 			action = "closeDialog 0";
 		};
-		class PM_Text_Description: PM_RscText
+		class APOC_PM_Text_Description: APOC_PM_RscText
 		{
 			idc = -1;
 			text = "Unlocking via property manager will unlock your objects within 50m.  Locking will lock all objects within 50m to your name."; //--- ToDo: Localize;

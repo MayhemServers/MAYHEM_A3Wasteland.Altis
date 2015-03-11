@@ -94,6 +94,6 @@ class CfgNotifications
 #include "addons\vip_sms_v1.0\vip_cmn\resource\vip_dlg_defaults.hpp" //Simple Mine System Addon
 #include "addons\vip_sms_v1.0\vip_sms\resource\vip_sms_dlg.hpp" //Simple Mine System Addon
 
-#include "addons\Property_Manager\PM_Defines.hpp"
-#include "addons\Property_Manager\PM_Dialog.hpp"
+#include "addons\APOC_Property_Manager\APOC_PM_Defines.hpp"
+#include "addons\APOC_Property_Manager\APOC_PM_Dialog.hpp"
 

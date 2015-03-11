@@ -1,3 +1,7 @@
+//Function Defines for APOC's Property Manager (APOC_PM_) 
+//Creator: Apoc
+
+
 APOC_PM_Lock = {
 	private["_player"];
 	_player = _this select 0;
