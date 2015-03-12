@@ -64,7 +64,7 @@ class APOC_PM_dialog
 			w = 0.0515625 * safezoneW;
 			h = 0.044 * safezoneH;
 			tooltip = "Unlocks your nearby crate inventories."; //--- ToDo: Localize;
-			action = "closeDialog 0;_nil=[player]Spawn APOC_PM_Unlock";
+			action = "closeDialog 0;_nil=[player]Spawn APOC_PM_InventoryUnlock";
 		};
 		class APOC_PM_Button_InventoryLock: RscButton
 		{
@@ -96,7 +96,7 @@ class APOC_PM_dialog
 			x = 0.391719 * safezoneW + safezoneX;
 			y = 0.346 * safezoneH + safezoneY;
 			w = 0.216563 * safezoneW;
-			h = 0.242 * safezoneH;
+			h = 0.2 * safezoneH;
 		};
 	};
 };
