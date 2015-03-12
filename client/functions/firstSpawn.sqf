@@ -64,7 +64,7 @@ player addEventHandler ["InventoryOpened",
 
 	if !(_obj isKindOf "Man") then
 	{
-		if (locked _obj > 1 || (_obj getVariable ["A3W_inventoryLockR3F", false] && _obj getVariable ["R3F_LOG_disabled", false] && (getPlayerUID _player != _obj getVariable ("ownerUID","")))) then
+		if (locked _obj > 1 || (_obj getVariable ["A3W_inventoryLockR3F", false] && _obj getVariable ["R3F_LOG_disabled", false] && (getPlayerUID _player != _obj getVariable ["ownerUID",""]))) then
 		{
 			if (_obj isKindOf "AllVehicles") then
 			{

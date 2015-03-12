@@ -43,7 +43,7 @@ switch (true) do
 	case (_obj call _isBox):
 	{
 		_variables pushBack ["cmoney", _obj getVariable ["cmoney", 0]];
-		_variables pushBack ["A3W_inventoryLockR3F", _obj getVariable ["A3W_inventoryLockR3F",false]; // Publish the inventory lock variable to DB //Apoc
+		_variables pushBack ["A3W_inventoryLockR3F", _obj getVariable ["A3W_inventoryLockR3F",false]]; // Publish the inventory lock variable to DB //Apoc
 		_variables pushBack ["R3F_LOG_disabled", false]; // Publish to DB, necessary to prevent inventory interaction on locked objects //Apoc
 	};
 	case (_obj call _isWarchest):
