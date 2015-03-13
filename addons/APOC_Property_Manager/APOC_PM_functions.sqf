@@ -1,5 +1,6 @@
 //Function Defines for APOC's Property Manager (APOC_PM_) 
 //Creator: Apoc
+//bits and pieces borrowed from Cael87's BoS system.
 
 
 APOC_PM_Lock = {
@@ -72,4 +73,69 @@ APOC_PM_InventoryUnlock = {
 	} forEach _objects;
 	//diag_log "PM_InventoryLock function called";
 	hint "Padlocks removed from nearby crates";	
+};
+
+APOC_PM_DisableLogistics = {
+	//taken from Cael's BoS functions (relock) and converted to removal protection system
+	private ["_price", "_playerMoney","_objects","_ownedObjects","_maxLifetime"];
+	_maxLifetime = ["A3W_objectLifetime", 0] call getPublicVar;
+	_objects = [];
+	_objects = nearestObjects [position player, ["thingX", "Building", "ReammoBox_F"], 50];
+	_ownedObjects = {typeName _x == "OBJECT" && {!(isNil {_x getVariable "ownerUID"})}} count _objects; //Count of objects owned.
+	
+	_playerMoney = player getVariable "cmoney";
+	_price = _ownedObjects * 100;
+
+	if (!isNil "_price") then 
+	{
+		// Add total sell value to confirm message
+		_confirmMsg = format ["Isolating %2 baseparts/objects will cost you $%1<br/>Range is 50 meters<br/>Objects will not load in after next restart if older than %3 hours.", _price, _ownedObjects, _maxLifetime];
+
+		// Display confirm message
+		if ([parseText _confirmMsg, "Confirm", "OK", true] call BIS_fnc_guiMessage) then
+		{	
+			// Ensure the player has enough money
+
+			if (_price > _playerMoney) exitWith
+			{
+				hint format ["You need $%1 to isolate %2 objects",  _price, _ownedObjects];
+				playSound "FD_CP_Not_Clear_F";
+			};
+			
+			player setVariable["cmoney",(player getVariable "cmoney")-_price,true];
+			
+			{
+				if (_x getVariable "objectLocked") then
+				{
+					_x setVariable ["R3F_LOG_disabled",true,true]; //Remove logistics ability for items.
+				};
+			} forEach _Objects;
+		};
+	};
+};
+
+APOC_PM_EnableLogistics = {
+	//taken from Cael's BoS functions (relock) and converted to removal protection system
+	private ["_objects","_confirmMsg"];
+	
+	_objects = [];
+	_objects = nearestObjects [position player, ["thingX", "Building", "ReammoBox_F"], 50];
+	
+	
+	if (!isNil "_price") then 
+	{
+		// Add total sell value to confirm message
+		_confirmMsg = format ["Enabling logistics on %1 baseparts/objects<br/>Range is 50 meters<br/> Ammo crates will not be affected. Use inventory unlock for those.", _ownedObjects];
+
+		// Display confirm message
+		if ([parseText _confirmMsg, "Confirm", "OK", true] call BIS_fnc_guiMessage) then
+		{	
+			{
+				if ((_x getVariable "objectLocked") && (typeof _x != "ReammoBox_F")) then
+				{
+					_x setVariable ["R3F_LOG_disabled",false,true]; //Remove logistics ability for items.
+				};
+			} forEach _Objects;
+		};
+	};
 };

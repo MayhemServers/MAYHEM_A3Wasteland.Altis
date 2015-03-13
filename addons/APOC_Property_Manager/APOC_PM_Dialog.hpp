@@ -17,7 +17,7 @@ class APOC_PM_dialog
 		class APOC_PM_Frame: RscFrame
 		{
 			idc = -1;
-			text = "Property Manager Frame"; //--- ToDo: Localize;
+			text = ""; //--- ToDo: Localize;
 			x = 0.386562 * safezoneW + safezoneX;
 			y = 0.269 * safezoneH + safezoneY;
 			w = 0.226875 * safezoneW;
@@ -42,7 +42,7 @@ class APOC_PM_dialog
 			w = 0.0515625 * safezoneW;
 			h = 0.044 * safezoneH;
 			tooltip = "Unlocks your nearby objects"; //--- ToDo: Localize;
-			action = "closeDialog 0;_nil=[player]Spawn APOC_PM_Unlock";
+			action = "_nil=[player]Spawn APOC_PM_Unlock";
 		};
 		class APOC_PM_Button_Lock: RscButton
 		{
@@ -53,7 +53,7 @@ class APOC_PM_dialog
 			w = 0.0515625 * safezoneW;
 			h = 0.044 * safezoneH;
 			tooltip = "Locks nearby objects."; //--- ToDo: Localize;
-			action = "closeDialog 0;_nil=[player]Spawn APOC_PM_Lock";
+			action = "_nil=[player]Spawn APOC_PM_Lock";
 		};
 		class APOC_PM_Button_InventoryUnlock: RscButton
 		{
@@ -64,7 +64,7 @@ class APOC_PM_dialog
 			w = 0.0515625 * safezoneW;
 			h = 0.044 * safezoneH;
 			tooltip = "Unlocks your nearby crate inventories."; //--- ToDo: Localize;
-			action = "closeDialog 0;_nil=[player]Spawn APOC_PM_InventoryUnlock";
+			action = "_nil=[player]Spawn APOC_PM_InventoryUnlock";
 		};
 		class APOC_PM_Button_InventoryLock: RscButton
 		{
@@ -75,13 +75,35 @@ class APOC_PM_dialog
 			w = 0.0515625 * safezoneW;
 			h = 0.044 * safezoneH;
 			tooltip = "Locks nearby crate inventories."; //--- ToDo: Localize;
-			action = "closeDialog 0;_nil=[player]Spawn APOC_PM_InventoryLock";
+			action = "_nil=[player]Spawn APOC_PM_InventoryLock";
+		};
+		class APOC_PM_Button_DisableLogistics: RscButton
+		{
+			idc = -1;
+			text = "DIS LOG"; //--- ToDo: Localize;
+			x = 0.402031 * safezoneW + safezoneX;
+			y = 0.51 * safezoneH + safezoneY;
+			w = 0.0515625 * safezoneW;
+			h = 0.044 * safezoneH;
+			tooltip = "Disables Removal of Baseparts"; //--- ToDo: Localize;
+			action = "_nil=[player]Spawn APOC_PM_DisableLogistics";
+		};
+		class APOC_PM_Button_EnableLogistics: RscButton
+		{
+			idc = -1;
+			text = "EN LOG"; //--- ToDo: Localize;
+			x = 0.546406 * safezoneW + safezoneX;
+			y = 0.51 * safezoneH + safezoneY;
+			w = 0.0515625 * safezoneW;
+			h = 0.044 * safezoneH;
+			tooltip = "Enables removal of Baseparts."; //--- ToDo: Localize;
+			action = "_nil=[player]Spawn APOC_PM_EnableLogistics";
 		};
 		
 		class APOC_PM_Button_Cancel: RscButton
 		{
 			idc = -1;
-			text = "CANCEL"; //--- ToDo: Localize;
+			text = "Close Dialog"; //--- ToDo: Localize;
 			x = 0.448438 * safezoneW + safezoneX;
 			y = 0.654 * safezoneH + safezoneY;
 			w = 0.103125 * safezoneW;
