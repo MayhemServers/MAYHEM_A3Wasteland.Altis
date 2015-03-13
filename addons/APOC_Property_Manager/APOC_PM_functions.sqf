@@ -7,7 +7,7 @@ APOC_PM_Lock = {
 	_player = _this select 0;
 	_objects = [];
 	_objects = nearestObjects [position player, ["thingX", "Building", "ReammoBox_F"], 50];
-	{if (((typeof _x) in R3F_LOG_CFG_objets_deplacables) || (_x isKindOf "ReammoBox_F") && !((typeof _x) in ["Land_Laptop_unfolded_F"])) then
+	{if (((typeof _x) in R3F_LOG_CFG_objets_deplacables) || (_x isKindOf "ReammoBox_F") && ((typeof _x) != "Land_Laptop_unfolded_F")) then
 		{
 		if !(_x getVariable ["objectLocked",false]) then 
 			{
@@ -26,7 +26,7 @@ APOC_PM_Unlock = {
 	_player = _this select 0;	
 	_objects = [];
 	_objects = nearestObjects [position player, ["thingX", "Building", "ReammoBox_F"], 50];
-	{if (((typeof _x) in R3F_LOG_CFG_objets_deplacables) || (_x isKindOf "ReammoBox_F") && !((typeof _x) in ["Land_Laptop_unfolded_F"])) then
+	{if (((typeof _x) in R3F_LOG_CFG_objets_deplacables) || (_x isKindOf "ReammoBox_F") && ((typeof _x) != "Land_Laptop_unfolded_F")) then
 		{
 		if (_x getVariable ["ownerUID",""]==(getPlayerUID _player)) then 
 			{
@@ -47,7 +47,7 @@ APOC_PM_InventoryLock = {
 	_player = _this select 0;
 	_objects = [];
 	_objects = nearestObjects [position player, ["ReammoBox_F"], 50];
-	{if (((typeof _x in ["ReammoBox_F"]))&&(_x getVariable ["ownerUID",""]==(getPlayerUID _player))&&(_x getVariable ["objectLocked",true])) then
+	{if ((_x getVariable ["ownerUID",""]==(getPlayerUID _player))&&(_x getVariable ["objectLocked",true])) then
 		{
 			_x setVariable ["A3W_inventoryLockR3F", true, true]; //Lock access to crate
 			_x setVariable ["R3F_LOG_disabled", true, true]; //Remove logistics actions from crates/objects (makes them immobile)
@@ -63,7 +63,7 @@ APOC_PM_InventoryUnlock = {
 	_player = _this select 0;
 	_objects = [];
 	_objects = nearestObjects [position player, ["ReammoBox_F"], 50];	
-	{if (((typeof _x in ["ReammoBox_F"]))&&(_x getVariable ["ownerUID",""]==(getPlayerUID _player))&&(_x getVariable ["objectLocked",true])&&(_x getVariable ["A3W_inventoryLockR3F",true])) then
+	{if ((_x getVariable ["ownerUID",""]==(getPlayerUID _player))&&(_x getVariable ["objectLocked",true])&&(_x getVariable ["A3W_inventoryLockR3F",true])) then
 		{
 			_x setVariable ["A3W_inventoryLockR3F", false, true]; //Unlock access to crate
 			_x setVariable ["R3F_LOG_disabled", false, true]; //Remove logistics actions from crates/objects (makes them immobile)
