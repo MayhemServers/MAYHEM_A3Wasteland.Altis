@@ -94,7 +94,14 @@ lmgArray = compileFinal str
 	["MX SW LMG", "arifle_MX_SW_F", 300],
 	["MX SW LMG (Black)", "arifle_MX_SW_Black_F", 325],
 	["Mk200 LMG", "LMG_Mk200_F", 375],
-	["Zafir LMG", "LMG_Zafir_F", 450]
+	["Zafir LMG", "LMG_Zafir_F", 450]/*,
+	
+	//DLC Weapons
+	["Navid 9.3 mm (Hex)", "MMG_01_hex_F", 500],
+	["Navid 9.3 mm (Tan)", "MMG_01_tan_F", 500],
+	["SPMG .338 (Black)", "MMG_02_black_F", 500],
+	["SPMG .338 (MTP)", "MMG_02_camo_F", 500],
+	["SPMG .338 (Sand)", "MMG_02_sand_F", 500]*/
 ];
 
 launcherArray = compileFinal str
@@ -200,6 +207,8 @@ ammoArray = compileFinal str
 	["12.7mm 10Rnd Mag", "10Rnd_127x54_Mag", 50],
 	["9.3mm 10Rnd Mag", "10Rnd_93x64_DMR_05_Mag", 50],
 	[".338 LM 10Rnd Mag", "10Rnd_338_Mag", 50],
+	["9.3mm 150Rnd Belt", "150Rnd_93x64_Mag", 150],
+	[".338 NM 130Rnd Belt", "130Rnd_338_Mag", 150],
 	*/
 	["RPG-42 Anti-Tank Rocket", "RPG32_F", 250],              // Direct damage: high      | Splash damage: low    | Guidance: none
 	["RPG-42 High-Explosive Rocket", "RPG32_HE_F", 250],      // Direct damage: medium    | Splash damage: medium | Guidance: none
@@ -529,9 +538,9 @@ vestArray = compileFinal str
 	["Raven Night Vest", "V_TacVestIR_blk", -1, "vest"],
 	["CTRG Plate Carrier Rig Mk.1 (Light)", "V_PlateCarrierL_CTRG", -1, "vest"],
 	["CTRG Plate Carrier Rig Mk.2 (Heavy)", "V_PlateCarrierH_CTRG", -1, "vest"],
-	//["Carrier Special Rig (Black)", "V_PlateCarrierSpec_blk", -1, "vest"],
+	//["Carrier Special Rig (Black)", "V_PlateCarrierSpec_blk", -1, "vest"], // DLC
 	["Carrier Special Rig (Green)", "V_PlateCarrierSpec_rgr", -1, "vest"],
-	//["Carrier Special Rig (MTP)", "V_PlateCarrierSpec_mtp", -1, "vest"],
+	//["Carrier Special Rig (MTP)", "V_PlateCarrierSpec_mtp", -1, "vest"], // DLC
 	["Press Vest", "V_Press_F", -1, "vest"]
 ];
 
