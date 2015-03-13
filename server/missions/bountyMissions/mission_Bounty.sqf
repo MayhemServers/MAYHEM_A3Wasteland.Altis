@@ -12,12 +12,12 @@ private ["_missionMarkerName","_missionType","_hint","_players","_marker","_coun
 
 
 _setupVars =
-{
-    _ignoreAiDeaths = true;
-	_missionMarkerName = "Bounty_Marker";
-	_missionType = "Bounty Hunt";
-	_missionEndStateNames = ["was killed", "survived", "was teamkilled"];
-};
+	{
+		_ignoreAiDeaths = true;
+		_missionMarkerName = "Bounty_Marker";
+		_missionType = "Bounty Hunt";
+		_missionEndStateNames = ["was killed", "survived", "was teamkilled"];
+	};
 
 _setupObjects =
 {
