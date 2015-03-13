@@ -206,7 +206,8 @@ if (_playerSavingOn || _objectSavingOn || _vehicleSavingOn) then
 	publicVariable "A3W_savingMethod";
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    //call compile preprocessFileLineNumbers "server\systems\bounties\init.sqf";
+	call compile preprocessFileLineNumbers "server\systems\events\init.sqf";
 	call compile preProcessFileLineNumbers format ["persistence\server\setup\%1\init.sqf", call A3W_savingMethodDir];
 
 	if (_playerSavingOn) then

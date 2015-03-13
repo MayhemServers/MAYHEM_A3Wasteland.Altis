@@ -57,7 +57,7 @@ _player spawn
 
 	_money = _player getVariable ["cmoney", 0];
 	_player setVariable ["cmoney", 0, true];
-
+	_player setVariable ["isBountyTarget",false,true];
 	_items = [];
 	{
 		_id = _x select 0;
