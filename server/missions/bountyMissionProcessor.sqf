@@ -6,4 +6,4 @@
 #define MISSION_PROC_COLOR_DEFINE bountyMissionColor
 
 #include "bountyMissions\bountyMissionDefines.sqf"
-#include "missionProcessor.sqf";
+#include "missionProcessor2.sqf";

@@ -106,9 +106,9 @@ waitUntil
 		_adjustTime = if (_missionTimeout < MISSION_TIMER_EXTENSION) then { MISSION_TIMER_EXTENSION - _missionTimeout } else { 0 };
 		_startTime = _startTime max (diag_tickTime - ((MISSION_TIMER_EXTENSION - _adjustTime) max 0));
 	};
-
 	_oldAiCount = _newAiCount;
-	
+
+//// AI Reinforcement Section  //Apoc ////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (((_newAiCount < _startAiCount/2) && (!_reinforcementsCalled)) && !(MISSION_PROC_TYPE_NAME == "Bounty")) then
 	{
 		if (_reinforceChance > _reinforceChanceRoll) then 
@@ -126,7 +126,8 @@ waitUntil
 			};
 		};
 	};
-	
+//// AI Reinforcement Section  //Apoc ////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	if (!isNull _leaderTemp) then { _leader = _leaderTemp }; // Update current leader
 
 	if (!isNil "_waitUntilMarkerPos") then { _marker setMarkerPos (call _waitUntilMarkerPos) };
