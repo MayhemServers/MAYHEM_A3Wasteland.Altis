@@ -44,7 +44,6 @@ switch (true) do
 	{
 		_variables pushBack ["cmoney", _obj getVariable ["cmoney", 0]];
 		_variables pushBack ["A3W_inventoryLockR3F", _obj getVariable ["A3W_inventoryLockR3F",false]]; // Publish the inventory lock variable to DB //Apoc
-		_variables pushBack ["R3F_LOG_disabled", false]; // Publish to DB, necessary to prevent inventory interaction on locked objects //Apoc
 	};
 	case (_obj call _isWarchest):
 	{
@@ -63,8 +62,13 @@ switch (true) do
 	};
 };
 
-_r3fSide = _obj getVariable "R3F_Side";
+_R3F_LOG_disabled = _obj getVariable "R3F_LOG_disabled";
+if (!isNil "_R3F_LOG_disabled") then
+{
+_variables pushBack ["R3F_LOG_disabled", _R3F_LOG_disabled]; // Publish to DB, necessary to prevent interaction on locked objects //Apoc
+};
 
+_r3fSide = _obj getVariable "R3F_Side";
 if (!isNil "_r3fSide") then
 {
 	_variables pushBack ["R3F_Side", str _r3fSide];
