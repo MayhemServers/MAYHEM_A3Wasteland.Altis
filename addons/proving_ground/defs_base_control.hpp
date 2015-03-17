@@ -119,7 +119,7 @@
 		x = 0.25; w = 0.1;
 		y = 0.1; h = 0.1;
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "";
 		font = "PuristaBold";
 		sizeEx = 0.032;
@@ -266,7 +266,7 @@
 		x = 0.25; w = 0.5;
 		y = 0.1; h = 0.8;
 		/*colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "\ca\ui\data\ui_gameoptions_background_ca.paa";
 		font = "PuristaBold";
 		sizeEx = 0.032;*/

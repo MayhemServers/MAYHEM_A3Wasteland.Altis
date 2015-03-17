@@ -257,7 +257,7 @@ class balca_debug_veh_creator
 		x = safezoneX_PG-border_offsetX; w = column_weight*3 + border_offsetX*3;
 		y = safezoneY_PG-border_offsetY-btn_height*3; h = display_height+border_offsetY*2+btn_height*4;
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "";
 		font = "PuristaMedium";
 		sizeEx = 0.032;
@@ -276,7 +276,7 @@ class balca_debug_veh_creator
 		y = safezoneY_PG + offset_top*2;
 		h = display_height - offset_bottom*4 - (safezoneY_PG + offset_top*2);
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		onLBSelChanged= "[1] call c_proving_ground_fnc_create_vehicle";
 		onLBDblClick = "[2] call c_proving_ground_fnc_create_vehicle";
 	};
@@ -289,7 +289,7 @@ class balca_debug_veh_creator
 		y = safezoneY_PG + offset_top*2;
 		h = img_height;
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "";
 	};
 
@@ -303,7 +303,7 @@ class balca_debug_veh_creator
 		y = safezoneY_PG + offset_top*2;
 		h = display_height - offset_bottom*3-(safezoneY_PG + offset_top*2);
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "";
 	};
 
@@ -450,7 +450,7 @@ class balca_debug_weap_creator
 		x = safezoneX_PG-border_offsetX; w = column_weight*3 + border_offsetX*3;
 		y = safezoneY_PG-border_offsetY-btn_height*3; h = display_height+border_offsetY*2+btn_height*4;
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "";
 		font = "PuristaMedium";
 		sizeEx = 0.032;
@@ -469,7 +469,7 @@ class balca_debug_weap_creator
 		y = safezoneY_PG + offset_top*2;
 		h = display_height - offset_bottom*4 - (safezoneY_PG + offset_top*2);
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		onLBSelChanged= "[1] call c_proving_ground_fnc_create_weapon;";
 		onLBDblClick = "[2] call c_proving_ground_fnc_create_weapon;";
 	};
@@ -482,7 +482,7 @@ class balca_debug_weap_creator
 		y = safezoneY_PG + offset_top*2 + img_height_wc;
 		h = display_height - offset_bottom*4 - img_height_wc-(safezoneY_PG + offset_top*2);
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		onLBSelChanged= "[3] call c_proving_ground_fnc_create_weapon;";
 		onLBDblClick = "[4] call c_proving_ground_fnc_create_weapon;";
 	};
@@ -495,7 +495,7 @@ class balca_debug_weap_creator
 		y = safezoneY_PG + offset_top*2;
 		h = img_height_wc;
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "";
 	};
 
@@ -509,7 +509,7 @@ class balca_debug_weap_creator
 		y = safezoneY_PG + offset_top*2;
 		h = img_height_wc;
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "";
 	};
 
@@ -523,7 +523,7 @@ class balca_debug_weap_creator
 		y = safezoneY_PG + offset_top*2 + img_height_wc;
 		h = display_height - offset_bottom*4 - img_height_wc-(safezoneY_PG + offset_top*2);
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "";
 	};
 
@@ -665,7 +665,7 @@ class balca_debug_console
 		x = safezoneX_PG-border_offsetX; w = column_weight*3 + border_offsetX*4;
 		y = safezoneY_PG-border_offsetY; h = display_height+border_offsetY*2;
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "";
 		font = "PuristaMedium";
 		sizeEx = 0.032;
@@ -682,6 +682,7 @@ class balca_debug_console
 		x = safezoneX_PG; w = column_weight*3;
 		y = safezoneY_PG + offset_top*2; h = str_height*3;
 		text = "enter command here";
+		colorBackground[] = {0,0,0,.75};
 	};
 
 	class balca_debug_console_result : balca_debug_edit
@@ -692,6 +693,7 @@ class balca_debug_console
 		y = safezoneY_PG + offset_top*2 + str_height*3;
 		h = str_height*2;
 		text = "";
+		colorBackground[] = {0,0,0,.75};
 	};
 
 	class balca_debug_console_history : balca_debug_list
@@ -702,7 +704,7 @@ class balca_debug_console
 		y = safezoneY_PG + offset_top*2 + str_height*5;
 		h = display_height - offset_bottom*4 - str_height*5 - (safezoneY_PG + offset_top*2);
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		onLBSelChanged= "[2] call c_proving_ground_fnc_exec_console;";
 		onLBDblClick = "[3] call c_proving_ground_fnc_exec_console;";
 	};
@@ -790,7 +792,7 @@ class balca_target_display
 		x = safezoneX_PG-border_offsetX; w = column_weight*3 + border_offsetX*3;
 		y = safezoneY_PG-border_offsetY-btn_height*3; h = display_height+border_offsetY*2+btn_height*4;
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "";
 		font = "PuristaMedium";
 		sizeEx = 0.032;
@@ -811,7 +813,7 @@ class balca_target_display
 		y = safezoneY_PG + offset_top*2;
 		h = display_height - offset_bottom*4 - (safezoneY_PG + offset_top*2);
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		onLBSelChanged= "[2] call c_proving_ground_fnc_target;";
 		onLBDblClick = "[3] call c_proving_ground_fnc_target;";
 	};
@@ -824,7 +826,7 @@ class balca_target_display
 		y = safezoneY_PG + offset_top*2;
 		h = img_height;
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "";
 	};
 
@@ -838,7 +840,7 @@ class balca_target_display
 		y = safezoneY_PG + offset_top*2 + img_height;
 		h = display_height - offset_bottom*3 - img_height-(safezoneY_PG + offset_top*2);
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "";
 	};
 
@@ -1283,7 +1285,7 @@ class balca_sound_player
 		x = safezoneX_PG-border_offsetX; w = column_weight*3 + border_offsetX*3;
 		y = safezoneY_PG-border_offsetY; h = display_height+border_offsetY*2+btn_height*1;
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "";
 		font = "PuristaMedium";
 		sizeEx = 0.032;
@@ -1302,7 +1304,7 @@ class balca_sound_player
 		y = safezoneY_PG + offset_top*2;
 		h = display_height - offset_bottom*4 - (safezoneY_PG + offset_top*2);
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		onLBSelChanged= "";
 		onLBDblClick = "[1] call c_proving_ground_fnc_sound;";
 	};
@@ -1347,7 +1349,7 @@ class balca_statistics
 		x = safezoneX_PG-border_offsetX; w = column_weight*3 + border_offsetX*3;
 		y = safezoneY_PG-border_offsetY; h = display_height+border_offsetY*2+btn_height*1;
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "";
 		font = "PuristaMedium";
 		sizeEx = 0.032;
@@ -1368,7 +1370,7 @@ class balca_statistics
 		y = safezoneY_PG + offset_top*2;
 		h = display_height - offset_bottom*3 -(safezoneY_PG + offset_top*2);
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "";
 	};
 
@@ -1418,7 +1420,7 @@ class balca_environment
 		x = safezoneX_PG-border_offsetX; w = column_weight*1 + border_offsetX*3;
 		y = safezoneY_PG-border_offsetY; h = display_height+border_offsetY*2+btn_height*1;
 		colorText[] = {1, 1, 1, 1};
-		colorBackground[] = {0,0,0,0};
+		colorBackground[] = {0,0,0,.75};
 		text = "";
 		font = "PuristaMedium";
 		sizeEx = 0.032;
