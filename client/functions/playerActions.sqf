@@ -28,10 +28,9 @@
 	["Push vehicle backward", "server\functions\pushVehicle.sqf", [-2.5], 1, false, false, "", "[-2.5] call canPushWatercraft"],
 
 	["<t color='#FF0000'>Emergency eject</t>",  { [[], fn_emergencyEject] execFSM "call.fsm" }, [], -9, false, true, "", "(vehicle player) isKindOf 'Air' && !((vehicle player) isKindOf 'ParachuteBase')"],
-	["<t color='#FF00FF'>Open magic parachute</t>", { [[], fn_openParachute] execFSM "call.fsm" }, [], 20, true, true, "", "vehicle player == player && (getPos player) select 2 > 2.5"],
-	
-	["<t color='#FF0000'>Explosives Interface</t>", {vip_sms_var_cl_minePlacing = false; createDialog "vip_sms_dlg_mineMenu"},[], -98, false, true, "", "!vip_sms_var_cl_minePlacing && !(surfaceIsWater (getPos player)) && ((getPosASL player select 2) > 0) && !((animationState player) in ['AinvPknlMstpSlayWrflDnon_medic', 'AinvPknlMstpSlayWpstDnon_medicOut', 'AinvPknlMstpSlayWnonDnon_medic'])"]
+	["<t color='#FF00FF'>Open magic parachute</t>", { [[], fn_openParachute] execFSM "call.fsm" }, [], 20, true, true, "", "vehicle player == player && (getPos player) select 2 > 2.5"]
 ];
+
 
 // Hehehe...
 if !(288520 in getDLCs 1) then
