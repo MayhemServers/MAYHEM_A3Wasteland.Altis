@@ -70,7 +70,9 @@ if (_packetName == "BIS_fnc_MP_packet") then
 			[
 				"A3W_fnc_",
 				"mf_remote_",
-				"vip_sms_fnc_"
+				"BIS_fnc_spawn",
+				"BH_fnc_"
+				
 			];
 		};
 	};
