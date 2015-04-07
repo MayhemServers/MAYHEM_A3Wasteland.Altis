@@ -53,7 +53,6 @@ if (_packetName == "BIS_fnc_MP_packet") then
 			"BIS_fnc_effectKilledAirDestruction",
 			"BIS_fnc_effectKilledAirDestructionStage2",
 			"BIS_fnc_effectKilledSecondaries",
-			"vip_sms_fnc_",
 			"BH_fnc_mkr3D",
 			"BH_fnc_mkr3D_VON"/*,
 			"JTS_FNC_SENT"*/ // PM Compact by JTS

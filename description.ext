@@ -83,9 +83,6 @@ class CfgNotifications
 	#include "client\CfgNotifications.hpp"
 };
 
-#include "addons\vip_sms_v1.0\vip_cmn\resource\vip_dlg_defaults.hpp" //Simple Mine System Addon
-#include "addons\vip_sms_v1.0\vip_sms\resource\vip_sms_dlg.hpp" //Simple Mine System Addon
-
 class params
 {
 	class marker3D
