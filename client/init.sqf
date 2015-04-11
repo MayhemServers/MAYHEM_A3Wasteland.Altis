@@ -141,6 +141,7 @@ A3W_scriptThreads pushBack execVM "addons\Lootspawner\LSclientScan.sqf";
 [] execVM "addons\far_revive\FAR_revive_init.sqf";
 [] execVM "addons\camera\functions.sqf";			// Improved admin camera addon
 [] execVM "addons\UAV_Control\functions.sqf";		// Protected UAV addon
+[] execVM "addons\APOC_Property_Manager\APOC_PM_functions.sqf"	// Property Manager Addon
 
 call compile preprocessFileLineNumbers "client\functions\generateAtmArray.sqf";
 [] execVM "client\functions\drawPlayerMarkers.sqf";

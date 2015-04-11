@@ -95,3 +95,7 @@ class params
 		file = "addons\3D_Markers\3Dmarkers.sqf";
 	};
 };
+
+#include "addons\APOC_Property_Manager\APOC_PM_Defines.hpp"
+#include "addons\APOC_Property_Manager\APOC_PM_Dialog.hpp"
+

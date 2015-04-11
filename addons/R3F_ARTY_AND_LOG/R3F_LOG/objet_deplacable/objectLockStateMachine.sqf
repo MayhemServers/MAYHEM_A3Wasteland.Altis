@@ -106,7 +106,8 @@ switch (_lockState) do
 	case 1: // UNLOCK
 	{
 		R3F_LOG_mutex_local_verrou = true;
-		_totalDuration = if (_object getVariable ["ownerUID", ""] == getPlayerUID player) then { 10 } else { 45 }; // Allow owner to unlock quickly
+		_totalDuration = if (_object getVariable ["ownerUID", ""] == getPlayerUID player) then 
+		{ 10 } else {if ('Land_Laptop_unfolded_F' == typeof _object) then {3600} else {45} }; // Allow owner to unlock quickly, have very slow unlock of laptop
 		//_unlockDuration = _totalDuration;
 		//_iteration = 0;
 
@@ -124,6 +125,7 @@ switch (_lockState) do
 				case (vehicle player != player): { _text = "Action failed! You can't do this in a vehicle" };
 				case (!isNull (_object getVariable ["R3F_LOG_est_transporte_par", objNull])): { _text = "Action failed! Somebody moved the object" };
 				case !(_object getVariable ["objectLocked", false]): { _text = "Somebody else unlocked it before you" };
+				case ((typeOf _object == 'Land_Laptop_unfolded_F') && !(_object getVariable ["ownerUID",""] == getPlayerUID player)): {_text = "Action failed!  You do not own this laptop!"};
 				default
 				{
 					_failed = false;
