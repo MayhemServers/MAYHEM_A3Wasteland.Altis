@@ -12,6 +12,7 @@ _weapon = _array select 0;
 _items = [];
 _mags = [];
 
+// attachments
 for "_i" from 1 to 3 do
 {
 	_item = _array select _i;
@@ -40,6 +41,13 @@ for "_i" from 4 to (count _array - 1) do
 	{
 		_mags pushBack _mag;
 	};
+};
+
+// bipod
+_item = _array select (count _array - 1);
+if (_item != "") then
+{
+	_items pushBack _item;
 };
 
 [_weapon, _items, _mags]
