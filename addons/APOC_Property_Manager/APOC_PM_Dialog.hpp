@@ -41,7 +41,7 @@ class APOC_PM_dialog
 			text = "UNLOCK"; //--- ToDo: Localize;
 			x = 0.402031 * safezoneW + safezoneX;
 			y = 0.599 * safezoneH + safezoneY;
-			w = 0.0515625 * safezoneW;
+			w = 0.054 * safezoneW;
 			h = 0.044 * safezoneH;
 			tooltip = "Unlocks your nearby objects"; //--- ToDo: Localize;
 			action = "_nil=[player]Spawn APOC_PM_Unlock";
@@ -53,7 +53,7 @@ class APOC_PM_dialog
 			text = "LOCK"; //--- ToDo: Localize;
 			x = 0.546406 * safezoneW + safezoneX;
 			y = 0.599 * safezoneH + safezoneY;
-			w = 0.0515625 * safezoneW;
+			w = 0.054 * safezoneW;
 			h = 0.044 * safezoneH;
 			tooltip = "Locks nearby objects."; //--- ToDo: Localize;
 			action = "_nil=[player]Spawn APOC_PM_Lock";
@@ -65,7 +65,7 @@ class APOC_PM_dialog
 			text = "INV UNLOCK"; //--- ToDo: Localize;
 			x = 0.402031 * safezoneW + safezoneX;
 			y = 0.55 * safezoneH + safezoneY;
-			w = 0.0515625 * safezoneW;
+			w = 0.054 * safezoneW;
 			h = 0.044 * safezoneH;
 			tooltip = "Unlocks your nearby crate inventories."; //--- ToDo: Localize;
 			action = "_nil=[player]Spawn APOC_PM_InventoryUnlock";
@@ -77,7 +77,7 @@ class APOC_PM_dialog
 			text = "INV LOCK"; //--- ToDo: Localize;
 			x = 0.546406 * safezoneW + safezoneX;
 			y = 0.55 * safezoneH + safezoneY;
-			w = 0.0515625 * safezoneW;
+			w = 0.054 * safezoneW;
 			h = 0.044 * safezoneH;
 			tooltip = "Locks nearby crate inventories."; //--- ToDo: Localize;
 			action = "_nil=[player]Spawn APOC_PM_InventoryLock";
@@ -86,10 +86,10 @@ class APOC_PM_dialog
 		class APOC_PM_Button_DisableLogistics: APOC_PM_RscButton
 		{
 			idc = -1;
-			text = "EN LOG"; //--- ToDo: Localize;
+			text = "UNSECURE"; //--- ToDo: Localize;
 			x = 0.402031 * safezoneW + safezoneX;
 			y = 0.5 * safezoneH + safezoneY;
-			w = 0.0515625 * safezoneW;
+			w = 0.054 * safezoneW;
 			h = 0.044 * safezoneH;
 			tooltip = "Enables Removal of Baseparts"; //--- ToDo: Localize;
 			action = "_nil=[player]Spawn APOC_PM_EnableLogistics";
@@ -98,10 +98,10 @@ class APOC_PM_dialog
 		class APOC_PM_Button_EnableLogistics: APOC_PM_RscButton
 		{
 			idc = -1;
-			text = "DIS LOG"; //--- ToDo: Localize;
+			text = "SECURE"; //--- ToDo: Localize;
 			x = 0.546406 * safezoneW + safezoneX;
 			y = 0.5 * safezoneH + safezoneY;
-			w = 0.0515625 * safezoneW;
+			w = 0.054 * safezoneW;
 			h = 0.044 * safezoneH;
 			tooltip = "Disables Removal of Baseparts."; //--- ToDo: Localize;
 			action = "_nil=[player]Spawn APOC_PM_DisableLogistics";
@@ -123,7 +123,7 @@ class APOC_PM_dialog
 		class APOC_PM_Text_Description: APOC_PM_RscText
 		{
 			idc = -1;
-			text = "Unlocking via property manager will unlock your objects within 30m.  Locking will lock all objects within 50m to your name."; //--- ToDo: Localize;
+			text = "Unlocking via property manager will unlock your objects within 30m.  Locking will lock all objects within 50m to your name.  Securing removes the ability for people to unlock and move your items."; 
 			x = 0.391719 * safezoneW + safezoneX;
 			y = 0.346 * safezoneH + safezoneY;
 			w = 0.216563 * safezoneW;

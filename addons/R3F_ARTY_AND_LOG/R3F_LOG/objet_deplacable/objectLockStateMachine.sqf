@@ -29,11 +29,11 @@ switch (_lockState) do
 
 		_checks =
 		{
-			private ["_progress", "_object", "_failed", "_text"];
+			private ["_progress", "_object", "_failed", "_text", "_allowR3FLock"];
 			_progress = _this select 0;
 			_object = _this select 1;
 			_failed = true;
-
+			_allowR3FLock = [] call APOC_PM_CheckNearbyPMs;
 			switch (true) do
 			{
 				case (!alive player): { _text = "" };
@@ -43,6 +43,7 @@ switch (_lockState) do
 				case (_object getVariable ["objectLocked", false]): { _text = "Somebody else locked it before you" };
 				case (count (nearestObjects [player, ["Land_Cashdesk_F"], 350]) > 0): { _text = "You are not allowed to lock objects within 350m of shops"};
 				case (surfaceIsWater getPos _object): { _text = "You are not allowed to lock objects over water. Move to land!"};
+				case (!_allowR3FLock): {_text = "You are not allowed to lock items near another player's Property Manager!"};
 				default
 				{
 					_failed = false;
