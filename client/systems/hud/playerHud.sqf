@@ -110,10 +110,10 @@ while {true} do
 	_hudActivityTextbox = _ui displayCtrl hud_activity_textbox_idc;
 	_hudServerTextbox = _ui displayCtrl hud_server_idc;
 	
-	_serverString = format ["<t color='#A0FFFFFF'>Server: MAYHEM Wasteland Altis</t>"];
-	_serverString = format ["%1<br/><t color='#A0FFFFFF'>Teamspeak: mayhem.tserverhq.com<br/>Website: Auzgaming.Enjin.com</t>",_serverString];
-	_hudServerTextbox ctrlSetStructuredText parseText _serverString;
-	_hudServerTextbox ctrlCommit 0;
+	//_serverString = format ["<t color='#A0FFFFFF'>Server: MAYHEM Wasteland Altis</t>"];
+	//_serverString = format ["%1<br/><t color='#A0FFFFFF'>Teamspeak: mayhem.tserverhq.com<br/>Website: Auzgaming.Enjin.com</t>",_serverString];
+	//_hudServerTextbox ctrlSetStructuredText parseText _serverString;
+	//_hudServerTextbox ctrlCommit 0;
 
 	//Calculate Health 0 - 100
 	_health = ((1 - damage player) * 100) max 0;
