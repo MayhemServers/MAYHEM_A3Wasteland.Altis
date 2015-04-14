@@ -10,6 +10,7 @@ waitUntil {!isNull player};
 player createDiarySubject ["infos", "Infos and Help"];
 player createDiarySubject ["changelog", "Changelog"];
 player createDiarySubject ["credits", "Credits"];
+player createDiarySubject ["MayhemModules", "MAYHEM Modules"];
 
 player createDiaryRecord ["changelog",
 [
@@ -433,3 +434,71 @@ player createDiaryRecord ["infos",
 <br/>A. Simply go into global chat and get the attention of one of the admins or visit our forums, and make a report if the offense is serious.
 "
 ]];
+
+_color = "#FF0000";
+
+player createDiaryRecord ["MayhemModules", 
+[
+"Property Manager",
+
+format[
+"
+<font color='%1' size='18'>Property Manager PRO</font>
+<br /><br />
+This mission uses Apoc's Property Manager Pro module.  This system allows for building of semi-permanent bases within Wasteland that are currently impervious to other players removing.  This also allows for the locking of crates' inventories.
+<br /><br />
+
+<font color='%1' size='18'>Instructions:</font>
+<br /><br />
+You will need to purchase a Property Manager Interface (Laptop) at the general store.  It is expensive, but worth it.
+<br /><br />
+The property manager script is activated via scroll-wheel when the laptop is locked down (using typical methods).
+<br /><br />
+Once you have placed the laptop within your base, and locked it down, you will have access to the Property Manager (PM) Functions.
+<br /><br />
+
+<font color='%1' size='18'>Functions</font>
+<br /><br />
+<font color='%1'>LOCK</font><br />
+Locks position of all unlocked items within 30m<br />
+Same as the LOCK THIS OBJECT function on scroll-wheel <br />
+<br />
+
+<font color='%1'>UNLOCK</font><br />
+Unlocks position of all locked items within 30m that you locked down.<br />
+Same as the UNLOCK THIS OBJECT function on scroll-wheel <br />
+<br />
+
+<font color='%1'>INV LOCK</font><br />
+Locks crates' inventories within 30m<br />
+This will prevent players other than the owner from accessing crates' inventories (via I) key.<br />
+<br />
+
+<font color='%1'>INV UNLOCK</font><br />
+Unlocks position of all locked items within 30m that you locked down.<br />
+Same as the UNLOCK THIS OBJECT function on scroll-wheel <br />
+<br />
+
+<font color='%1'>SECURE</font><br />
+COST: $1000 per item being secured.  These are only items which are locked down and owned by you.<br />
+Removes the ability for other players to interact with base parts.<br />
+You, and other players, will not be able to unlock these items.<br />
+UNSECURE will have to be used to allow for unlocking and movement of base parts.<br />
+<br />
+
+<font color='%1'>UNSECURE</font><br />
+This functions restores the ability to unlock and move objects.<br />
+<br />
+
+<br /><br />
+<font color='%1' size='18'>Planned Features and Known Issues</font>
+<br /><br />
+<font color='%1'>Planned Features</font><br />
+1) Provide method for players to neutralize the PM interface to raid/destroy base items. <br />
+  **This raiding ability will be expensive, and have a high chance to fail.<br />
+2) Implement a count of items which are locked down and owned by player.<br />
+3) Have a max number of items which can be secured.  This is to prevent too-large bases.<br />
+
+<font color='%1'>Known Issues</font><br />
+KNOWN BUG: Players may still be able to access items via the TAKE function in ARMA<br />
+",_color]]];
