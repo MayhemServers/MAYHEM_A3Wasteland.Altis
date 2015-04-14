@@ -30,7 +30,7 @@ if (_vehicle == _unit) exitWith
 
 //set up prices
 _vehClass = typeOf _vehicle;
-_price = 50000; // price = 100 for vehicles not found in vehicle store.
+_price = 5000; // price = 100 for vehicles not found in vehicle store.
 
 {
 	if (_vehClass == _x select 1) exitWith
