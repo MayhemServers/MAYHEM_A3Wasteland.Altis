@@ -10,4 +10,5 @@ _player = _this select 0;
 
 _playerPos = getPos _player;
 _spawnPos = [(_playerPos select 0), (_playerPos select 1) + 5, (_playerPos select 2) + 10];
-_veh = "Quadbike_01_base_F" createVehicle _spawnPos;
+//_veh = "Quadbike_01_base_F" createVehicle _spawnPos;
+_veh = createVehicle ["B_G_Quadbike_01_F", _spawnPos, [], 0, "none"];
