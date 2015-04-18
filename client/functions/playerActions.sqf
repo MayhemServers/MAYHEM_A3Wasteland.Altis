@@ -30,7 +30,10 @@
 	["<t color='#FF0000'>Emergency eject</t>",  { [[], fn_emergencyEject] execFSM "call.fsm" }, [], -9, false, true, "", "(vehicle player) isKindOf 'Air' && !((vehicle player) isKindOf 'ParachuteBase')"],
 	["<t color='#FF00FF'>Open magic parachute</t>", { [[], fn_openParachute] execFSM "call.fsm" }, [], 20, true, true, "", "vehicle player == player && (getPos player) select 2 > 2.5"],
 	
-	["<t color='#FF00FF'>Property Manager</t>", {createDialog "APOC_PM_dialog"},[], -98, false, true, "", "!isNull cursorTarget && vehicle player == player && {{ cursorTarget isKindOf _x } count ['Land_Laptop_unfolded_F'] > 0 ;} && cursorTarget getVariable ['ownerUID',''] == getPlayerUID player && cursorTarget distance player < 7 && cursorTarget getVariable ['objectLocked',false]"]
+	["<t color='#FF00FF'>Property Manager</t>", {createDialog "APOC_PM_dialog"},[], -98, false, true, "", "!isNull cursorTarget && vehicle player == player && {{ cursorTarget isKindOf _x } count ['Land_Laptop_unfolded_F'] > 0 ;} && cursorTarget getVariable ['ownerUID',''] == getPlayerUID player && cursorTarget distance player < 7 && cursorTarget getVariable ['objectLocked',false]"],
+	
+	[format ["<img image='\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\supplydrop_ca.paa' color='%1'/> <t color='%1'>[</t>Airdrop Menu<t color='%1'>]</t>", "#FF0000"],"addons\APOC_Airdrop_Assistance\APOC_cli_menu.sqf",[], -100, false, false]
+	
 ];
 
 
