@@ -10,15 +10,16 @@ _type 				= _this select 0;
 _selectionNumber 	= _this select 1;
 _player 			= _this select 2;
 
-diag_log format ["Player %1, Drop Type %2, Selection # %3",_player,_type,_selection];
-hint format ["Well we've made it this far! %1, %2, %3,",_player,_type,_selection];
-/*
-switch (true) do {
-	case (_type == "vehicle"):
-	{_selectionArray = APOC_AA_VehOptions};
-	case (_type == "supply"):
-	{_selectionArray = APOC_AA_SupOptions};
+diag_log format ["SERVER - Apoc's Airdrop Assistance - Player: %1, Drop Type: %2, Selection #: %3",name _player,_type,_selectionNumber];
+//hint format ["Well we've made it this far! %1, %2, %3,",_player,_type,_selectionNumber];
+_selectionArray = [];
+
+switch (_type) do {
+	case "vehicle": {_selectionArray = APOC_AA_VehOptions};
+	case "supply": 	{_selectionArray = APOC_AA_SupOptions};
+	default 		{_selectionArray = APOC_AA_VehOptions; diag_log "AAA - Default Array Selected - Something broke";};
 };
+
 _selectionName 	= (_selectionArray select _selectionNumber) select 0;
 _selectionClass = (_selectionArray select _selectionNumber) select 1;
 _price 			= (_selectionArray select _selectionNumber) select 2;
@@ -36,20 +37,22 @@ _playermoney = _player setVariable ["bmoney", _playermoney - _price, true];
  _center = createCenter west;
 _grp = createGroup west;
 if(isNil("_grp2"))then{_grp2 = createGroup west;}else{_grp2 = _grp2;};
-_dropSpot = position _player;
+_flyHeight = 350;
+_dropSpot = [(position _player select 0),(position _player select 1),_flyHeight];
 _heliDirection = random 360;
 
-_flyHeight = 250;
+_flyHeight = 350;
 _spos = [
+	[15000,15000,_flyHeight]/*,
 	[2475,25690,_flyHeight], 
 	[2000,7000,_flyHeight], 
 	[19000,27000,_flyHeight], 
 	[28767,13935,_flyHeight], 
-	[27552,5013,_flyHeight]
+	[27552,5013,_flyHeight]*/
 ] call BIS_fnc_selectRandom;
 diag_log format ["AAA - Heli Spawned at %1", _spos];
 _heli = createVehicle [_heliType, _spos, [], 0, "FLY"];
-_heli allowDamage _allowDamage;
+_heli allowDamage false;
 _heli setVariable ["R3F_LOG_disabled", true, true];
 [_heli] call vehicleSetup;
 
@@ -58,24 +61,24 @@ _crew moveInDriver _heli;
 
 _heli setCaptive true;
 
-_heliDistance = 1000;
+_heliDistance = 2000;
 _dir = ((_dropSpot select 0) - (_spos select 0)) atan2 ((_dropSpot select 1) - (_spos select 1));
 _flySpot = [(_dropSpot select 0) + (sin _dir) * _heliDistance, (_dropSpot select 1) + (cos _dir) * _heliDistance, _flyHeight];
 
 _wp0 = _grp addWaypoint [_dropSpot, 0, 1];
 [_grp,0] setWaypointBehaviour "CARELESS";
-[_grp,0] setWaypointCompletionRadius 60;
+[_grp,0] setWaypointCompletionRadius 20;
 _wp1 = _grp addWaypoint [_flySpot, 0, 2];
 [_grp,1] setWaypointBehaviour "CARELESS";
-[_grp,1] setWaypointCompletionRadius 60;
-
+[_grp,1] setWaypointCompletionRadius 20;
+_heli flyInHeight _flyHeight;
 //Create Purchased Object
-switch (true) do {
-	case (_type == "vehicle"):
+_object = switch (_type) do {
+	case "vehicle":
 	{
 		_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) - 5];
 		_object = createVehicle [_selectionClass, _objectSpawnPos, [], 0, "None"];
-		diag_log format ["AAA - Object Spawned at %1", _objectSpawnPos];
+		diag_log format ["Apoc's Airdrop Assistance - Object Spawned at %1", position _object];
 		_object setVariable ["A3W_purchasedStoreObject", true];
 		_object setVariable ["ownerUID", getPlayerUID _player, true];
 		[_object, false] call vehicleSetup;
@@ -83,29 +86,14 @@ switch (true) do {
 		{
 			_object call fn_manualVehicleSave;
 		};
-		
 		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
+		_object
 	};	
-	case (_type == "supply"):
+	case "supply":
 	{
 	};
 };
-//Delete vehicle once it has proceeded to end point
-	[_heli,_grp,_flySpot,_dropSpot,_heliDistance] spawn {
-		private ["_heli","_grp","_flySpot","_dropSpot","_heliDistance"];
-		_heli = _this select 0;
-		_grp = _this select 1;
-		_flySpot = _this select 2;
-		_dropSpot = _this select 3;
-		_heliDistance = _this select 4;
-		while{([_heli, _flySpot] call BIS_fnc_distance2D)>200}do{
-			if(!alive _heli || !canMove _heli)exitWith{};
-			sleep 5;
-		};
-		waitUntil{([_heli, _dropSpot] call BIS_fnc_distance2D)>(_heliDistance * .5)};
-		{ deleteVehicle _x; } forEach units _grp;
-		deleteVehicle _heli;
-	};
+diag_log format ["Apoc's Airdrop Assistance - Object at %1", position _object];
 
 //Wait until the heli is close to the drop spot, then move on to dropping the cargo and all of that jazz
 WaitUntil{([_heli, _dropSpot] call BIS_fnc_distance2D)<50};
@@ -125,4 +113,19 @@ WaitUntil {(((position _object) select 2) < 70)};
 WaitUntil {((((position _object) select 2) < 1) || (isNil "_para"))};
 		detach _object;
 
-*/
+//Delete vehicle once it has proceeded to end point
+	[_heli,_grp,_flySpot,_dropSpot,_heliDistance] spawn {
+		private ["_heli","_grp","_flySpot","_dropSpot","_heliDistance"];
+		_heli = _this select 0;
+		_grp = _this select 1;
+		_flySpot = _this select 2;
+		_dropSpot = _this select 3;
+		_heliDistance = _this select 4;
+		while{([_heli, _flySpot] call BIS_fnc_distance2D)>200}do{
+			if(!alive _heli || !canMove _heli)exitWith{};
+			sleep 5;
+		};
+		waitUntil{([_heli, _dropSpot] call BIS_fnc_distance2D)>(_heliDistance * .5)};
+		{ deleteVehicle _x; } forEach units _grp;
+		deleteVehicle _heli;
+	};

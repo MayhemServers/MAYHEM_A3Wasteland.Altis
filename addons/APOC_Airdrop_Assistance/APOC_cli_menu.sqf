@@ -7,7 +7,7 @@ AirdropMenu =
 [
 	["Airdrop",true],
 			["Vehicles", [2], "#USER:VehicleMenu", -5, [["expression", ""]], "1", "1"],
-			//["Supplies", [3], "#USER:SupplyMenu", -5, [["expression", ""]], "1", "1"],
+			["Supplies", [3], "#USER:SupplyMenu", -5, [["expression", ""]], "1", "1"],
 			["Cancel Airdrop", [4], "", -3, [["expression", ""]], "1", "1"]
 ];
 //////////////////////////////////////////////////////
@@ -38,7 +38,7 @@ _i=_i+1;
 _endVehMenu = ["Cancel Airdrop", [_i+2], "", -3, [["expression", ""]], "1", "1"];
 VehicleMenu pushback _endVehMenu;
 ///////////////////////////////////////////////////////
-/*
+
 //////////////////////////////////////////////////////
 //Setting up the Supply Menu ////////////////////////
 /////////////////////////////////////////////////////
@@ -55,7 +55,7 @@ _optionSupMenu pushback _lineElement1;
 
 _optionSupMenu append [[_i+2], "", -5];
 
-_optionSupMenu pushback [["expression", format ['[%1,%2,player] execVM "addons\APOC_Airdrop_Assistance\APOC_cli_startAirdrop.sqf"',_type,_i]]];
+_optionSupMenu pushback [["expression", format ['["%1",%2,player] execVM "addons\APOC_Airdrop_Assistance\APOC_cli_startAirdrop.sqf"',_type,_i]]];
 
 _optionSupMenu append ["1","1"];
 
@@ -68,5 +68,5 @@ _endSupMenu = ["Cancel Airdrop", [_i+2], "", -3, [["expression", ""]], "1", "1"]
 SupplyMenu pushback _endSupMenu;
 ///////////////////////////////////////////////////////
 
-*/
+
 showCommandingMenu "#USER:AirdropMenu";
