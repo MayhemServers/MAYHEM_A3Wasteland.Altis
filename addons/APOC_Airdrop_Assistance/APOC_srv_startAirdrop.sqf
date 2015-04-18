@@ -106,7 +106,7 @@ WaitUntil{([_heli, _dropSpot] call BIS_fnc_distance2D)<50};
 detach _object;  //WHEEEEEEEEEEEEE
 _objectPosDrop = position _object;
 
-WaitUntil {(((position _object) select 2) < (_flyHeight-20)};
+WaitUntil {(((position _object) select 2) < (_flyHeight-20))};
 		_objectPosDrop = position _object;
 		_para = createVehicle ["B_Parachute_02_F", _objectPosDrop, [], 0, ""];
 		_object attachTo [_para,[0,0,-1.5]];
