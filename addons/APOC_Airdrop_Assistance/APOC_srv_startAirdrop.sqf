@@ -70,8 +70,8 @@ _flySpot = [(_dropSpot select 0) + (sin _dir) * _heliDistance, (_dropSpot select
 
 _grp setCombatMode "BLUE";
 _grp setBehaviour "CARELESS";
-_grp disableAI "AUTOTARGET";
-_grp disableAI "TARGET";
+
+{_x disableAI "AUTOTARGET"; _x disableAI "TARGET";} forEach units _grp;
 
 _wp0 = _grp addWaypoint [_dropSpot, 0, 1];
 [_grp,0] setWaypointBehaviour "CARELESS";
