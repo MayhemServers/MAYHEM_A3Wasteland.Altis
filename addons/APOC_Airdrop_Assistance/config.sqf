@@ -14,7 +14,9 @@ APOC_AA_SupOptions =
 [// ["stringItemName",ItemClassname,Price,"type"]
 ["Launchers", "mission_USLaunchers", 25000, "supply"],
 ["Assault Rifle", "mission_USSpecial", 10000, "supply"],
-["Sniper Rifles", "mission_main_A3snipers", 250000, "supply"],
+["Sniper Rifles", "mission_main_A3snipers", 25000, "supply"],
 ["DLC Rifles", "airdrop_DLC_Rifles", 35000, "supply"],
-["DLC LMGs", "airdrop_DLC_LMGs", 35000, "supply"]
+["DLC LMGs", "airdrop_DLC_LMGs", 35000, "supply"],
+["Food", "Land_Sacks_goods_F", 5000, "picnic"],
+["Water", "Land_BarrelWater_F", 5000, "picnic"]
 ];
