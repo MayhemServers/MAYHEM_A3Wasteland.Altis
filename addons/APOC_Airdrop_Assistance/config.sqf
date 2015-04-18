@@ -1,6 +1,8 @@
 //Configuration for Airdrop Assistance
 //Author: Apoc
 
+APOC_AA_coolDownTime = 60; //Expressed in ms
+
 APOC_AA_VehOptions =
 [ // [stringItemName,ItemClassname,Price]
 ["Quadbike (Civilian)", "C_Quadbike_01_F", 2400, "vehicle"],
