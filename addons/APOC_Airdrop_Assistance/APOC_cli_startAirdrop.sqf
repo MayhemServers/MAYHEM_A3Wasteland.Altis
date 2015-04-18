@@ -8,8 +8,8 @@ _type 				= _this select 0;
 _selectionNumber 	= _this select 1;
 _player 			= _this select 2;
 
-diag_log format ["Player %1, Drop Type %2, Selection # %3",_player,_type,_selectionNumber];
-hint format ["Well we've made it this far! %1, %2, %3,",_player,_type,_selectionNumber];
+//diag_log format ["Player %1, Drop Type %2, Selection # %3",_player,_type,_selectionNumber];
+//hint format ["Well we've made it this far! %1, %2, %3,",_player,_type,_selectionNumber];
 _selectionArray = [];
 switch (_type) do {
 	case "vehicle": {_selectionArray = APOC_AA_VehOptions};

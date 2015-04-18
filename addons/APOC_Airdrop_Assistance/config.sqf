@@ -10,6 +10,9 @@ APOC_AA_VehOptions =
 
 APOC_AA_SupOptions =
 [// ["stringItemName",ItemClassname,Price,"type"]
-["Launchers", "launcher_crate", 10000, "supply"],
-["Assault Rifle", "arifle_crate", 10000, "supply"]
+["Launchers", "mission_USLaunchers", 25000, "supply"],
+["Assault Rifle", "mission_USSpecial", 10000, "supply"],
+["Sniper Rifles", "mission_main_A3snipers", 250000, "supply"],
+["DLC Rifles", "airdrop_DLC_Rifles", 35000, "supply"],
+["DLC LMGs", "airdrop_DLC_LMGs", 35000, "supply"]
 ];
