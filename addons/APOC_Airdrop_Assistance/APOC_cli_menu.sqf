@@ -31,7 +31,7 @@ _optionVehMenu pushback [["expression", format ['["%1",%2,player] execVM "addons
 _optionVehMenu append ["1","1"];
 
 VehicleMenu pushback _optionVehMenu;
-diag_log format["Here's the menu structure: %1",VehicleMenu];
+//diag_log format["Here's the menu structure: %1",VehicleMenu];
 _i=_i+1;
 }forEach APOC_AA_VehOptions;
 
@@ -60,7 +60,7 @@ _optionSupMenu pushback [["expression", format ['["%1",%2,player] execVM "addons
 _optionSupMenu append ["1","1"];
 
 SupplyMenu pushback _optionSupMenu;
-diag_log format["Here's the menu structure: %1",SupplyMenu];
+//diag_log format["Here's the menu structure: %1",SupplyMenu];
 _i=_i+1;
 }forEach APOC_AA_SupOptions;
 
