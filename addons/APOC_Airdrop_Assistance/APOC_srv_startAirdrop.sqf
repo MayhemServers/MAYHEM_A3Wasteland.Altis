@@ -41,16 +41,9 @@ if(isNil("_grp2"))then{_grp2 = createGroup civilian;}else{_grp2 = _grp2;};
 _flyHeight = 350;
 _dropSpot = [(position _player select 0),(position _player select 1),_flyHeight];
 _heliDirection = random 360;
-
 _flyHeight = 200;  //Distance from ground that heli will fly at
-_spos = [
-	[15000,15000,_flyHeight]/*, Disabling the other spawn points.  Takes too long for huron to get to target site
-	[2475,25690,_flyHeight], 
-	[2000,7000,_flyHeight], 
-	[19000,27000,_flyHeight], 
-	[28767,13935,_flyHeight], 
-	[27552,5013,_flyHeight]*/
-] call BIS_fnc_selectRandom;
+_heliStartDistance = 5000;
+_spos=[(_dropSpot select 0) - (sin _heliDirection) * _heliStartDistance, (_dropSpot select 1) - (cos _heliDirection) * _heliStartDistance, (_flyHeight+200)];
 
 diag_log format ["AAA - Heli Spawned at %1", _spos];
 _heli = createVehicle [_heliType, _spos, [], 0, "FLY"];
