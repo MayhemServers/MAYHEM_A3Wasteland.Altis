@@ -123,7 +123,14 @@ _object allowDamage false; //Let's not let these things get destroyed on the way
 diag_log format ["Apoc's Airdrop Assistance - Object at %1", position _object];  //A little log love to confirm the location of this new creature
 
 //Wait until the heli is close to the drop spot, then move on to dropping the cargo and all of that jazz
-WaitUntil{([_heli, _dropSpot] call BIS_fnc_distance2D)<50};
+
+// fix the drop distance between vehicles and ammo boxes - Creampie
+if (_type == "vehicle") then {
+	WaitUntil{([_heli, _dropSpot] call BIS_fnc_distance2D)<300};
+} else {
+	WaitUntil{([_heli, _dropSpot] call BIS_fnc_distance2D)<50};
+};
+
 detach _object;  //WHEEEEEEEEEEEEE
 _objectPosDrop = position _object;
 _heli fire "CMFlareLauncher";
