@@ -29,6 +29,7 @@ _playerMoney = _player getVariable ["bmoney", 0];
 if (_price > _playerMoney) exitWith{};
 
 _playermoney = _player setVariable ["bmoney", _playermoney - _price, true];
+[_player] spawn fn_savePlayerData;
 
 //OK, now the real fun
 
