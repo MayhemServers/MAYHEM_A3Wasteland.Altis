@@ -82,4 +82,4 @@ if (isServer) then
 [] execVM "addons\laptop\init.sqf";
 [] execVM "addons\vactions\functions.sqf";				// Micovery vehicle actions
 [] execVM "addons\APOC_Airdrop_Assistance\init.sqf";
-
+[] execVM "addons\HvT\HvT.sqf"; 
