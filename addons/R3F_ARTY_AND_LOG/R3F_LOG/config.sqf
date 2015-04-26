@@ -74,6 +74,8 @@ R3F_LOG_CFG_transporteurs =
 	["Heli_Light_01_base_F", 10],
 	["Heli_Light_02_base_F", 20],
 	["I_Heli_light_03_base_F", 20],
+	["I_Heli_light_03_unarmed_F", 20],
+	["I_Heli_light_03_F", 20],
 	["Heli_Transport_01_base_F", 25],
 	["Heli_Transport_02_base_F", 150],
 	["B_Heli_Transport_03_base_F", 150],
