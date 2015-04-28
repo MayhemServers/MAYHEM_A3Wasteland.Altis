@@ -19,6 +19,8 @@ A3W_globalVoiceMaxWarns = 5;       // Number of global voice warnings after whic
 A3W_antiHackMinRecoil = 1.0;       // Minimum recoil coefficient enforced by the antihack (recommended values: default = 1.0, TMR Mod = 0.5, VTS Weapon Resting = 0.25)
 A3W_spawnBeaconCooldown = 5*60;    // Number of seconds to wait between each use of an individual spawn beacon (0 = disabled)
 A3W_spawnBeaconSpawnHeight = 1500; // Altitude in meters at which players will spawn when using spawn beacons (0 = ground/sea)
+A3W_maxSpawnBeacons = 5;		   // Maxmimum number of spawn beacons (0 = disabled)
+A3W_townSpawnCooldown = 5*60;    // Number of seconds to wait between each use of a spawn on friends in towns (0 = disabled)
 A3W_vehicleThermals = 0;	   // Allow vehicles to use thermals (0 = disabled)
 A3W_resupplyCostPR = 4;		   // Determine resupply cost by vehicle store cost / A3W_resupplyCostPR. (4 = default, %25 percent)
 A3W_firstPersonCamOnFoot = 0;	   // Lock infantry to first person view
