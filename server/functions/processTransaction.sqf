@@ -41,12 +41,10 @@ switch (toLower _type) do
 				[] spawn fn_saveWarchestMoney;
 			};
 
-			_player setVariable ["cmoney", (_player getVariable ["cmoney", 0]) - _amount, true]; // temp fix for negative wallet glitch
-
-			/*if (!local _player) then
+			if (!local _player) then
 			{
 				_player setVariable ["cmoney", (_player getVariable ["cmoney", 0]) - _amount, false]; // do NOT set to true, this is only a temporary server-side change
-			};*/
+			};
 
 			_result = _amount;
 		};
@@ -80,12 +78,10 @@ switch (toLower _type) do
 				_crate spawn fn_manualObjectSave;
 			};
 
-			_player setVariable ["cmoney", (_player getVariable ["cmoney", 0]) - _amount, true]; // temp fix for negative wallet glitch
-
-			/*if (!local _player) then
+			if (!local _player) then
 			{
 				_player setVariable ["cmoney", (_player getVariable ["cmoney", 0]) - _amount, false]; // do NOT set to true, this is only a temporary server-side change
-			};*/
+			};
 
 			_result = _amount;
 		};
@@ -117,12 +113,10 @@ switch (toLower _type) do
 
 			_player setVariable ["bmoney", _newBalance, true];
 
-			_player setVariable ["cmoney", _wallet - _amount, true]; // temp fix for negative wallet glitch
-
-			/*if (!local _player) then
+			if (!local _player) then
 			{
 				_player setVariable ["cmoney", _wallet - _amount, false]; // do NOT set to true, this is only a temporary server-side change
-			};*/
+			};
 
 			if (["A3W_playerSaving"] call isConfigOn) then
 			{
