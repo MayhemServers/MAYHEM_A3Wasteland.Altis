@@ -142,7 +142,6 @@ BH_fnc_mkr3D =
 					{
 						if (uiNamespace getVariable ["BH_fnc_mkr3D_show", true]) then
 						{
-							alphaText = linearConversion [500, 3000, player distance _pos, 1, 0, true];
 							drawIcon3D [%1, %2, %3, 1, 1, 0, %4, 0, 0.05 ];
 						};
 					}
@@ -165,7 +164,7 @@ BH_fnc_mkr3D =
 					};
 				',
 				str _path,
-				[(_colour select 0), (_colour select 1), (_colour select 2), alphaText],
+				_colour,
 				_pos,
 				str _text,
 				str _marker,
