@@ -246,17 +246,17 @@ ammoArray = compileFinal str
 //Text name, classname, buy cost, item class
 accessoriesArray = compileFinal str
 [
-	["Suppressor 9mm", "muzzle_snds_L", 50, "item"],
-	["Suppressor .45 ACP", "muzzle_snds_acp", 75, "item"],
-	["Suppressor 5.56mm", "muzzle_snds_M", 100, "item"],
-	["Suppressor 6.5mm", "muzzle_snds_H", 100, "item"],
-	["Suppressor 6.5mm LMG", "muzzle_snds_H_MG", 125, "item"],
-	["Suppressor 7.62mm", "muzzle_snds_B", 125, "item"],
-	["Suppressor .338 Black", "muzzle_snds_338_black", 150, "item"], // DLC Item
-	["Suppressor .338 Green", "muzzle_snds_338_green", 150, "item"], // DLC Item
-	["Suppressor .338 Sand", "muzzle_snds_338_sand", 175, "item"], // DLC Item
-	["Suppressor 9.3mm Black", "muzzle_snds_93mmg", 175, "item"], // DLC Item
-	["Suppressor 9.3mm Tan", "muzzle_snds_93mmg_tan", 175, "item"], // DLC Item
+	["Suppressor 9mm", "muzzle_snds_L", 250, "item"],
+	["Suppressor .45 ACP", "muzzle_snds_acp", 275, "item"],
+	["Suppressor 5.56mm", "muzzle_snds_M", 375, "item"],
+	["Suppressor 6.5mm", "muzzle_snds_H", 375, "item"],
+	["Suppressor 6.5mm LMG", "muzzle_snds_H_MG", 375, "item"],
+	["Suppressor 7.62mm", "muzzle_snds_B", 375, "item"],
+	["Suppressor .338 Black", "muzzle_snds_338_black", 375, "item"], // DLC Item
+	["Suppressor .338 Green", "muzzle_snds_338_green", 375, "item"], // DLC Item
+	["Suppressor .338 Sand", "muzzle_snds_338_sand", 375, "item"], // DLC Item
+	["Suppressor 9.3mm Black", "muzzle_snds_93mmg", 375, "item"], // DLC Item
+	["Suppressor 9.3mm Tan", "muzzle_snds_93mmg_tan", 375, "item"], // DLC Item
 	["Flashlight", "acc_flashlight", 25, "item"],
 	["IR Laser Pointer", "acc_pointer_IR", 25, "item"],
 	["Yorris Sight (Zubr Revolver)", "optic_Yorris", 50, "item"],
@@ -279,10 +279,10 @@ accessoriesArray = compileFinal str
 	["Kahlia (Hex)", "optic_KHS_hex", 200, "item"], // DLC Item
 	["Kahlia (Old)", "optic_KHS_old", 200, "item"], // DLC Item
 	["Kahlia (Tan)", "optic_KHS_tan", 200, "item"], // DLC Item
-	["NVS", "optic_NVS", 1500, "item"],
-	["TWS", "optic_tws", 7500, "item"],
-	["TWS MG", "optic_tws_mg", 8500, "item"],
-	["Nightstalker", "optic_Nightstalker", 7500, "item"],
+	["NVS", "optic_NVS", 4000, "item"],
+	["TWS", "optic_tws", 12000, "item"],
+	["TWS MG", "optic_tws_mg", 13500, "item"],
+	["Nightstalker", "optic_Nightstalker", 15000, "item"],
 	["Bipod (Black) (NATO)", "bipod_01_F_blk", 500, "item"], // DLC Item
 	["Bipod (Black) (CSAT)", "bipod_02_F_blk", 500, "item"], // DLC Item
 	["Bipod (Black) (AAF)", "bipod_03_F_blk", 500, "item"], // DLC Item
@@ -569,9 +569,9 @@ backpackArray = compileFinal str
 
 genItemArray = compileFinal str
 [
-	["Quadrotor UAV (NATO)", "B_UAV_01_backpack_F", 500, "backpack"],
-	["Quadrotor UAV (CSAT)", "O_UAV_01_backpack_F", 500, "backpack"],
-	["Quadrotor UAV (AAF)", "I_UAV_01_backpack_F", 500, "backpack"],
+	["Quadrotor UAV (NATO)", "B_UAV_01_backpack_F", 1000, "backpack"],
+	["Quadrotor UAV (CSAT)", "O_UAV_01_backpack_F", 1000, "backpack"],
+	["Quadrotor UAV (AAF)", "I_UAV_01_backpack_F", 1000, "backpack"],
 	["UAV Terminal (NATO)", "B_UavTerminal", 150, "gps"],
 	["UAV Terminal (CSAT)", "O_UavTerminal", 150, "gps"],
 	["UAV Terminal (AAF)", "I_UavTerminal", 150, "gps"],
@@ -810,11 +810,11 @@ planesArray = compileFinal str
 	["A-143 Buzzard CAS", "I_Plane_Fighter_03_CAS_F", 120000, "vehicle"],
 	// ["A-164 Wipeout CAS", "B_Plane_CAS_01_F", 60000, "vehicle"],
 	// ["To-199 Neophron CAS", "O_Plane_CAS_02_F", 60000, "vehicle"],
-	["MQ4A Greyhawk ATGM UAV", "B_UAV_02_F", 65000, "vehicle"],
+	["MQ4A Greyhawk ATGM UAV", "B_UAV_02_F", 85000, "vehicle"],
 	["MQ4A Greyhawk Bomber UAV", "B_UAV_02_CAS_F", 40000, "vehicle"], // Bomber UAVs are a lot harder to use, hence why they are cheaper than ATGMs
-	["K40 Ababil-3 ATGM UAV (CSAT)", "O_UAV_02_F", 65000, "vehicle"],
+	["K40 Ababil-3 ATGM UAV (CSAT)", "O_UAV_02_F", 85000, "vehicle"],
 	["K40 Ababil-3 Bomber UAV (CSAT)", "O_UAV_02_CAS_F", 40000, "vehicle"],
-	["K40 Ababil-3 ATGM UAV (AAF)", "I_UAV_02_F", 65000, "vehicle"],
+	["K40 Ababil-3 ATGM UAV (AAF)", "I_UAV_02_F", 85000, "vehicle"],
 	["K40 Ababil-3 Bomber UAV (AAF)", "I_UAV_02_CAS_F", 40000, "vehicle"]
 ];
 
