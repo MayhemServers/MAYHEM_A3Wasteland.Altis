@@ -58,7 +58,7 @@ _crew allowDamage false;
 
 _heli setCaptive true;
 
-_heliDistance = 10000;
+_heliDistance = 5000;
 _dir = ((_dropSpot select 0) - (_spos select 0)) atan2 ((_dropSpot select 1) - (_spos select 1));
 _flySpot = [(_dropSpot select 0) + (sin _dir) * _heliDistance, (_dropSpot select 1) + (cos _dir) * _heliDistance, _flyHeight];
 
@@ -68,13 +68,13 @@ _grp setBehaviour "CARELESS";
 {_x disableAI "AUTOTARGET"; _x disableAI "TARGET";} forEach units _grp;
 
 _wp0 = _grp addWaypoint [_dropSpot, 0, 1];
-[_grp,0] setWaypointBehaviour "CARELESS";
-[_grp,0] setWaypointCombatMode "BLUE";
-[_grp,0] setWaypointCompletionRadius 20;
-_wp1 = _grp addWaypoint [_flySpot, 0, 2];
 [_grp,1] setWaypointBehaviour "CARELESS";
 [_grp,1] setWaypointCombatMode "BLUE";
 [_grp,1] setWaypointCompletionRadius 20;
+_wp1 = _grp addWaypoint [_flySpot, 0, 2];
+[_grp,2] setWaypointBehaviour "CARELESS";
+[_grp,2] setWaypointCombatMode "BLUE";
+[_grp,2] setWaypointCompletionRadius 20;
 _heli flyInHeight _flyHeight;
 
 //////// Create Purchased Object //////////////////////////////////////////////
@@ -122,9 +122,9 @@ diag_log format ["Apoc's Airdrop Assistance - Object at %1", position _object]; 
 
 // fix the drop distance between vehicles and ammo boxes - Creampie
 if (_type == "vehicle") then {
-	WaitUntil{([_heli, _dropSpot] call BIS_fnc_distance2D)<125};
+	WaitUntil{(([_heli, _dropSpot] call BIS_fnc_distance2D)<125)||(currentWaypoint _grp == 2)};
 } else {
-	WaitUntil{([_heli, _dropSpot] call BIS_fnc_distance2D)<50};
+	WaitUntil{(([_heli, _dropSpot] call BIS_fnc_distance2D)<50)||(currentWaypoint _grp == 2)};
 };
 
 detach _object;  //WHEEEEEEEEEEEEE
