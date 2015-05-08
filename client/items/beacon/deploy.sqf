@@ -14,7 +14,7 @@
 #define MAX_BEACONS format ["You cannot deploy more then %1 spawnbeacons", [_MaxSpawnbeacons]]
 _MaxSpawnbeacons = ceil (["A3W_maxSpawnBeacons", 5] call getPublicVar);
 
-private ["_hasFailed", "_success","_pos","_uid","_beacon","_beacons","_ownedBeacons"];
+private ["_hasFailed", "_success","_pos","_uid","_beacon","_beacons","_ownedBeacons","_oldBeacon"];
 
 _beacons = []; 
 { 
@@ -34,7 +34,26 @@ _hasFailed = {
 		case (!alive player): {};
 		case (doCancelAction) :{doCancelAction = false; _text = ERR_CANCELLED;};
 		case (vehicle player != player): {_text = ERR_IN_VEHICLE};
-		case (_ownedBeacons >= _MaxSpawnbeacons): {_text = MAX_BEACONS};
+		case (_ownedBeacons >= _MaxSpawnbeacons): 
+		{
+			_confirmMsg = MAX_BEACONS + format ["Press Delete to Remove Oldest Beacon"];
+		
+				// Display confirm message
+				if ([parseText _confirmMsg, "Delete", "BEACONS!", true] call BIS_fnc_guiMessage) then
+				{
+					_oldBeacon = _beacons select 0;
+				
+					pvar_spawn_beacons = pvar_spawn_beacons - [_oldBeacon];
+					publicVariable "pvar_spawn_beacons";
+					pvar_manualObjectDelete = [netId _oldBeacon, _oldBeacon getVariable "A3W_objectID"];
+					publicVariableServer "pvar_manualObjectDelete";
+					deleteVehicle _oldBeacon;
+				
+					_text = format["Old Beacon Destroyed. Try Deploying a New Beacon."];
+				} else {
+				_text = MAX_BEACONS;
+				};
+		};
 		default {
 			_text = format["Spawn Beacon %1%2 Deployed", round(_progress*100), "%"];
 			_failed = false;
