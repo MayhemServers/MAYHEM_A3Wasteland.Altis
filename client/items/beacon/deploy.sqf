@@ -11,7 +11,7 @@
 #define ANIM "AinvPknlMstpSlayWrflDnon_medic"
 #define ERR_CANCELLED "Action Cancelled"
 #define ERR_IN_VEHICLE "Action Failed! You can't do this in a vehicle"
-#define MAX_BEACONS format ["You cannot deploy more then %1 spawnbeacons", [_MaxSpawnbeacons]]
+#define MAX_BEACONS format ["You cannot deploy more then %1 spawn beacons!", [_MaxSpawnbeacons]]
 _MaxSpawnbeacons = ceil (["A3W_maxSpawnBeacons", 5] call getPublicVar);
 
 private ["_hasFailed", "_success","_pos","_uid","_beacon","_beacons","_ownedBeacons","_oldBeacon"];
@@ -36,10 +36,10 @@ _hasFailed = {
 		case (vehicle player != player): {_text = ERR_IN_VEHICLE};
 		case (_ownedBeacons >= _MaxSpawnbeacons): 
 		{
-			_confirmMsg = MAX_BEACONS + format ["Press Delete to Remove Oldest Beacon"];
+			_confirmMsg = MAX_BEACONS + format ["<br/>Press Delete to Remove Oldest Beacon"];
 		
 				// Display confirm message
-				if ([parseText _confirmMsg, "Delete", "BEACONS!", true] call BIS_fnc_guiMessage) then
+				if ([parseText _confirmMsg, "BEACONS!", "Delete", true] call BIS_fnc_guiMessage) then
 				{
 					_oldBeacon = _beacons select 0;
 				
