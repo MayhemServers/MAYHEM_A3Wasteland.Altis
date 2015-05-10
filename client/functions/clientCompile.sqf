@@ -53,6 +53,7 @@ unitHandleDamage = "client\functions\unitHandleDamage.sqf" call mf_compile;
 updateTerritoryMarkers = "territory\client\updateTerritoryMarkers.sqf" call mf_compile;
 vehicleSideCfg = "client\functions\vehicleSideCfg.sqf" call mf_compile;
 weaponDisassembledEvent = "client\functions\weaponDisassembledEvent.sqf" call mf_compile;
+deleteBeacon = "client\items\beacon\deleteBeacon.sqf" call mf_compile;
 
 //Custom Compiles
 fn_rewardLoyalty = "client\functions\fn_rewardLoyalty.sqf" call mf_compile;

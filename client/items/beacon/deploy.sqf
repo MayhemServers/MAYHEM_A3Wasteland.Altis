@@ -34,7 +34,7 @@ _hasFailed = {
 		case (!alive player): {};
 		case (doCancelAction) :{doCancelAction = false; _text = ERR_CANCELLED;};
 		case (vehicle player != player): {_text = ERR_IN_VEHICLE};
-		case (_ownedBeacons >= _MaxSpawnbeacons): {_text = MAX_BEACONS};
+		case (_ownedBeacons >= _MaxSpawnbeacons): {_text = MAX_BEACONS; player spawn deleteBeacon};
 		default {
 			_text = format["Spawn Beacon %1%2 Deployed", round(_progress*100), "%"];
 			_failed = false;
