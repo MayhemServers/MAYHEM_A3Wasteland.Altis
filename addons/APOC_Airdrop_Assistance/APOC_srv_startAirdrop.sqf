@@ -136,12 +136,12 @@ _playerMoney = _player getVariable ["bmoney", 0];
 			diag_log format ["Apoc's Airdrop Assistance - Player Account Too Low, Drop Aborted. %1. Bank:$%2. Cost: $%3", _player, _playerMoney, _price];  //A little log love to mark the Scallywag who tried to cheat the valiant pilot
 			};  //Thought you'd be tricky and not pay, eh?
 
-_playermoney = _player setVariable ["bmoney", _playermoney - _price, true];
-//[_player] spawn fn_savePlayerData;
-[_player,"fn_savePlayerData",_player,false,false] call BIS_fnc_MP;
+//Server Style Money handling
+pvar_processTransaction = ["airdrop", _player, _price];
+publicVariableServer "pvar_processTransaction";
 
-//  Now on to the fun stuff:
 
+//  Now on to the other fun stuff:
 diag_log format ["Apoc's Airdrop Assistance - Object at %1, Detach Up Next", position _object];  //A little log love to confirm the location of this new creature
 detach _object;  //WHEEEEEEEEEEEEE
 _objectPosDrop = position _object;

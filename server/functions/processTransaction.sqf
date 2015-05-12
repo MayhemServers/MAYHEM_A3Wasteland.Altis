@@ -188,4 +188,25 @@ switch (toLower _type) do
 
 		_sender setVariable [_transferKey, nil, true];
 	};
+	case "airdrop":
+	{
+		_player = [_this, 1, objNull, [objNull]] call BIS_fnc_param;
+		_price = [_this, 2, 0, [0]] call BIS_fnc_param;
+		
+		if (_price != 0) then
+		{
+			_balance = _player getVariable ["bmoney", 0];
+
+			if (_price > 0 && _balance < abs _price) exitWith {}; // player has not enough funds for airdrop
+
+			_newBalance = _balance - _price;
+
+			_player setVariable ["bmoney", _newBalance, true];
+
+			if (["A3W_playerSaving"] call isConfigOn) then
+			{
+				[getPlayerUID _player, [["BankMoney", _newBalance]], []] call fn_saveAccount;
+			};
+		};	
+	};
 };
