@@ -41,7 +41,7 @@ if (_price > _playerMoney) exitWith
 		playSound "FD_CP_Not_Clear_F";
 	};
 			
-_confirmMsg = format ["This airdrop will deduct $%1 from your bank account<br/>",_price];
+_confirmMsg = format ["This airdrop will deduct $%1 from your bank account upon delivery<br/>",_price];
 _confirmMsg = _confirmMsg + format ["<br/><t font='EtelkaMonospaceProBold'>1</t> x %1",_selectionName];
 		
 	// Display confirm message

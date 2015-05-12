@@ -24,12 +24,7 @@ switch (_type) do {
 _selectionName 	= (_selectionArray select _selectionNumber) select 0;
 _selectionClass = (_selectionArray select _selectionNumber) select 1;
 _price 			= (_selectionArray select _selectionNumber) select 2;
-
-_playerMoney = _player getVariable ["bmoney", 0];
-if (_price > _playerMoney) exitWith{};
-
-_playermoney = _player setVariable ["bmoney", _playermoney - _price, true];
-[_player] spawn fn_savePlayerData;
+// Moved money removal until after the drop point.
 
 //OK, now the real fun
 
@@ -132,6 +127,18 @@ While {true} do {
 	sleep 0.1;
 	if (currentWaypoint _grp >= 2) exitWith {};  //Completed Drop Waypoint
 };	
+// Let's handle the money after this tricky spot - This way players won't be charged for non-delivered goods!
+_playerMoney = _player getVariable ["bmoney", 0];
+		if (_price > _playerMoney) exitWith{
+			{ _x setDamage 1; } forEach units _grp; 
+			_heli setDamage 1; 
+			_object setDamage 1;
+			diag_log format ["Apoc's Airdrop Assistance - Player Account Too Low, Drop Aborted. %1. Bank:$%2. Cost: $%3", _player, _playerMoney, _price];  //A little log love to mark the Scallywag who tried to cheat the valiant pilot
+			};  //Thought you'd be tricky and not pay, eh?
+
+_playermoney = _player setVariable ["bmoney", _playermoney - _price, true];
+[_player] spawn fn_savePlayerData;
+//  Now on to the fun stuff:
 
 diag_log format ["Apoc's Airdrop Assistance - Object at %1, Detach Up Next", position _object];  //A little log love to confirm the location of this new creature
 detach _object;  //WHEEEEEEEEEEEEE
