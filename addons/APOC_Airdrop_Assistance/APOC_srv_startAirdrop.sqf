@@ -112,7 +112,7 @@ _object = switch (_type) do {
 		_object setVariable ["A3W_purchasedStoreObject", true];
 		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
 		_object
-	}
+	};
 	default {
 		_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) - 5];
 		_object = createVehicle ["B_supplyCrate_F", _objectSpawnPos, [], 0, "None"];
@@ -126,21 +126,14 @@ _object allowDamage false; //Let's not let these things get destroyed on the way
 
 diag_log format ["Apoc's Airdrop Assistance - Object at %1", position _object];  //A little log love to confirm the location of this new creature
 
-//Wait until the heli is close to the drop spot, then move on to dropping the cargo and all of that jazz
+//Wait until the heli completes the drop waypoint, then move on to dropping the cargo and all of that jazz
 
-// fix the drop distance between vehicles and ammo boxes - Creampie
-if (_type == "vehicle") then {
-	WaitUntil{
-		if ((([_heli, _dropSpot] call BIS_fnc_distance2D)<125)||(currentWaypoint _grp == 2)) exitWith{true};
-		false
-	};
-} else {
-	WaitUntil{
-		if((([_heli, _dropSpot] call BIS_fnc_distance2D)<50)||(currentWaypoint _grp == 2)) exitWith {true};
-		false 
-	};
-};
+While {true} do {		
+	sleep 0.1;
+	if (currentWaypoint _grp >= 2) exitWith {};  //Completed Drop Waypoint
+};	
 
+diag_log format ["Apoc's Airdrop Assistance - Object at %1, Detach Up Next", position _object];  //A little log love to confirm the location of this new creature
 detach _object;  //WHEEEEEEEEEEEEE
 _objectPosDrop = position _object;
 _heli fire "CMFlareLauncher";
