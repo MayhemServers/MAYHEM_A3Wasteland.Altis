@@ -97,22 +97,30 @@ _object = switch (_type) do {
 	};	
 	case "supply":
 	{
-	_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) - 5];
-	_object = createVehicle ["B_supplyCrate_F", _objectSpawnPos, [], 0, "None"];
-	_object setVariable ["A3W_purchasedStoreObject", true];
-	[_object, _selectionClass] call fn_refillbox;
-	_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
-	_object 
+		_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) - 5];
+		_object = createVehicle ["B_supplyCrate_F", _objectSpawnPos, [], 0, "None"];
+		_object setVariable ["A3W_purchasedStoreObject", true];
+		[_object, _selectionClass] call fn_refillbox;
+		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
+		_object 
 	};
 	case "picnic":  //Beware of Bears!
 	{
-	_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) - 5];
-	_object = createVehicle ["B_supplyCrate_F", _objectSpawnPos, [], 0, "None"];
-	diag_log format ["Apoc's Airdrop Assistance - Object Spawned at %1", position _object];
-	_object setVariable ["A3W_purchasedStoreObject", true];
-	_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
-	_object
+		_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) - 5];
+		_object = createVehicle ["B_supplyCrate_F", _objectSpawnPos, [], 0, "None"];
+		diag_log format ["Apoc's Airdrop Assistance - Object Spawned at %1", position _object];
+		_object setVariable ["A3W_purchasedStoreObject", true];
+		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
+		_object
 	}
+	default {
+		_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) - 5];
+		_object = createVehicle ["B_supplyCrate_F", _objectSpawnPos, [], 0, "None"];
+		_object setVariable ["A3W_purchasedStoreObject", true];
+		[_object, "mission_USSpecial"] call fn_refillbox;
+		_object attachTo [_heli, [0,0,-5]]; //Attach Object to the heli
+		_object 
+		};
 };
 _object allowDamage false; //Let's not let these things get destroyed on the way there, shall we?
 
