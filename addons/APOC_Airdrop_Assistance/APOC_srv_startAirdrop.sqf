@@ -130,9 +130,15 @@ diag_log format ["Apoc's Airdrop Assistance - Object at %1", position _object]; 
 
 // fix the drop distance between vehicles and ammo boxes - Creampie
 if (_type == "vehicle") then {
-	WaitUntil{(([_heli, _dropSpot] call BIS_fnc_distance2D)<125)||(currentWaypoint _grp == 2)};
+	WaitUntil{
+		if ((([_heli, _dropSpot] call BIS_fnc_distance2D)<125)||(currentWaypoint _grp == 2)) exitWith{true};
+		false
+	};
 } else {
-	WaitUntil{(([_heli, _dropSpot] call BIS_fnc_distance2D)<50)||(currentWaypoint _grp == 2)};
+	WaitUntil{
+		if((([_heli, _dropSpot] call BIS_fnc_distance2D)<50)||(currentWaypoint _grp == 2)) exitWith {true};
+		false 
+	};
 };
 
 detach _object;  //WHEEEEEEEEEEEEE
