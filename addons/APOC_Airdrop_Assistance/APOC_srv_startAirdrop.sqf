@@ -139,6 +139,7 @@ _playerMoney = _player getVariable ["bmoney", 0];
 //Server Style Money handling
 _balance = _player getVariable ["bmoney", 0];
 _newBalance = _balance - _price;
+_player setVariable ["bmoney", _newBalance, true];
 [getPlayerUID _player, [["BankMoney", _newBalance]], []] call fn_saveAccount;
 
 //  Now on to the fun stuff:
