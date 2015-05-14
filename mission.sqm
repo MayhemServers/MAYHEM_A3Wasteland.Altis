@@ -78,8 +78,6 @@ class Mission
 	};
 	addOnsAuto[]=
 	{
-		"A3_Characters_F_Civil",
-		"a3_characters_f",
 		"A3_Characters_F_BLUFOR",
 		"a3_characters_f",
 		"A3_Characters_F_OPFOR",
@@ -2054,7 +2052,7 @@ class Mission
 	};
 	class Vehicles
 	{
-		items=42;
+		items=44;
 		class Item0
 		{
 			position[]={5892.3325,225.05762,20124.521};
@@ -2578,10 +2576,40 @@ class Mission
 			init="this call A3W_fnc_setupSellTruck";
 			description="Sell Vehicle";
 		};
+		class Item42
+		{
+			position[]={13421.608,65.558792,22606.172};
+			azimut=230;
+			special="NONE";
+			id=201;
+			side="EMPTY";
+			vehicle="O_Truck_03_ammo_F";
+			leader=1;
+			lock="LOCKED";
+			skill=0.60000002;
+			text="Service_Truck_7_1";
+			init="this call A3W_fnc_setupResupplyTruck";
+			description="Service";
+		};
+		class Item43
+		{
+			position[]={13484.483,68.799561,22632.314};
+			azimut=235;
+			special="NONE";
+			id=202;
+			side="EMPTY";
+			vehicle="B_Truck_01_box_F";
+			leader=1;
+			lock="LOCKED";
+			skill=0.60000002;
+			text="Sell_Truck_8_1";
+			init="this call A3W_fnc_setupSellTruck";
+			description="Sell Vehicle";
+		};
 	};
 	class Markers
 	{
-		items=194;
+		items=215;
 		class Item0
 		{
 			position[]={3612.1487,12.11851,13020.892};
@@ -2878,7 +2906,7 @@ class Mission
 		};
 		class Item42
 		{
-			position[]={10481.982,92.54425,8165.8809};
+			position[]={10367.659,125.04192,7837.0596};
 			name="Mission_10";
 			type="Empty";
 			colorName="ColorOrange";
@@ -4074,6 +4102,155 @@ class Mission
 			text="Sell_Truck_9";
 			type="Empty";
 			colorName="ColorGreen";
+		};
+		class Item194
+		{
+			position[]={11709.138,54.848961,18224.15};
+			name="Mission_21";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item195
+		{
+			position[]={18755.395,208.82076,10202.748};
+			name="Mission_22";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item196
+		{
+			position[]={16657.51,16.230467,12689.979};
+			name="Mission_24";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item197
+		{
+			position[]={11327.046,138.86478,8257.0918};
+			name="Mission_25";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item198
+		{
+			position[]={8454.9404,96.900978,25174.967};
+			name="Mission_26";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item199
+		{
+			position[]={8196.7402,74.394363,22541.352};
+			name="Mission_27";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item200
+		{
+			position[]={12363.744,77.006287,21894.768};
+			name="Mission_28";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item201
+		{
+			position[]={16155.725,33.545872,19367.801};
+			name="Mission_29";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item202
+		{
+			position[]={20955.344,15.493174,19268.236};
+			name="Mission_30";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item203
+		{
+			position[]={22472.322,18.29957,20019.885};
+			name="Mission_31";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item204
+		{
+			position[]={22614.143,20.432728,21617.762};
+			name="Mission_32";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item205
+		{
+			position[]={25432.072,9.7850418,20345.178};
+			name="Mission_33";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item206
+		{
+			position[]={28192.398,28.236439,25684.068};
+			name="Mission_34";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item207
+		{
+			position[]={27495.762,18.622601,21483.043};
+			name="Mission_35";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item208
+		{
+			position[]={3814.7158,189.58923,21497.254};
+			name="Mission_36";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item209
+		{
+			position[]={2312.7026,74.332687,22269.027};
+			name="Mission_37";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item210
+		{
+			position[]={3814.9829,13.853227,17497.141};
+			name="Mission_38";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item211
+		{
+			position[]={13419.399,65.437096,22611.801};
+			name="Service_Truck_8";
+			text="Service_Truck_8";
+			type="Empty";
+			colorName="ColorYellow";
+		};
+		class Item212
+		{
+			position[]={13481.272,68.683945,22635.953};
+			name="Sell_Truck_10";
+			text="Sell_Truck_10";
+			type="Empty";
+			colorName="ColorGreen";
+		};
+		class Item213
+		{
+			position[]={12820.76,46.35466,19690.66};
+			name="Mission_39";
+			type="Empty";
+			colorName="ColorOrange";
+		};
+		class Item214
+		{
+			position[]={14096.81,19.359612,18465.543};
+			name="Mission_40";
+			type="Empty";
+			colorName="ColorOrange";
 		};
 	};
 };
