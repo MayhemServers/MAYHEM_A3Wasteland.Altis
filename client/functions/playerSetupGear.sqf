@@ -90,13 +90,16 @@ switch (_donatorLevel) do
 		_player addBackpack "B_Carryall_oli";
 		_player addVest "V_PlateCarrier3_rgr";
 		_player addHeadgear "H_HelmetLeaderO_ocamo";
+		_player addMagazine "30Rnd_9x21_Mag";
+		_player addWeapon "hgun_PDW2000_F";
+		_player addMagazine "30Rnd_9x21_Mag";
 		_player addMagazine "11Rnd_45ACP_Mag";
 		_player addWeapon "hgun_Pistol_heavy_01_F";
 		_player addHandgunItem "optic_MRD";
 		_player addHandgunItem "muzzle_snds_acp";
 		_player addMagazine "11Rnd_45ACP_Mag";
 		_player addMagazine "11Rnd_45ACP_Mag";
-		_player addMagazine "11Rnd_45ACP_Mag";
+		_player addMagazine "11Rnd_45ACP_Mag";		
 		_player addItem "FirstAidKit";
 		_player addWeapon "Laserdesignator";
 		_player linkItem "ItemGPS";
