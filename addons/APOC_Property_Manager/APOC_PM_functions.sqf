@@ -1,13 +1,21 @@
 //Function Defines for APOC's Property Manager (APOC_PM_) 
 //Creator: Apoc
 //bits and pieces borrowed from Cael87's BoS system.
-#define PropertyManagerRadius 30
 
 APOC_PM_Lock = {
 	private["_player","_objects"];
 	_player = _this select 0;
+	_donatorLevel = player getVariable ["donatorLevel", 0];
+	_propertyManagerRadius = switch (_donatorLevel) do
+		{
+			case 1: {_propertyManagerRadius = 30;};
+			case 2: {_propertyManagerRadius = 30;};
+			case 3: {_propertyManagerRadius = 45;};
+			case 4: {_propertyManagerRadius = 45;};
+			default {_propertyManagerRadius = 30;}:
+		};
 	_objects = [];
-	_objects = nearestObjects [position player, ["thingX", "Building", "ReammoBox_F"], 30];
+	_objects = nearestObjects [position player, ["thingX", "Building", "ReammoBox_F"], _propertyManagerRadius];
 	{if (((typeof _x) in R3F_LOG_CFG_objets_deplacables) || (_x isKindOf "ReammoBox_F")) then
 		{
 			if !(_x getVariable ["objectLocked",false]) then 
@@ -24,9 +32,18 @@ APOC_PM_Lock = {
 
 APOC_PM_Unlock = {
 	private["_player","_objects"];
-	_player = _this select 0;	
+	_player = _this select 0;
+	_donatorLevel = player getVariable ["donatorLevel", 0];
+	_propertyManagerRadius = switch (_donatorLevel) do
+		{
+			case 1: {_propertyManagerRadius = 30;};
+			case 2: {_propertyManagerRadius = 30;};
+			case 3: {_propertyManagerRadius = 45;};
+			case 4: {_propertyManagerRadius = 45;};
+			default {_propertyManagerRadius = 30;}:
+		};
 	_objects = [];
-	_objects = nearestObjects [position player, ["thingX", "Building", "ReammoBox_F"], 30];
+	_objects = nearestObjects [position player, ["thingX", "Building", "ReammoBox_F"], _propertyManagerRadius];
 	{if (((typeof _x) in R3F_LOG_CFG_objets_deplacables) || (_x isKindOf "ReammoBox_F")) then
 		{
 			if !((typeof _x) == "Land_Laptop_unfolded_F") then 
@@ -49,8 +66,17 @@ APOC_PM_Unlock = {
 APOC_PM_InventoryLock = {
 	private["_player","_objects"];
 	_player = _this select 0;
+	_donatorLevel = player getVariable ["donatorLevel", 0];
+	_propertyManagerRadius = switch (_donatorLevel) do
+		{
+			case 1: {_propertyManagerRadius = 30;};
+			case 2: {_propertyManagerRadius = 30;};
+			case 3: {_propertyManagerRadius = 45;};
+			case 4: {_propertyManagerRadius = 45;};
+			default {_propertyManagerRadius = 30;}:
+		};
 	_objects = [];
-	_objects = nearestObjects [position player, ["ReammoBox_F"], 30];
+	_objects = nearestObjects [position player, ["ReammoBox_F"], _propertyManagerRadius];
 	{if ((_x getVariable ["ownerUID",""]==(getPlayerUID _player))&&(_x getVariable ["objectLocked",true])) then
 		{
 			_x setVariable ["A3W_inventoryLockR3F", true, true]; //Lock access to crate
@@ -65,8 +91,17 @@ APOC_PM_InventoryLock = {
 APOC_PM_InventoryUnlock = {
 	private["_player","_objects"];
 	_player = _this select 0;
+	_donatorLevel = player getVariable ["donatorLevel", 0];
+	_propertyManagerRadius = switch (_donatorLevel) do
+		{
+			case 1: {_propertyManagerRadius = 30;};
+			case 2: {_propertyManagerRadius = 30;};
+			case 3: {_propertyManagerRadius = 45;};
+			case 4: {_propertyManagerRadius = 45;};
+			default {_propertyManagerRadius = 30;}:
+		};
 	_objects = [];
-	_objects = nearestObjects [position player, ["ReammoBox_F"], 30];	
+	_objects = nearestObjects [position player, ["ReammoBox_F"], _propertyManagerRadius];	
 	{if ((_x getVariable ["ownerUID",""]==(getPlayerUID _player))&&(_x getVariable ["objectLocked",true])&&(_x getVariable ["A3W_inventoryLockR3F",true])) then
 		{
 			_x setVariable ["A3W_inventoryLockR3F", false, true]; //Unlock access to crate
@@ -82,8 +117,17 @@ APOC_PM_DisableLogistics = {
 	//taken from Cael's BoS functions (relock) and converted to removal protection system
 	private ["_price", "_playerMoney","_objects","_ownedObjects","_maxLifetime"];
 	_maxLifetime = ["A3W_objectLifetime", 0] call getPublicVar;
+	_donatorLevel = player getVariable ["donatorLevel", 0];
+	_propertyManagerRadius = switch (_donatorLevel) do
+		{
+			case 1: {_propertyManagerRadius = 30;};
+			case 2: {_propertyManagerRadius = 30;};
+			case 3: {_propertyManagerRadius = 45;};
+			case 4: {_propertyManagerRadius = 45;};
+			default {_propertyManagerRadius = 30;}:
+		};
 	_objects = [];
-	_objects = nearestObjects [position player, ["thingX", "Building"], 30];
+	_objects = nearestObjects [position player, ["thingX", "Building"], _propertyManagerRadius];
 	_ownedObjects = {typeName _x == "OBJECT" && {!(isNil {_x getVariable "ownerUID"})} && !(_x getVariable "R3F_LOG_disabled") && !(_x iskindOf "ReammoBox_F")} count _objects; //Count of objects owned.
 	_player = _this select 0;
 	_playerMoney = player getVariable "cmoney";
@@ -121,8 +165,17 @@ APOC_PM_EnableLogistics = {
 	//taken from Cael's BoS functions (relock) and converted to removal protection system
 	private ["_objects","_confirmMsg"];
 	_player = _this select 0;
+	_donatorLevel = player getVariable ["donatorLevel", 0];
+	_propertyManagerRadius = switch (_donatorLevel) do
+		{
+			case 1: {_propertyManagerRadius = 30;};
+			case 2: {_propertyManagerRadius = 30;};
+			case 3: {_propertyManagerRadius = 45;};
+			case 4: {_propertyManagerRadius = 45;};
+			default {_propertyManagerRadius = 30;}:
+		};
 	_objects = [];
-	_objects = nearestObjects [position player, ["thingX", "Building"], 30];
+	_objects = nearestObjects [position player, ["thingX", "Building"], _propertyManagerRadius];
 	_ownedObjects = {typeName _x == "OBJECT" && {!(isNil {_x getVariable "ownerUID"})} && (_x getVariable "R3F_LOG_disabled") && !(_x iskindOf "ReammoBox_F")} count _objects; //Count of objects owned.
 	
 	// Add total sell value to confirm message
@@ -147,7 +200,7 @@ APOC_PM_CheckNearbyPMs = {
 	//Do some defining work
 	//_player = _this select 0;
 	_allowR3FLock = false;
-	_distance = 45; //Distance hard-coded to be greater than the effective range of the laptop, trying to keep from overlapping effect fields
+	_distance = 60; //Distance hard-coded to be greater than the effective range of the laptop, trying to keep from overlapping effect fields
 	
 	//Check for nearby Property Managers (based on them being laptops)
 	_findNearestPMs = nearestObjects [player, ["Land_Laptop_unfolded_F"], _distance]; //create an array of all property managers within the distance
