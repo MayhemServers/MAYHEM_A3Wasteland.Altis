@@ -41,7 +41,7 @@ switch (_donatorLevel) do
 {
 	case 1:
 	{
-		_player addBackpack "B_AssaultPack_rgr";
+		_player addBackpack "B_FieldPack_khk";
 		_player addVest "V_BandollierB_cbr";
 		
 		_player addMagazine "11Rnd_45ACP_Mag";
