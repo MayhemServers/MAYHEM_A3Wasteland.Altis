@@ -31,6 +31,16 @@ if (player getVariable ["cmoney", 0] < _amount) exitWith
 _balance = player getVariable ["bmoney", 0];
 _maxBalance = ["A3W_atmMaxBalance", 1000000] call getPublicVar;
 
+_donatorLevel = player getVariable ["donatorLevel", 0];
+_maxBalance = switch (_donatorLevel) do
+	{
+		case 1: {_maxBalance = _maxBalance + 0;};
+		case 2: {_maxBalance = _maxBalance + 1000000;};
+		case 3: {_maxBalance = _maxBalance + 1000000;};
+		case 4: {_maxBalance = _maxBalance + 2000000;};
+		default {_maxBalance};
+	};
+
 if (_balance + _amount > _maxBalance) then
 {
 	_amount = 0 max (_maxBalance - _balance);
