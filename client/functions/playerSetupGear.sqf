@@ -8,7 +8,7 @@ private ["_player", "_uniform", "_vest", "_headgear", "_goggles", "_donatorLevel
 _player = _this;
 
 _donatorEnabled = ["A3W_donatorEnabled"] call isConfigOn;
-_donatorLevel = player getVariable ["donator", 0];
+_donatorLevel = player getVariable ["donatorLevel", 0];
 
 
 // Clothing is now defined in "client\functions\getDefaultClothing.sqf"

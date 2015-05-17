@@ -29,7 +29,7 @@ _warnd3 = true;
 _warnd4 = true;
 
 _donatorEnabled = ["A3W_donatorEnabled"] call isConfigOn;
-_donatorLevel = player getVariable ["donator", 0];
+_donatorLevel = player getVariable ["donatorLevel", 0];
 
 
 if (_donatorEnabled && _donatorLevel > 1) exitWith

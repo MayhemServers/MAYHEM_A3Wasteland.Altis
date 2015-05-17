@@ -68,7 +68,7 @@ fn_kickPlayerIfFlagged = "persistence\server\players\fn_kickPlayerIfFlagged.sqf"
 				};
 				if (_x select 0 == "DonatorLevel") then
 				{
-					_player setVariable ["donator", _x select 1, true];
+					_player setVariable ["donatorLevel", _x select 1, true];
 				};
 			} forEach _data;
 

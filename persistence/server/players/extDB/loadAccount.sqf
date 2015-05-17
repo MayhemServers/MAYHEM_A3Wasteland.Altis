@@ -10,7 +10,7 @@ private ["_UID", "_bank", "_moneySaving", "_donator", "_donatorEnabled", "_resul
 _UID = _this;
 
 _bank = 0;
-_donator = 0;
+_donatorLevel = 0;
 _moneySaving = ["A3W_moneySaving"] call isConfigOn;
 _donatorEnabled = ["A3W_donatorEnabled"] call isConfigOn;
 
@@ -20,7 +20,7 @@ if (_donatorEnabled) then
 
 	if (count _result > 0) then
 	{
-		_donator = _result select 0;
+		_donatorLevel = _result select 0;
 	};
 };
 
@@ -42,7 +42,7 @@ if (!_result) then
 	[
 		["PlayerSaveValid", false],
 		["BankMoney", _bank],
-		["DonatorLevel", _donator]
+		["DonatorLevel", _donatorLevel]
 	];
 }
 else
@@ -112,7 +112,7 @@ else
 	} forEach _result;
 
 	_data pushBack ["BankMoney", _bank];
-	_data pushBack ["DonatorLevel", _donator];
+	_data pushBack ["DonatorLevel", _donatorLevel];
 	_data pushBack ["PlayerSaveValid", true];
 };
 
