@@ -123,7 +123,7 @@ class APOC_PM_dialog
 		class APOC_PM_Text_Description: APOC_PM_RscText
 		{
 			idc = -1;
-			text = "Unlocking via property manager will unlock your objects within 30m.  Locking will lock all objects within 50m to your name.  Securing removes the ability for people to unlock and move your items."; 
+			text = "Unlocking via property manager will unlock your objects within 30m.  Locking will lock all objects within 30m to your name.  Securing removes the ability for people to unlock and move your items."; 
 			x = 0.391719 * safezoneW + safezoneX;
 			y = 0.346 * safezoneH + safezoneY;
 			w = 0.216563 * safezoneW;
