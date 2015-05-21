@@ -8,11 +8,11 @@ APOC_PM_Lock = {
 	_donatorLevel = player getVariable ["donatorLevel", 0];
 	_propertyManagerRadius = switch (_donatorLevel) do
 		{
-			case 1: {_propertyManagerRadius = 30;};
-			case 2: {_propertyManagerRadius = 30;};
-			case 3: {_propertyManagerRadius = 45;};
-			case 4: {_propertyManagerRadius = 45;};
-			default {_propertyManagerRadius = 30;};
+			case 1: {30};
+			case 2: {30};
+			case 3: {45};
+			case 4: {45};
+			default {30};
 		};
 	_objects = [];
 	_objects = nearestObjects [position player, ["thingX", "Building", "ReammoBox_F"], _propertyManagerRadius];
@@ -36,11 +36,11 @@ APOC_PM_Unlock = {
 	_donatorLevel = player getVariable ["donatorLevel", 0];
 	_propertyManagerRadius = switch (_donatorLevel) do
 		{
-			case 1: {_propertyManagerRadius = 30;};
-			case 2: {_propertyManagerRadius = 30;};
-			case 3: {_propertyManagerRadius = 45;};
-			case 4: {_propertyManagerRadius = 45;};
-			default {_propertyManagerRadius = 30;};
+			case 1: {30};
+			case 2: {30};
+			case 3: {45};
+			case 4: {45};
+			default {30};
 		};
 	_objects = [];
 	_objects = nearestObjects [position player, ["thingX", "Building", "ReammoBox_F"], _propertyManagerRadius];
@@ -69,11 +69,11 @@ APOC_PM_InventoryLock = {
 	_donatorLevel = player getVariable ["donatorLevel", 0];
 	_propertyManagerRadius = switch (_donatorLevel) do
 		{
-			case 1: {_propertyManagerRadius = 30;};
-			case 2: {_propertyManagerRadius = 30;};
-			case 3: {_propertyManagerRadius = 45;};
-			case 4: {_propertyManagerRadius = 45;};
-			default {_propertyManagerRadius = 30;};
+			case 1: {30};
+			case 2: {30};
+			case 3: {45};
+			case 4: {45};
+			default {30};
 		};
 	_objects = [];
 	_objects = nearestObjects [position player, ["ReammoBox_F"], _propertyManagerRadius];
@@ -94,11 +94,11 @@ APOC_PM_InventoryUnlock = {
 	_donatorLevel = player getVariable ["donatorLevel", 0];
 	_propertyManagerRadius = switch (_donatorLevel) do
 		{
-			case 1: {_propertyManagerRadius = 30;};
-			case 2: {_propertyManagerRadius = 30;};
-			case 3: {_propertyManagerRadius = 45;};
-			case 4: {_propertyManagerRadius = 45;};
-			default {_propertyManagerRadius = 30;};
+			case 1: {30};
+			case 2: {30};
+			case 3: {45};
+			case 4: {45};
+			default {30};
 		};
 	_objects = [];
 	_objects = nearestObjects [position player, ["ReammoBox_F"], _propertyManagerRadius];
@@ -120,11 +120,11 @@ APOC_PM_DisableLogistics = {
 	_donatorLevel = player getVariable ["donatorLevel", 0];
 	_propertyManagerRadius = switch (_donatorLevel) do
 		{
-			case 1: {_propertyManagerRadius = 30;};
-			case 2: {_propertyManagerRadius = 30;};
-			case 3: {_propertyManagerRadius = 45;};
-			case 4: {_propertyManagerRadius = 45;};
-			default {_propertyManagerRadius = 30;};
+			case 1: {30};
+			case 2: {30};
+			case 3: {45};
+			case 4: {45};
+			default {30};
 		};
 	_objects = [];
 	_objects = nearestObjects [position player, ["thingX", "Building"], _propertyManagerRadius];
@@ -168,11 +168,11 @@ APOC_PM_EnableLogistics = {
 	_donatorLevel = player getVariable ["donatorLevel", 0];
 	_propertyManagerRadius = switch (_donatorLevel) do
 		{
-			case 1: {_propertyManagerRadius = 30;};
-			case 2: {_propertyManagerRadius = 30;};
-			case 3: {_propertyManagerRadius = 45;};
-			case 4: {_propertyManagerRadius = 45;};
-			default {_propertyManagerRadius = 30;};
+			case 1: {30};
+			case 2: {30};
+			case 3: {45};
+			case 4: {45};
+			default {30};
 		};
 	_objects = [];
 	_objects = nearestObjects [position player, ["thingX", "Building"], _propertyManagerRadius];

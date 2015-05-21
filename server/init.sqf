@@ -120,7 +120,8 @@ forEach
 	"A3W_resupplyCostPR",
 	"A3W_territoryAllowed",
 	"A3W_uavControl",
-	"A3W_townSpawnCooldown"
+	"A3W_townSpawnCooldown",
+	"A3W_donatorEnabled"
 ];
 
 ["A3W_join", "onPlayerConnected", { [_id, _uid, _name] spawn fn_onPlayerConnected }] call BIS_fnc_addStackedEventHandler;
