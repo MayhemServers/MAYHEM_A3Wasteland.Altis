@@ -9,7 +9,15 @@ waitUntil {!isNil "playerSpawning" && {!playerSpawning}};
 
 for "_i" from 0 to 1 step 0 do
 {
-	if (player getvariable "cmoney" > 74999) then
+	_nearestCity = nearestLocation [getPos player,"nameCity"];
+	_cityPosition= locationPosition _nearestCity;
+	_distanceToCity= [getPos player,_cityPosition] call bis_fnc_distance2D;
+
+	_nearestCityCapital = nearestLocation [getPos player,"nameCityCapital"];
+	_cityCapitalPosition= locationPosition _nearestCityCapital;
+	_distanceToCityCapital= [getPos player,_cityCapitalPosition] call bis_fnc_distance2D;
+
+	if ((player getvariable "cmoney" > 74999) && ((_distanceToCity < 1000 )||(_distanceToCityCapital < 2000))) then //Town Check by Apoc
 		{
 			_title  = "<t color='#ff0000' size='1.2' align='center'>High Value Target! </t><br />";
 			_name = format ["%1<br /> ",name player];
