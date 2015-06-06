@@ -58,6 +58,8 @@ if (!isDedicated) then
 				execVM "client\headless\init.sqf";
 			};
 		};
+
+		player setVehicleVarName ""; // undo BIS_fnc_objectVar crap
 	};
 };
 
