@@ -28,7 +28,7 @@ if (alive player && !isNil "_getPublicVar" && !isNil "_isConfigOn") then
 		{
 			_preventAbort =
 			{
-				_unconscious = (player getVariable ["FAR_isUnconscious", 0] == 1);
+				_unconscious = player call A3W_fnc_isUnconscious;
 				_timeStamp = ["combatTimestamp", -1] call _getPublicVar;
 				(!isNull findDisplay 49 && ((_timeStamp != -1 && diag_tickTime - _timeStamp < _abortDelay) || _unconscious))
 			};
