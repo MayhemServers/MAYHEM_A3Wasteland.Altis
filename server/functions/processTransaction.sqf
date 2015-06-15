@@ -109,7 +109,20 @@ switch (toLower _type) do
 
 			_newBalance = _balance + _amount;
 
-			if (_newBalance > ["A3W_atmMaxBalance", 1000000] call getPublicVar) exitWith {}; // account would exceed or has reached max balance
+			//Donator Bank Cap Adjustment
+			_maxBalance = ["A3W_atmMaxBalance", 1000000] call getPublicVar;
+
+			_donatorLevel = _player getVariable ["donatorLevel", 0];
+			_maxBalance = switch (_donatorLevel) do
+				{
+					case 1: {_maxBalance + 0;};
+					case 2: {_maxBalance + 1000000;};
+					case 3: {_maxBalance + 1000000;};
+					case 4: {_maxBalance + 2000000;};
+					default {_maxBalance};
+				};
+
+			if (_newBalance > _maxBalance) exitWith {}; // account would exceed or has reached max balance
 
 			_player setVariable ["bmoney", _newBalance, true];
 
