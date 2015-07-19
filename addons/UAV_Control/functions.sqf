@@ -10,9 +10,8 @@ while {true} do
 {
 	waitUntil {sleep 0.1; _uav = getConnectedUAV player; !isNull _uav};
 
-	// ignore quadcopters and remote designators
-	if ({_uav isKindOf _x} count ["StaticWeapon"] == 0) then // Readd Quad Copter to restricted ones
-	//if ({_uav isKindOf _x} count ["UAV_01_base_F", "StaticWeapon"] == 0) then
+	// ignore remote designators
+	if !(_uav isKindOf "StaticWeapon") then
 	{
 		_ownerUID = _uav getVariable ["ownerUID", ""];
 

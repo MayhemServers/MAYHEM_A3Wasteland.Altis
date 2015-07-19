@@ -46,19 +46,23 @@ if (!isDedicated) then
 			9999 cutText ["Welcome to A3Wasteland, please wait for your client to initialize", "BLACK", 0.01];
 
 			waitUntil {!isNull player};
+			player setVariable ["playerSpawning", true, true];
+			playerSpawning = true;
+
 			removeAllWeapons player;
 			client_initEH = player addEventHandler ["Respawn", { removeAllWeapons (_this select 0) }];
 
 			// Reset group & side
 			[player] joinSilent createGroup playerSide;
-			player setVariable ["playerSpawning", true, true];
 
 			execVM "client\init.sqf";
+
+			if ((vehicleVarName player) select [0,17] == "BIS_fnc_objectVar") then { player setVehicleVarName "" }; // undo useless crap added by BIS
 		}
 		else // Headless
 		{
 			waitUntil {!isNull player};
-			if (typeOf player == "HeadlessClient_F") then
+			if (getText (configFile >> "CfgVehicles" >> typeOf player >> "simulation") == "headlessclient") then
 			{
 				execVM "client\headless\init.sqf";
 			};
@@ -76,16 +80,21 @@ if (isServer) then
 	[] execVM "server\init.sqf";
 };
 
-//init 3rd Party Scripts
-[] execVM "addons\R3F_ARTY_AND_LOG\init.sqf";
-[] execVM "custom\statusBar.sqf";
-[] execVM "addons\proving_ground\init.sqf";
-[] execVM "addons\scripts\DynamicWeatherEffects.sqf";
-[] execVM "addons\zlt_fastrope\zlt_fastrope.sqf";
-[] execVM "addons\JumpMF\init.sqf";
-[] execVM "addons\EtV\init.sqf";
-[] execVM "addons\outlw_magRepack\MagRepack_init_sv.sqf";
-[] execVM "addons\laptop\init.sqf";
-[] execVM "addons\vactions\functions.sqf";				// Micovery vehicle actions
-[] execVM "addons\APOC_Airdrop_Assistance\init.sqf";
-[] execVM "addons\HvT\HvT.sqf";
+if (hasInterface || isServer) then
+{
+	//init 3rd Party Scripts
+	[] execVM "addons\R3F_ARTY_AND_LOG\init.sqf";
+	[] execVM "addons\proving_ground\init.sqf";
+	[] execVM "addons\JumpMF\init.sqf";
+	[] execVM "addons\outlw_magRepack\MagRepack_init.sqf";
+	[] execVM "addons\lsd_nvg\init.sqf";
+	if (isNil "drn_DynamicWeather_MainThread") then { drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf" };	
+	[] execVM "custom\statusBar.sqf";
+	[] execVM "addons\scripts\DynamicWeatherEffects.sqf";
+	[] execVM "addons\zlt_fastrope\zlt_fastrope.sqf";	
+	[] execVM "addons\EtV\init.sqf";
+	[] execVM "addons\laptop\init.sqf";
+	[] execVM "addons\vactions\functions.sqf";				// Micovery vehicle actions
+	[] execVM "addons\APOC_Airdrop_Assistance\init.sqf";
+	[] execVM "addons\HvT\HvT.sqf";
+};

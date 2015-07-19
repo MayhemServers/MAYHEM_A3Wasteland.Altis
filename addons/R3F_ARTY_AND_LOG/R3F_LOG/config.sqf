@@ -5,9 +5,18 @@
  */
 R3F_LOG_CFG_remorqueurs =
 [
-	"Car_F",
-	"Ship_F",
-	"Tank_F"
+	"SUV_01_base_F",
+	"Offroad_01_base_F",
+	"Van_01_base_F",
+	"MRAP_01_base_F",
+	"MRAP_02_base_F",
+	"MRAP_03_base_F",
+	"Truck_01_base_F",
+	"Truck_02_base_F",
+	"Truck_03_base_F",
+	"Wheeled_APC_F",
+	"Tank_F",
+	"Boat_Armed_01_base_F"
 ];
 
 /**
@@ -15,12 +24,20 @@ R3F_LOG_CFG_remorqueurs =
  */
 R3F_LOG_CFG_objets_remorquables =
 [
-	"Car_F",
-	"Ship_F",
-	"Tank_F",
-	"Plane",
+	"Hatchback_01_base_F",
+	"SUV_01_base_F",
+	"Offroad_01_base_F",
+	"Van_01_base_F",
+	"MRAP_01_base_F",
+	"MRAP_02_base_F",
+	"MRAP_03_base_F",
+	"UGV_01_base_F",
+	"SDV_01_base_F",
+	"Boat_Civil_01_base_F",
+	"Boat_Armed_01_base_F",
 	"Helicopter_Base_F",
-	"Land_Pod_Heli_Transport_04_ammo_F"
+	"Land_Pod_Heli_Transport_04_ammo_F",
+	"Plane"
 ];
 
 /****** LIFT WITH VEHICLE  ******/
