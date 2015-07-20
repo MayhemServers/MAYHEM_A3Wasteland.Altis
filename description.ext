@@ -58,7 +58,7 @@ loadScreen = "mapConfig\Loading.jpg";
 #include "addons\proving_ground\PG_config.hpp"
 #include "addons\outlw_magrepack\config.hpp"
 
-#include "addons\outlw_magRepack\MagRepack_config.hpp"
+
 #include "addons\cfgsounds.hpp"	//Collapsed all sounds to one .hpp due to array of class names at beginning of cfg
 #include "client\systems\hud\dialog\downloadData.hpp"
 
@@ -95,7 +95,7 @@ class params
 		values[] = {0,1};
 		texts[] = {$STR_DISABLED,$STR_ENABLED};
 		default = 1;
-		isGlobal = 1;		
+		isGlobal = 1;
 		file = "addons\3D_Markers\3Dmarkers.sqf";
 	};
 };

@@ -87,7 +87,7 @@ rifleArray = compileFinal str
 	["M320 LRR Sniper", "srifle_LRR_LRPS_F", 1000],
 	["M320 LRR Sniper (Camo)", "srifle_LRR_camo_LRPS_F", 1200],
 	["GM6 Lynx Sniper", "srifle_GM6_LRPS_F", 1100],
-	["GM6 Lynx Sniper (Camo)", "srifle_GM6_camo_LRPS_F", 1300]
+	["GM6 Lynx Sniper (Camo)", "srifle_GM6_camo_LRPS_F", 1300],
 	["ASP-1 Kir Rifle [DLC]", "srifle_DMR_04_F", 2000],
 	["ASP-1 Kir Rifle (Tan) [DLC]", "srifle_DMR_04_tan_F", 2250]
 ];
@@ -268,7 +268,7 @@ accessoriesArray = compileFinal str
 	["Bipod (Hex)", "bipod_02_F_hex", 500, "item"],
 	["Bipod (Olive)", "bipod_03_F_oli", 500, "item"],
 	["Bipod (Sand)", "bipod_01_F_snd", 500, "item"],
-	["Bipod (Tan)", "bipod_02_F_tan", 500, "item"], 
+	["Bipod (Tan)", "bipod_02_F_tan", 500, "item"],
 	["Flashlight", "acc_flashlight", 25, "item"],
 	["IR Laser Pointer", "acc_pointer_IR", 25, "item"],
 	["Yorris Sight (Zubr Revolver)", "optic_Yorris", 50, "item"],

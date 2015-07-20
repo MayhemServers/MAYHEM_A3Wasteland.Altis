@@ -91,56 +91,58 @@ else
 	diag_log "[WARNING] For more information go to http://forums.a3wasteland.com/";
 };
 
-// compileFinal & broadcast client config variables
+if (isServer) then
 {
-	missionNamespace setVariable [_x, compileFinal str (missionNamespace getVariable _x)];
-	publicVariable _x;
-}
-forEach
-[
-	"A3W_startingMoney",
-	"A3W_showGunStoreStatus",
-	"A3W_gunStoreIntruderWarning",
-	"A3W_playerSaving",
-	"A3W_combatAbortDelay",
-	"A3W_unlimitedStamina",
-	"A3W_bleedingTime",
-	"A3W_teamPlayersMap",
-	"A3W_remoteBombStoreRadius",
-	"A3W_vehiclePurchaseCooldown",
-	"A3W_globalVoiceWarnTimer",
-	"A3W_globalVoiceMaxWarns",
-	"A3W_antiHackMinRecoil",
-	"A3W_spawnBeaconCooldown",
-	"A3W_spawnBeaconSpawnHeight",
-	"A3W_purchasedVehicleSaving",
-	"A3W_missionVehicleSaving",
-	"A3W_missionFarAiDrawLines",
-	"A3W_atmEnabled",
-	"A3W_atmMaxBalance",
-	"A3W_atmTransferFee",
-	"A3W_atmTransferAllTeams",
-	"A3W_atmEditorPlacedOnly",
-	"A3W_atmMapIcons",
-	"A3W_atmRemoveIfDisabled",
-	"A3W_extDB_PlayerSave_ServerID",
-	"A3W_extension",
-	"A3W_vehicleThermals",
-	"A3W_firstPersonCamOnFoot",
-	"A3W_firstPersonCamNotDriver",
-	"A3W_resupplyCostPR",
-	"A3W_territoryAllowed",
-	"A3W_uavControl",
-	"A3W_townSpawnCooldown",
-	"A3W_donatorEnabled"
-	"A3W_survivalSystem",
-	"A3W_extDB_GhostingAdmins",
-	"A3W_hcPrefix",
-	"A3W_hcObjCaching",
-	"A3W_hcObjCachingID",
-	"A3W_hcObjSaving",
-	"A3W_hcObjSavingID"
-];
+	// compileFinal & broadcast client config variables
+	{
+		missionNamespace setVariable [_x, compileFinal str (missionNamespace getVariable _x)];
+		publicVariable _x;
+	}
+	forEach
+	[
+		"A3W_startingMoney",
+		"A3W_showGunStoreStatus",
+		"A3W_gunStoreIntruderWarning",
+		"A3W_playerSaving",
+		"A3W_combatAbortDelay",
+		"A3W_unlimitedStamina",
+		"A3W_bleedingTime",
+		"A3W_teamPlayersMap",
+		"A3W_remoteBombStoreRadius",
+		"A3W_vehiclePurchaseCooldown",
+		"A3W_globalVoiceWarnTimer",
+		"A3W_globalVoiceMaxWarns",
+		"A3W_antiHackMinRecoil",
+		"A3W_spawnBeaconCooldown",
+		"A3W_spawnBeaconSpawnHeight",
+		"A3W_purchasedVehicleSaving",
+		"A3W_missionVehicleSaving",
+		"A3W_missionFarAiDrawLines",
+		"A3W_atmEnabled",
+		"A3W_atmMaxBalance",
+		"A3W_atmTransferFee",
+		"A3W_atmTransferAllTeams",
+		"A3W_atmEditorPlacedOnly",
+		"A3W_atmMapIcons",
+		"A3W_atmRemoveIfDisabled",
+		"A3W_extDB_PlayerSave_ServerID",
+		"A3W_extension",
+		"A3W_vehicleThermals",
+		"A3W_firstPersonCamOnFoot",
+		"A3W_firstPersonCamNotDriver",
+		"A3W_resupplyCostPR",
+		"A3W_territoryAllowed",
+		"A3W_uavControl",
+		"A3W_townSpawnCooldown",
+		"A3W_donatorEnabled",
+		"A3W_survivalSystem",
+		"A3W_extDB_GhostingAdmins",
+		"A3W_hcPrefix",
+		"A3W_hcObjCaching",
+		"A3W_hcObjCachingID",
+		"A3W_hcObjSaving",
+		"A3W_hcObjSavingID"
+	];
 
 	["A3W_join", "onPlayerConnected", { [_id, _uid, _name] spawn fn_onPlayerConnected }] call BIS_fnc_addStackedEventHandler;
 	["A3W_quit", "onPlayerDisconnected", { diag_log format ["onPlayerDisconnected - %1", [_name, _uid]] }] call BIS_fnc_addStackedEventHandler;
