@@ -3,9 +3,9 @@
 | Mag Repack |
 --------------
 
-	- Version: 3.1.1
+	- Version: 3.1.0
 	- Created: 7 March 2013
-	- Updated: 5 December 2014
+	- Updated: 5 February 2014
 
 ----------
 | Author |
@@ -26,23 +26,23 @@
 | Notes |
 ---------
 
-	- This mod requires CBA.
-	- Feel free to unpack the PBO and look through the code and change stuff, but please don't steal anything. That would not be tits. Just email me if you want to use any of my code in your own public release.
+	- You can change the repack times for individual bullets and belt magazines via the outlw_MR_bulletTime and outlw_MR_beltTime variables located in the MagRepack_init_sv.sqf.
 
 ----------------
 | Installation |
 ----------------
 
-	- Extract "@outlw_magRepack" folder to your ArmA 3 directory.
-		- "C:\Program Files (x86)\Steam\steamapps\common\Arma 3" for 64-bit Windows.
-		- "C:\Program Files\Steam\steamapps\common\Arma 3" for 32-bit Windows.
+	- Place the "outlw_magRepack" folder into your mission folder.
+
+	- Add the following to your init.sqf
+		- [] execVM "addons\outlw_magRepack\MagRepack_init_sv.sqf";
+
+	- Add the following to your description.ext
+		- #include "addons\outlw_magRepack\MagRepack_config.hpp"
 
 -------------
 | Changelog |
 -------------
-	- 3.1.1
-		- Fixed: RPT Error.
-
 	- 3.1.0
 		- Fixed: Error dialogs popping up about the scrollbars.
 		- Removed: Mag Repack logo from the bottom left of the main dialog.
@@ -54,6 +54,7 @@
 	- 3.0.2
 		- Fixed: Updated UI classnames to be unique so as to avoid possible conflicts.
 		- Fixed: An issue with the keybinding not being recognized if another key wasn't pressed between keybinding presses.
+		- Changed "MagRepack_config.cpp" file extension to ".hpp".
 
 	- 3.0.1
 		- New: Pressing the keybinding while the dialog is open will now close the dialog.
@@ -62,7 +63,7 @@
 		- Fixed: Now uses the keyName command to get the Strings associated with each keyboard key instead of having them hardcoded like an idiot.
 		- New: Can now change the bullet and belt repack times via outlw_MR_bulletTime and outlw_MR_beltTime variables (script version).
 		- All default repack times slightly increased.
-		- Fixed: Changed script version init file name to "MagRepack_init_sv.sqf" to avoid conflict when user has the addon version installed while playing on a server running the script version. 
+		- Fixed: Changed script version init file name to "MagRepack_init_sv.sqf" to avoid conflict when user has the addon version installed while playing on a server running the script version.
 
 	- 3.0.0
 		- Removed: Everything.
