@@ -4,7 +4,7 @@
 //	@file Created: 07/09/2013 15:19
 
 #define bountyMissionTimeout 30*60
-#define bountyMissionDelayTime 10*60
+#define bountyMissionDelayTime 20*60
 #define missionRadiusTrigger 50
 #define bountyMissionColor "#0054fe"
 #define failMissionColor "#FF1717"
@@ -17,4 +17,3 @@
 #define BOUNTY_MISSION_END_TEAMKILLED 3
 #define BOUNTY_MISSION_END_SUICIDE 4
 #define BOUNTY_MISSION_END_DISCONNECT 5
-#define BOUNTY_MISSION_END_AI 6

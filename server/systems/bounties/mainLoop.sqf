@@ -3,7 +3,7 @@
 // Bounty system for player use.
 
 #define bountyMissionDelayTime 20*60
-#define bountyMissionColor "#0054fe"
+#define bountyMissionColor "#ffff00"
 #define subTextColor "#FFFFFF"
 
 if (!isServer) exitWith {};
@@ -38,7 +38,6 @@ while {true} do
 	_dequeuedBounties = [];
 	_players = playableUnits;
 	{
-	
 		private ["_currentPlayerUID"];
 		_currentPlayerUID = getPlayerUID _x;
 		{
@@ -53,17 +52,17 @@ while {true} do
 	pvar_BountySystemReconnects = [];
 	_dequeuedBounties = [];
 
-	if (_currentTime - _lastSystemMission >= bountyMissionDelayTime) then 
-	{ 
+	if (_currentTime - _lastSystemMission >= bountyMissionDelayTime) then
+	{
 			_lastSystemMission = floor(time);
-	
+
 			_foundPlayer = nil;
 			_IsPlayerAlive = false;
 			_IsPlayerBounty = false;
-			
+
 			_players = playableUnits;
 			_count = count _players;
-			
+
 			_alivePlayerCount = 0;
 			for "_x" from 0 to (_count - 1) do {
 				_p = _players select _x;
@@ -72,7 +71,7 @@ while {true} do
 				};
 			};
 
-			
+
 			if (_alivePlayerCount == 0) exitWith {};
 
 			// Keep looping over players until we find an alive one
@@ -92,17 +91,17 @@ while {true} do
 						_IsPlayerBounty = true;
 					};
 				}foreach pvar_BountySystemActiveTargets;
-				
-				if(_IsPlayerAlive && (!_IsPlayerBounty)) exitWith {};	
-				
-				
+
+				if(_IsPlayerAlive && (!_IsPlayerBounty)) exitWith {};
+
+
 			};
-	
+
 			if(!isnil "_foundPlayer") then
 			{
 				[getPlayerUID _foundPlayer,'SYSTEM'] execVM format ["server\systems\bounties\playerLoop.sqf"];
 			};
 	};
-	
+
 };
 

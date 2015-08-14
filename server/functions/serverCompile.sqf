@@ -36,7 +36,7 @@ setLocationObjects = [_path, "setLocationObjects.sqf"] call mf_compile;
 setLocationState = [_path, "setLocationState.sqf"] call mf_compile;
 setMissionState = [_path, "setMissionState.sqf"] call mf_compile;
 // Non Vanilla missions
-createsniperGroup = [_path, "createUnits\sniperGroup.sqf"] call mf_compile; 
+createsniperGroup = [_path, "createUnits\sniperGroup.sqf"] call mf_compile;
 createsmugglerGroup = [_path, "createUnits\smugglerGroup.sqf"] call mf_compile;
 createRandomPilot = [_path, "createUnits\createRandomPilot.sqf"] call mf_compile;
 createWaitCondition = [_path, "createWaitCondition.sqf"] call mf_compile;
@@ -90,14 +90,14 @@ weaponDisassembledServer = [_path, "weaponDisassembledServer.sqf"] call mf_compi
 server_playerDied = [_path, "serverPlayerDied.sqf"] call mf_compile;
 server_BountyDied = [_path, "serverBountyDied.sqf"] call mf_compile;
 
-/*
+
 //Bounty System
 _path = "server\systems\bounties";
 onBountySystemPlayerDied = [_path, "onBountySystemPlayerDied.sqf"] call mf_compile;
 startPlayerBounty = [_path, "startPlayerBounty.sqf"] call mf_compile;
 startSystemBounty = [_path, "startSystemBounty.sqf"] call mf_compile;
 startSystemBountyByName = [_path, "startSystemBountyByName.sqf"] call mf_compile;
-*/
+
 
 //Spawning Compiles
 _path = "server\spawning";

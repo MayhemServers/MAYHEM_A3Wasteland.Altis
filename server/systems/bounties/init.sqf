@@ -17,6 +17,3 @@ pvar_BountySystemTargetDeaths = [];
 publicVariable "pvar_BountySystemTargetDeaths";
 
 [] execVM format ["server\systems\bounties\mainLoop.sqf"];
-
-
-

@@ -33,22 +33,21 @@ _BountyType = _this select 1;
 _mission_state = BOUNTY_MISSION_ACTIVE;
 
 pvar_BountySystemActiveTargets = pvar_BountySystemActiveTargets + [_targetUID];
-publicVariable "pvar_BountySystemActiveTargets"; //Rebroadcast the Variable to clients so they know if they're the Target to block suicide options //Apoc
 
 {
 		if(_targetUID == getPlayerUID _x) then
 		{
 			_targetPlayer = _x;
-			_targetName = name _x;		
+			_targetName = name _x;
 		};
-		
+
 }foreach playableUnits;
 
 _targetSide = side _targetPlayer;
-_targetSideName = 
-switch (_targetSide) do 
+_targetSideName =
+switch (_targetSide) do
 {
-	case west: {"Blufor"}; 
+	case west: {"Blufor"};
 	case east: {"Opfor"};
 	case civilian: {"A.I."};
 	case independent: {"Rebels"};
@@ -64,7 +63,7 @@ if(!isnil "_targetGroup") then
 	{
 		_targetFriendlies = _targetFriendlies + [name _x];
 	}foreach units _targetGroup;
-	
+
 };
 
 
@@ -94,7 +93,7 @@ _missionPicture = getText (configFile >> "CfgWeapons" >> "A3_Weapons_F_LongRange
 
 
 _targetPlayer addMPEventHandler ["mpkilled", {[_this] call onBountySystemPlayerDied;}];
-
+_targetPlayer setVariable ["BountyTarget", true, true];
 [
 	format ["%1 Objective", MISSION_PROC_TYPE_NAME],
 	_missionType,
@@ -109,7 +108,7 @@ if(isnil "_sourceUID") then
 	_sourceUID = '0';
 };
 
-//[format ["addBounty:%1:%2:%3:%4:%5:%6:%7:%8", call A3W_extDB_ServerID, call A3W_extDB_MapID, _BountyType, _targetUID, _sourceUID, _mission_state, 5000, 50000]] call extDB_Database_async;
+[format ["addBounty:%1:%2:%3:%4:%5:%6:%7:%8", call A3W_extDB_ServerID, call A3W_extDB_MapID, _BountyType, _targetUID, _sourceUID, _mission_state, 5000, 50000]] call extDB_Database_async;
 
 
 _missionPos = position _targetPlayer;
@@ -122,129 +121,128 @@ private ["_bountyDeath"];
 
 while {true} do
 {
-	sleep 10;
-	_currTime = (floor time);
+sleep 10;
+_currTime = (floor time);
 
 
 
 
-	if (_currTime - _startTime >= bountyMissionTimeout) then 
-	{ 
-			_mission_state = BOUNTY_MISSION_END_SURVIVED; 
-	};
+if (_currTime - _startTime >= bountyMissionTimeout) then
+{
+		_mission_state = BOUNTY_MISSION_END_SURVIVED;
+};
 
-	//Update Marker
-	_targetMarker setMarkerPos (position _targetPlayer);
+//Update Marker
+_targetMarker setMarkerPos (position _targetPlayer);
 
-	if(!isnil "_targetGroup") then
+if(!isnil "_targetGroup") then
+{
 	{
+		private ["_friendlyFound","_friendlyName"];
+		_friendlyFound = false;
+		_friendlyName = name _x;
 		{
-			private ["_friendlyFound","_friendlyName"];
-			_friendlyFound = false;
-			_friendlyName = name _x;
+			if(_friendlyName == _x) then
 			{
-				if(_friendlyName == _x) then
-				{
-					_friendlyFound = true;
-				};
-			}foreach _targetFriendlies;
-			
-			if(!_friendlyFound) then
-			{
-				_targetFriendlies = _targetFriendlies + [_friendlyName];
+				_friendlyFound = true;
 			};
-		}foreach units _targetGroup;
-	};
+		}foreach _targetFriendlies;
 
-
-	{
-		private ["_player"];
-		_player = _x select 0;
-
-		if(name _player == _targetName) then
+		if(!_friendlyFound) then
 		{
-			_bountyDeath = _x;
-			_killer = _x select 1;
-			_killerName = name _killer;
-			_killerSide = side _killer;
-			_killerUID = getPlayerUID _killer;
-			
-			_killerSideName = 
-			switch (_killerSide) do 
-			{
-				case west: {"Blufor"}; 
-				case east: {"Opfor"};
-				case civilian: {"A.I."};
-				case independent: {"Rebels"};
-				default {"Unknown"};
-			};
+			_targetFriendlies = _targetFriendlies + [_friendlyName];
 		};
-	}foreach pvar_BountySystemTargetDeaths;
+	}foreach units _targetGroup;
+};
 
-	if(!isNil "_killer") then
-	{ 
-			_mission_state = BOUNTY_MISSION_END_KILLED;
-			if(_killerName == _targetName) then 
-			{ 
-				_mission_state = BOUNTY_MISSION_END_SUICIDE;
-			}
-			else 
+{
+	private ["_player"];
+	_player = _x select 0;
+
+	if(name _player == _targetName) then
+	{
+		_bountyDeath = _x;
+		_killer = _x select 1;
+		_killerName = name _killer;
+		_killerSide = side _killer;
+		_killerUID = getPlayerUID _killer;
+
+		_killerSideName =
+		switch (_killerSide) do
+		{
+			case west: {"Blufor"};
+			case east: {"Opfor"};
+			case civilian: {"A.I."};
+			case independent: {"Rebels"};
+			default {"Unknown"};
+		};
+	};
+}foreach pvar_BountySystemTargetDeaths;
+
+if(!isNil "_killer") then
+{
+		_mission_state = BOUNTY_MISSION_END_KILLED;
+		if(_killerName == _targetName) then
+		{
+			_mission_state = BOUNTY_MISSION_END_SUICIDE;
+		}
+		else
+		{
+			if(_killerSide == _targetSide) then
 			{
-				if(_killerSide == _targetSide) then 
-				{ 
-					if(_killerSide == independent) then 
+				if(_killerSide == independent) then
+				{
+
+					_killerIsFriendly = 0;
+					diag_log format ["Is Killer Friendly: %1", _killerIsFriendly];
+					diag_log format ["_killerName: %1", _killerName];
+					diag_log format ["_targetFriendlies: %1", _targetFriendlies];
 					{
-						
-						_killerIsFriendly = 0;
-						diag_log format ["Is Killer Friendly: %1", _killerIsFriendly];
-						diag_log format ["_killerName: %1", _killerName];
-						diag_log format ["_targetFriendlies: %1", _targetFriendlies];
+						if(_killerName == _x) then
 						{
-							if(_killerName == _x) then
-							{
-								_killerIsFriendly = 1;
-							};
-						}foreach _targetFriendlies;
-						
-						if(_killerIsFriendly == 1) then
-						{
-							_mission_state = BOUNTY_MISSION_END_TEAMKILLED;
-						}
-						else
-						{
-							_mission_state = BOUNTY_MISSION_END_KILLED;
+							_killerIsFriendly = 1;
 						};
-					} 
-					else 
+					}foreach _targetFriendlies;
+
+					if(_killerIsFriendly == 1) then
 					{
 						_mission_state = BOUNTY_MISSION_END_TEAMKILLED;
+					}
+					else
+					{
+						_mission_state = BOUNTY_MISSION_END_KILLED;
 					};
+				}
+				else
+				{
+					_mission_state = BOUNTY_MISSION_END_TEAMKILLED;
 				};
 			};
-	};
-
-	if(!(_mission_state == BOUNTY_MISSION_END_SUICIDE || _mission_state == BOUNTY_MISSION_END_TEAMKILLED || _mission_state == BOUNTY_MISSION_END_KILLED)) then
-	{
-		_isPlayerOnServer = 0;
-		_players = playableUnits;
-		{
-				if(name _x == _targetName) then
-				{
-					_isPlayerOnServer = 1;
-				};
-		}foreach _players;
-			
-			
-		if(_isPlayerOnServer == 0) then
-		{
-				 diag_log format ["Player Not On Server: %1 PlayerName: %2", _targetUID, _targetName];
-				_mission_state = BOUNTY_MISSION_END_DISCONNECT;
 		};
+};
+
+if(!(_mission_state == BOUNTY_MISSION_END_SUICIDE || _mission_state == BOUNTY_MISSION_END_TEAMKILLED || _mission_state == BOUNTY_MISSION_END_KILLED)) then
+{
+	_isPlayerOnServer = 0;
+	_players = playableUnits;
+	{
+			if(name _x == _targetName) then
+			{
+				_isPlayerOnServer = 1;
+			};
+	}foreach _players;
+
+
+	if(_isPlayerOnServer == 0) then
+	{
+			 diag_log format ["Player Not On Server: %1 PlayerName: %2", _targetUID, _targetName];
+			_mission_state = BOUNTY_MISSION_END_DISCONNECT;
 	};
+};
 
-	diag_log format ["Custom Bounty in Progress: %1", _targetUID];
+diag_log format ["Custom Bounty in Progress: %1", _targetUID];
 
-	if (_mission_state != BOUNTY_MISSION_ACTIVE) exitWith {};	
+if (_mission_state != BOUNTY_MISSION_ACTIVE) exitWith {};
 
 };
 
@@ -255,7 +253,7 @@ if(!isnil "_bountyDeath") then
 };
 
 //remove the event
-_targetPlayer removeAllMPEventHandlers "mpkilled"; 
+_targetPlayer removeAllMPEventHandlers "mpkilled";
 
 sleep 1;
 //Mission Reward Logic Start
@@ -265,8 +263,8 @@ if (_mission_state == BOUNTY_MISSION_END_SURVIVED) then {
 		// Money for survivor + extra money for team
 		_playerMoney = _targetPlayer getVariable "cmoney";
 		_playerMoney = _playerMoney + 50000;
-		//[format ["updateBounty:%1:%2:%3:%4", _targetUID, _targetUID,'0', _mission_state]] call extDB_Database_async;
-		//[format ["setPlayerBountyDisabled:%1", _targetUID]] call extDB_Database_async;
+		[format ["updateBounty:%1:%2:%3:%4", _targetUID, _targetUID,'0', _mission_state]] call extDB_Database_async;
+		[format ["setPlayerBountyDisabled:%1", _targetUID]] call extDB_Database_async;
 		_targetPlayer setVariable["cmoney", _playerMoney, true];
 		_players = playableUnits;
 		{
@@ -287,10 +285,10 @@ if (_mission_state == BOUNTY_MISSION_END_SURVIVED) then {
 	// Unlucky
 	if (_mission_state == BOUNTY_MISSION_END_TEAMKILLED) then {
 		// Loop over each player on that side and remove their money and guns
-		
-		//[format ["updateBounty:%1:%2:%3:%4", _targetUID, '0', _killerUID, _mission_state]] call extDB_Database_async;
-		//[format ["setPlayerBountyDisabled:%1", _targetUID]] call extDB_Database_async;
-		
+
+		[format ["updateBounty:%1:%2:%3:%4", _targetUID, '0', _killerUID, _mission_state]] call extDB_Database_async;
+		[format ["setPlayerBountyDisabled:%1", _targetUID]] call extDB_Database_async;
+
 		_players = playableUnits;
 		{
 			private ["_currentLoopPlayer"];
@@ -302,9 +300,16 @@ if (_mission_state == BOUNTY_MISSION_END_SURVIVED) then {
 					{
 						if(name _currentLoopPlayer == _x) then
 						{
-							_currentLoopPlayer setVariable["cmoney", 0, true];
-							removeAllWeapons _currentLoopPlayer;
-						};	
+							//_currentLoopPlayer setVariable["cmoney", 0, true];
+							//removeAllWeapons _currentLoopPlayer;
+							_TKMoney = _x getVariable "cmoney";
+							_TKMoney = _TKMoney - 10000;
+							if (_TKMoney < 0) then
+								{
+								_TKMoney = 0;
+								};
+							_x setVariable["cmoney",_TKMoney,true];
+						};
 					};
 				}foreach _targetFriendlies;
 			}
@@ -312,43 +317,51 @@ if (_mission_state == BOUNTY_MISSION_END_SURVIVED) then {
 			{
 				if(side _currentLoopPlayer == _killerSide)then
 				{
-					_currentLoopPlayer setVariable["cmoney", 0, true];
-					removeAllWeapons _currentLoopPlayer;
-					
+					//_currentLoopPlayer setVariable["cmoney", 0, true];
+					//removeAllWeapons _currentLoopPlayer;
+					_TKMoney = _x getVariable "cmoney";
+						_TKMoney = _TKMoney - 10000;
+						if (_TKMoney < 0) then
+							{
+							_TKMoney = 0;
+							};
+					_x setVariable["cmoney",_TKMoney,true];
+
 				};
 			};
-			
+
 		}foreach _players;
+
 
 		_failedHintMessage = format ["<t align='center' color='%2' shadow='2' size='1.75'>Objective Failed</t><br/><t align='center' color='%2'>------------------------------</t><br/><t align='center' color='%3' size='1.25'>%1 was teamkilled!</t><br/><br/><t align='center' color='%3'>Naughty naughty team players. As a penalty %4 has lost all their weapons and money!</t>", _targetName, failMissionColor, subTextColor, _targetSideName];
 	};
 
 	// Dumbass
 	if (_mission_state == BOUNTY_MISSION_END_SUICIDE) then {
-		_failedHintMessage =  format ["<t align='center' color='%2' shadow='2' size='1.75'>Objective Failed</t><br/><t align='center' color='%2'>------------------------------</t><br/><t align='center' color='%3' size='1.25'>PUSSY!!</t><br/><br/><t align='center' color='%3'>%1 took the coward's way out and committed suicide!</t>", _targetName, failMissionColor, subTextColor];
-		//[format ["updateBounty:%1:%2:%3:%4", _targetUID, '0','0', _mission_state]] call extDB_Database_async;
-		//[format ["setPlayerBountyDisabled:%1", _targetUID]] call extDB_Database_async;
+		_failedHintMessage =  format ["<t align='center' color='%2' shadow='2' size='1.75'>Objective Failed</t><br/><t align='center' color='%2'>------------------------------</t><br/><t align='center' color='%3' size='1.25'>Damnit!!</t><br/><br/><t align='center' color='%3'>%1 Bled out or committed suicide! Be sure to kill them next time!</t>", _targetName, failMissionColor, subTextColor];
+		[format ["updateBounty:%1:%2:%3:%4", _targetUID, '0','0', _mission_state]] call extDB_Database_async;
+		[format ["setPlayerBountyDisabled:%1", _targetUID]] call extDB_Database_async;
 	};
-	
+
 	// Coward
-	
+
 		if (_mission_state == BOUNTY_MISSION_END_DISCONNECT) then {
 			_failedHintMessage =  format ["<br/><t align='center' color='%2'>------------------------------</t><br/><t align='center' color='%3' size='1.25'>PUSSY!!</t><br/><br/><t align='center' color='%3'>%1 took the coward's way out and disconnected! He will become the bounty when he reconnects!</t>", _targetName, failMissionColor, subTextColor];
-			//[format ["updateBounty:%1:%2:%3:%4", _targetUID, '0','0', _mission_state]] call extDB_Database_async;
-			
+			[format ["updateBounty:%1:%2:%3:%4", _targetUID, '0','0', _mission_state]] call extDB_Database_async;
+
 		};
-	
-	
-	if (_mission_state == BOUNTY_MISSION_END_KILLED) then 
+
+
+	if (_mission_state == BOUNTY_MISSION_END_KILLED) then
 	{
 		_playerMoney = _killer getVariable "cmoney";
-		
+
 		if(!isnil "_playerMoney") then
 		{
 			_playerMoney = _playerMoney + 50000;
-			//[format ["updateBounty:%1:%2:%3:%4", _targetUID, _killerUID, _killerUID, _mission_state]] call extDB_Database_async;
-			//[format ["setPlayerBountyDisabled:%1", _targetUID]] call extDB_Database_async;
-			
+			[format ["updateBounty:%1:%2:%3:%4", _targetUID, _killerUID, _killerUID, _mission_state]] call extDB_Database_async;
+			[format ["setPlayerBountyDisabled:%1", _targetUID]] call extDB_Database_async;
+
 			_killer setVariable["cmoney", _playerMoney, true];
 			{
 				if(side _x == _killerSide) then
@@ -362,9 +375,9 @@ if (_mission_state == BOUNTY_MISSION_END_SURVIVED) then {
 				};
 			}foreach playableUnits;
 		};
-		_successHintMessage = format ["<br/><t align='center' color='%2'>------------------------------</t><br/><t align='center' color='%6' size='1.25'>%1</t><br/><t align='center'><img size='5' image='%2'/></t><br/><t align='center' color='%3'>%1 has been killed by %4! %5 has earned $5,000 for each member and %4 has earned $50,000!</t>", _targetName, successMissionColor, subTextColor, _killerName, _killerSideName, failMissionColor];
+		_successHintMessage = format ["<br/><t align='center' color='%2'>------------------------------</t><br/><t align='center' color='%6' size='1.25'>%1</t><br/><t align='center'></t><br/><t align='center' color='%3'>%1 has been killed by %4! %5 has earned $5,000 for each member and %4 has earned $50,000!</t>", _targetName, successMissionColor, subTextColor, _killerName, _killerSideName, failMissionColor];
 
-	
+
 	};
 
 //Mission Reward Logic End
@@ -401,6 +414,8 @@ diag_log format ["Custom Bounty ended: %1", _targetUID];
 deleteMarker _targetMarker;
 
 pvar_BountySystemActiveTargets = pvar_BountySystemActiveTargets - [_targetUID];
+
+_targetPlayer setVariable ["BountyTarget", nil, true];
 
 diag_log format ["Custom Bounty Remaining Targets %1", pvar_BountySystemActiveTargets];
 
