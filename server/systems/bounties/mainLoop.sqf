@@ -44,7 +44,7 @@ while {true} do
 			if(_currentPlayerUID == _x) then
 			{
 				_dequeuedBounties = _dequeuedBounties + [_x];
-				[_x,'COWARD'] execVM format ["server\systems\bounties\playerLoop.sqf"];
+				[_x,'COWARD'] execVM format ["server\systems\bounties\playerLoop.sqf"];  //Fire up a new bounty loop for every schlep that rejoined with a bounty
 			};
 		}foreach pvar_BountySystemReconnects;
 	}foreach _players;
@@ -63,6 +63,7 @@ while {true} do
 			_players = playableUnits;
 			_count = count _players;
 
+			// Keep looping over players until we find an alive one
 			_alivePlayerCount = 0;
 			for "_x" from 0 to (_count - 1) do {
 				_p = _players select _x;
@@ -72,16 +73,16 @@ while {true} do
 			};
 
 
-			if (_alivePlayerCount == 0) exitWith {};
+			if (_alivePlayerCount == 0) exitWith {};	//Jump out of script if no alive players
 
-			// Keep looping over players until we find an alive one
+
 
 			while {true} do {
 				_random = floor(random _count);
-				_potentialPlayer = _players select _random;
+				_potentialPlayer = _players select _random;	//Pick a random player from the list of playable units
 
 				if (alive _potentialPlayer) then {
-					_foundPlayer = _potentialPlayer;
+					_foundPlayer = _potentialPlayer;	//Designate potential as found if they're alive
 					_IsPlayerAlive = true;
 				};
 
