@@ -28,6 +28,7 @@ _columns = "";
         _columns = _columns + ((if (_columns != "") then { "," } else { "" }) + (_x select 0));
         } forEach _vars;
 
+//Apoc - Bounty System - Check connecting player for Coward status  ///////////////////////////////////////
         _result = [format ["checkPlayerBountyDisconnect:%1:%2:%3", call A3W_extDB_ServerID, _uid, _columns],2] call extDB_Database_async;
         diag_log format["WASTELAND SERVER - Bounty Disconnect Result '%1' Player - '%2'", _result, _uid];
 
@@ -49,5 +50,7 @@ _columns = "";
                 };
 
         };
+//Apoc - Bounty System - Check connecting player for Coward status End ///////////////////////////////////////
+
 };
 if (_ifcheck == 2) then {diag_log format ["Player connected: %1 (%2)", _name, _uid]};
