@@ -223,7 +223,7 @@ private ["_bountyDeath"];
 		if(!(_mission_state == BOUNTY_MISSION_END_SUICIDE || _mission_state == BOUNTY_MISSION_END_TEAMKILLED || _mission_state == BOUNTY_MISSION_END_KILLED)) then
 		{
 			_isPlayerOnServer = 0;
-			_players = playableUnits;
+			_players = allPlayers;
 			{
 					if(name _x == _targetName) then
 					{
