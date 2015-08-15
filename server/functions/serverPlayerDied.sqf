@@ -31,7 +31,7 @@ diag_log format ["A3WASTELAND KILL REPORT -- %1 Killed. Name of Killer: %2, Side
 if (_unit getVariable ["isBountyTarget",false]) then
 {
 	diag_log format["A3WASTELAND SERVER - Bounty System: %1 whacked by %2", name _unit, name _killer];
-	pvar_BountySystemTargetDeaths = pvar_BountySystemTargetDeaths + [[_player,_killer]];
+	pvar_BountySystemTargetDeaths = pvar_BountySystemTargetDeaths + [[_unit,_killer]];
 };
 //Apoc - Bounty System Kill Register End ////////////////////////////////
 
